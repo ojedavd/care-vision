@@ -1,0 +1,315 @@
+{
+  "base_source_zip_sha256": "b19b27ad83d4246908e6ad0ee8d7b8c64b7c934ad3b6a476448433fde7931936",
+  "source_src_unchanged": true,
+  "publication_changes": "New documentation/privacy guards; five historical helper connection defaults removed; two synthetic credential fixtures constructed at runtime. No primary CV/model/controller/threshold changes.",
+  "source_files": [
+    {
+      "path": "src/care_vision/__init__.py",
+      "sha256": "d2d271db23243dd262153fe8c2d5db87c81629a7400a7c1d3de7fd111024968b"
+    },
+    {
+      "path": "src/care_vision/adaptive_evaluation.py",
+      "sha256": "7b7a323d3bf581d01d2c86eab102fa67f5045cd8ebd9a1c11fa959f854c14753"
+    },
+    {
+      "path": "src/care_vision/aws_demo.py",
+      "sha256": "e195b332efac8847813d497c5f70885cad788cb89d3117d44b44f1617249a6bb"
+    },
+    {
+      "path": "src/care_vision/check_history_delivery.py",
+      "sha256": "26eba7e45a37bf1332bffbe4268fdd568f29522919762080932e76223e791645"
+    },
+    {
+      "path": "src/care_vision/check_loop.py",
+      "sha256": "f191c42d47361c0a6f01f69d10824ba1b5b0b1c796206083f1c3d7be7a99f361"
+    },
+    {
+      "path": "src/care_vision/check_resolution.py",
+      "sha256": "fe2780d5868eaa277779ab9ced7bc7827e636643702ef8a4fa2148996550f9a3"
+    },
+    {
+      "path": "src/care_vision/check_roi.py",
+      "sha256": "0968b7f7d21600b19872899ea11f8a121aa7feba91eb2cad3d0029d60f42e612"
+    },
+    {
+      "path": "src/care_vision/check_states.py",
+      "sha256": "b8bca76634338f8abb639447239edf5e670429ac362f68130cf30ebec4ebc6cc"
+    },
+    {
+      "path": "src/care_vision/check_trajectory.py",
+      "sha256": "1ba2d9ff708abbea589392e89906df0987fa87e204d052382c1ffa32671ed569"
+    },
+    {
+      "path": "src/care_vision/checkin.py",
+      "sha256": "ac5d795d67eb40071864c8acc704e8b1f3f9b7e4fc9a2b7c8628addf1e340343"
+    },
+    {
+      "path": "src/care_vision/cloud/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "src/care_vision/cloud/__main__.py",
+      "sha256": "f8664f5088b8f207ee9b1ea4e72a23b5d2856a62477e32da5217aac5e78ad9b8"
+    },
+    {
+      "path": "src/care_vision/cloud/accumulated_descent.py",
+      "sha256": "1303d83f69adedba784f55575fd0ee14831c8e2f0e29aa615410d6fa115007a1"
+    },
+    {
+      "path": "src/care_vision/cloud/context_association.py",
+      "sha256": "9e7619760f80bf02ebdc3ed95b9c77d623b105cc2a8101bbc538d1dd79647f0c"
+    },
+    {
+      "path": "src/care_vision/cloud/controller.py",
+      "sha256": "8c2abf7bdef68fdb7109857ef92aa9d083d35afcf81d8f67befaca0aa506e15c"
+    },
+    {
+      "path": "src/care_vision/cloud/episode_store.py",
+      "sha256": "c0b05a22813d2b20d1c1d5a9a859d2072abe28f47704812cf70d31d5e26c776a"
+    },
+    {
+      "path": "src/care_vision/cloud/event_context.py",
+      "sha256": "2c29bff0022ac043c89116220794bdc20a8eda2326c67bbb128930d3164dbc24"
+    },
+    {
+      "path": "src/care_vision/cloud/history.py",
+      "sha256": "8acca75e93e9ebe5175770a00a2f231320049047debd7313057898ab829235b5"
+    },
+    {
+      "path": "src/care_vision/cloud/incident_evidence.py",
+      "sha256": "477e70a540adece7db963bc0e6cda862a8da67115b999ec23c0ce9f76ebe0f84"
+    },
+    {
+      "path": "src/care_vision/cloud/loss_probe.py",
+      "sha256": "e62d3ec1f92d52fb34e2b733fe3a1e1f7678d772f9245c175ae4d88f8d53556e"
+    },
+    {
+      "path": "src/care_vision/cloud/mediapipe_person.py",
+      "sha256": "328ee764971ff573d3d44b002e9961807c3f82cfc5dd55478435ac9d937be29a"
+    },
+    {
+      "path": "src/care_vision/cloud/nanodet.py",
+      "sha256": "5d2e9e08c075ba11f8b80e574430c89d638bdf8528981da129f48b5a7adee6dc"
+    },
+    {
+      "path": "src/care_vision/cloud/occlusion_evidence.py",
+      "sha256": "b2c7f31393d2302c241cdd929d613475158df62346f930a9beb0bc351f0aa896"
+    },
+    {
+      "path": "src/care_vision/cloud/occlusion_fragments.py",
+      "sha256": "2093bce8f014ee49e0ef4b52226edbf345e51a699b959c8de6a3e7acc763f6c8"
+    },
+    {
+      "path": "src/care_vision/cloud/occlusion_roi.py",
+      "sha256": "472511a4bedf058f317d54d8a0a577b286a6cacbffcee5275dca30433bc05f0c"
+    },
+    {
+      "path": "src/care_vision/cloud/person.py",
+      "sha256": "1ff0150f639ef74d27e496a314c7414787bb84e7c174dc0f3ba294f155c2880d"
+    },
+    {
+      "path": "src/care_vision/cloud/pose_actuation.py",
+      "sha256": "a8736a9a2233abe1983b362327675744861024b48959d58e8bed5d869698ad5f"
+    },
+    {
+      "path": "src/care_vision/cloud/pose_evidence.py",
+      "sha256": "714bcefa8a784ece98f46823bc0025510d4a07f4e243e9fffadf7c6835d25f21"
+    },
+    {
+      "path": "src/care_vision/cloud/pose_observation_plan.py",
+      "sha256": "f46c05e8a2b56623eec174c2bf981826d5afafa898ba1d5cf1b01d842974dd56"
+    },
+    {
+      "path": "src/care_vision/cloud/pose_shadow.py",
+      "sha256": "076a828fe5cbc0cf29a76427197387fb13698385124d44724e17a759788acbbf"
+    },
+    {
+      "path": "src/care_vision/cloud/pose_signals.py",
+      "sha256": "adaa3784f760becd25dec531b2209aeaf8600fee16f34f9f9ff0469a020c29bc"
+    },
+    {
+      "path": "src/care_vision/cloud/posture_evidence.py",
+      "sha256": "7e2b25c7906c39ca101bed84e3d1792ead33d23a88ed5da9d382bac58b601729"
+    },
+    {
+      "path": "src/care_vision/cloud/reference_posture.py",
+      "sha256": "967556b592f1e8f17de2d1e3474325446ded06e7a24caee239ae4470d53c7a39"
+    },
+    {
+      "path": "src/care_vision/cloud/rtmpose.py",
+      "sha256": "531461c6101dc551dec683b387a6b0fc394c6fdd5848a55ad79e17e3ebd49ad8"
+    },
+    {
+      "path": "src/care_vision/cloud/seated_candidate.py",
+      "sha256": "e741924aca5dfe746c25c87c4ca9f6eb9fbefc10157e9480efcce4e0e0939fa1"
+    },
+    {
+      "path": "src/care_vision/cloud/seated_pose_candidate.py",
+      "sha256": "e00cafd6025e2733d054ffdbc593b98e3178e943a73ac03f36499b6e82c5e6c7"
+    },
+    {
+      "path": "src/care_vision/cloud/server.py",
+      "sha256": "604167f0781d1ac2c3df7f7d93e44bd9372c619d039f97e5e33f9b0464461702"
+    },
+    {
+      "path": "src/care_vision/cloud/source_tracking.py",
+      "sha256": "dca8f638098f293b85a759505bccced15dd0c1b30646025fb12da6abad1d1093"
+    },
+    {
+      "path": "src/care_vision/cloud/temporal_candidate.py",
+      "sha256": "92eb9146c2bdcf09a532497cba0a8067eb40470948cbcfcf9bd2b05bf52a87bb"
+    },
+    {
+      "path": "src/care_vision/cloud/tracking.py",
+      "sha256": "eb387ce4f9be915d0028eb7b30281ade87ed3315a8b7fc2aacfc02684cbfacae"
+    },
+    {
+      "path": "src/care_vision/cloud/trajectory.py",
+      "sha256": "e40586a925574c9bf2b2982108705b26dd8f6382ac8a40853299a1a7b8d83159"
+    },
+    {
+      "path": "src/care_vision/cloud/visibility_probe.py",
+      "sha256": "fd90789aa249cd2cfeaab990365e803982f69b94c41ba1f107751e02235e0012"
+    },
+    {
+      "path": "src/care_vision/cloud/vision.py",
+      "sha256": "1bbfef471a94f584d79fadf899a933e4aefc14e7c316db893b21c669e4b7f618"
+    },
+    {
+      "path": "src/care_vision/cloud/yolox.py",
+      "sha256": "f36c6f046ac954220a4353ab6f775cf4b62a0882dde00ebbaa17fed2f4b0f7e9"
+    },
+    {
+      "path": "src/care_vision/common/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "src/care_vision/common/contracts.py",
+      "sha256": "c6a65c753371c1725fcacfa68a303d251803764227831657be1d836549c33743"
+    },
+    {
+      "path": "src/care_vision/common/cool.py",
+      "sha256": "65abaa54cf610c8ac859d67aa4a977fd8ef25701b46c6c4a11a2e5ded290c066"
+    },
+    {
+      "path": "src/care_vision/common/environment.py",
+      "sha256": "6291fa0c3c48cf7df7c65509e2d0948b2e09dce9181883e43b8eadf22456bee9"
+    },
+    {
+      "path": "src/care_vision/common/history_budget.py",
+      "sha256": "b1c335e06c3d5a23fefea5efc8427bf51de3ba07393c5daad26d3ab46875516b"
+    },
+    {
+      "path": "src/care_vision/common/image_geometry.py",
+      "sha256": "7b8c1b495f4ea7e0d45f773d28766f30f83d3f26b5368c5a1dab74b5ea9147a3"
+    },
+    {
+      "path": "src/care_vision/common/metrics.py",
+      "sha256": "bd4625df8362b7fb6c59232be6b9fd2fa387b1e96d79b69d056d3d7fcbf72a94"
+    },
+    {
+      "path": "src/care_vision/common/resources.py",
+      "sha256": "a113de7a478b26b21b3d198273d1ef461b2504862c903d0194f6c7408c2e9c6d"
+    },
+    {
+      "path": "src/care_vision/common/transport.py",
+      "sha256": "055ecc94a61a69614f6416256e576dbeb109a343f22dfee404a07d27b3c42115"
+    },
+    {
+      "path": "src/care_vision/demo.py",
+      "sha256": "f69c66cf87eaca46c1f6dd25f204304cc3f946177d3f10b45cdf3e9f44f10ce9"
+    },
+    {
+      "path": "src/care_vision/dense_identity_evaluation.py",
+      "sha256": "663ae56568d0a6a591b8e00bf6cd5ccf33ff950dbfb6809243c2dc5081b3f645"
+    },
+    {
+      "path": "src/care_vision/edge/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "src/care_vision/edge/__main__.py",
+      "sha256": "5d272934be68931a5385a7ef0937ec5ce9b765a1f064e0b118d38cc224ea9425"
+    },
+    {
+      "path": "src/care_vision/edge/buffer.py",
+      "sha256": "aa3a8cf20c00d7c3b57d486347892ce0bfb3c462ef18f1f9203ef96a5a669606"
+    },
+    {
+      "path": "src/care_vision/edge/cloud_feedback.py",
+      "sha256": "cf820056c51c339c1cdafb19d26466135af57903777dd320177d7d7eefe312cf"
+    },
+    {
+      "path": "src/care_vision/edge/commands.py",
+      "sha256": "4bf01323b594c7c19511284c4786fbc39e0732ac62586c9712665ffeb8bdb47d"
+    },
+    {
+      "path": "src/care_vision/edge/network.py",
+      "sha256": "db8e2657ef9419095a14dca26721b10855b0f04747105469fe986df7f0f2adaf"
+    },
+    {
+      "path": "src/care_vision/edge/recorded_source.py",
+      "sha256": "4c1e11045202cb0a9488c148030ba678cc316202523aa05e832ff3ab11069534"
+    },
+    {
+      "path": "src/care_vision/edge/representation.py",
+      "sha256": "cf97ada6283ee7ee7ea4ceba4472f8787fc77113d68f388b03f36cd670a6102f"
+    },
+    {
+      "path": "src/care_vision/edge/runtime.py",
+      "sha256": "74d99c6cafc71ddd7107187999717db99f7b75f773d2c0ae52c5216ff8539e96"
+    },
+    {
+      "path": "src/care_vision/edge/sampler.py",
+      "sha256": "b93dc12ec238a19cfdd58aa4bf200a20ef0edaa3b5d6f07a53286de2695df0a0"
+    },
+    {
+      "path": "src/care_vision/edge/source.py",
+      "sha256": "4c78e95310d89c7477db7a077c2e1ffc887641a915680d90662e7b5cf64a88c1"
+    },
+    {
+      "path": "src/care_vision/edge/spool.py",
+      "sha256": "637111e44f74641d441d0d1cad17400daecbff2722d9df7fa4330dd184fa9a8d"
+    },
+    {
+      "path": "src/care_vision/evaluation.py",
+      "sha256": "e87ce2cb78750e80a23ad02ea242b15a4782cb7d2b0364088f6e18df327b94e3"
+    },
+    {
+      "path": "src/care_vision/event_context_evaluation.py",
+      "sha256": "e842a651a12b3db213cab7a0a41f931e5b5f6ba682ee373a76cc52711f161820"
+    },
+    {
+      "path": "src/care_vision/fixture.py",
+      "sha256": "c29444c43dd3f3df9ec5dbb8d56a2945d5a39b7e93918029c1be58d0d21f97ae"
+    },
+    {
+      "path": "src/care_vision/netem_probe.py",
+      "sha256": "198cb087dd37cea50bd4544b7732ff7f6770892c8a16ea1a338022f85db3db38"
+    },
+    {
+      "path": "src/care_vision/seated_evaluation.py",
+      "sha256": "3f6fa261cda1370cd7d6eb4894bec3701cd42641e020d2904146d3b402411f64"
+    },
+    {
+      "path": "src/care_vision/seated_pose_evaluation.py",
+      "sha256": "0cd5c07a1f5cb4d6d0fcdec7514b8b909652b6852cd79d0443b4736be36524f8"
+    },
+    {
+      "path": "src/care_vision/sequence_evaluation.py",
+      "sha256": "9714688ac315a75fe61f6ea288575a439b738b99dcfff79d97e86ba3f49cc363"
+    },
+    {
+      "path": "src/care_vision/tcp_telemetry.py",
+      "sha256": "3c708f38ed8f226ef33a0ee686cc552711c11be2ae6e2d9777d9d822fd977f53"
+    },
+    {
+      "path": "src/care_vision/temporal_evaluation.py",
+      "sha256": "888a4503c75766f984ba3d84ba38d06c836be502e498ddd5a07e49566770e372"
+    },
+    {
+      "path": "src/care_vision/transport_probe.py",
+      "sha256": "d389a542ed3cfc612097ca6a48cfcf55585d5b3c493f9046e0c3258e2f821770"
+    }
+  ]
+}

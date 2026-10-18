@@ -1,0 +1,37 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "care-vision"
+version = "0.1.0"
+description = "CARE-Vision reproducible active-perception loop for AWS Graviton and COOL"
+requires-python = ">=3.11,<3.13"
+dependencies = [
+  "cryptography>=45,<47",
+  "numpy>=2,<3",
+  "websockets>=15,<16",
+]
+
+[dependency-groups]
+dev = ["pytest>=8,<9", "ruff>=0.11,<1"]
+standard-cv = ["opencv-python-headless>=4.10,<5"]
+
+[tool.uv]
+default-groups = ["dev", "standard-cv"]
+
+[project.scripts]
+care-edge = "care_vision.edge.__main__:main"
+care-cloud = "care_vision.cloud.__main__:main"
+care-demo = "care_vision.demo:main"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["integration: real paced video and separate processes (about 35 seconds)"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]

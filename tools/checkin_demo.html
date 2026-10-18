@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CARE-Vision · Demo del check-in</title>
+<style>
+:root{color-scheme:dark;font-family:system-ui,-apple-system,sans-serif;background:#0b1219;color:#e9f0f4;font-size:15px}
+*{box-sizing:border-box}body{margin:0}main{max-width:1440px;margin:auto;padding:32px}
+header{display:flex;justify-content:space-between;gap:24px;align-items:center;margin-bottom:24px}
+h1{font-size:29px;letter-spacing:-.8px;margin:0 0 6px}h2{font-size:17px;margin:0 0 18px}
+p{line-height:1.5;margin:5px 0}small,.muted{color:#9eb0bf}a{color:#83cce9}
+.eyebrow{color:#7dbac8;font-size:12px;letter-spacing:2px;margin-bottom:10px}
+.badge{font-size:12px;color:#9de6c2;background:#123528;border:1px solid #28634b;border-radius:6px;padding:8px 12px;white-space:nowrap}
+.notice{border-left:3px solid #d5b274;padding:10px 14px;background:#211e19;color:#e8d4b2;margin-bottom:22px}
+.layout{display:grid;grid-template-columns:minmax(0,1.8fr) minmax(310px,1fr);gap:22px;align-items:start}
+video{width:100%;background:#000;display:block;border-radius:8px} .caption{font-size:12px;margin:10px 0 20px;color:#9eb0bf}
+.panel{padding:22px;background:#111d27;border:1px solid #253340;border-radius:9px;margin-bottom:18px}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:18px}
+.stat{padding:14px 0;border-top:1px solid #30414e}.stat strong{font-size:24px;display:block;margin-top:7px;font-variant-numeric:tabular-nums}.stat small{font-size:12px}
+.state{font-size:26px;letter-spacing:.6px;margin:5px 0 14px;color:#9de6c2}
+dl{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:0}dt{color:#9eb0bf}dd{text-align:right;margin:0;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+button{font:inherit;background:#1b2d3a;color:#e9f0f4;border:1px solid #3b5668;border-radius:5px;padding:9px 13px;cursor:pointer;min-height:42px}
+button:hover{background:#2a4253}button:focus-visible{outline:2px solid #9de6c2;outline-offset:3px}
+.chapters{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 20px}.chapter-time{color:#a9c5d6;font-size:12px}
+.action{font:13px ui-monospace,monospace;color:#add7ec;overflow-wrap:anywhere;margin:10px 0}
+.event{padding:10px 0;border-top:1px solid #2a3a46;display:grid;grid-template-columns:44px 1fr;gap:8px;font-size:12px}.event span{color:#9eb0bf}.event b{font-weight:500;overflow-wrap:anywhere}
+table{width:100%;border-collapse:collapse;font-size:13px}td,th{padding:10px 5px;border-bottom:1px solid #2a3a46;text-align:left}td:last-child,th:last-child{text-align:right;font-variant-numeric:tabular-nums}
+footer{font-size:12px;color:#9eb0bf;margin-top:12px;line-height:1.6}.timeline{display:flex;gap:2px;height:10px;margin:16px 0 5px}.timeline button{padding:0;border:0;border-radius:0;min-height:10px;background:#3f6e70}.timeline button:nth-child(even){background:#9b8053}
+@media(max-width:920px){main{padding:20px}.layout{grid-template-columns:1fr}.stats{gap:8px}header{align-items:start;flex-direction:column;gap:12px}}
+@media(max-width:400px){main{padding:12px}.panel{padding:16px}.stats{grid-template-columns:1fr}.stat strong{font-size:22px}h1{font-size:25px}}
+</style>
+</head>
+<body><main>
+<header><div><div class="eyebrow">OPENCV AI COMPETITION 2026 · CHECK-IN</div><h1>CARE-Vision</h1><p class="muted">La decisión cambia la próxima observación.</p></div><div class="badge" id="runtime"></div></header>
+<div class="notice">Demo de arquitectura · Detección de caídas y alertas desactivadas. Reproducción de una ejecución real en AWS.</div>
+<p id="attempt-note" class="caption"></p>
+<div class="layout"><section>
+<video id="video" src="replay.mp4" controls preload="metadata" playsinline aria-label="Replay del circuito registrado en AWS"></video>
+<p class="caption">Imagen reconstruida desde el video fuente para el último frame live procesado. Verde: caja de persona; azul: ROI. El reloj sigue la disponibilidad en AWS; la imagen se mantiene hasta la próxima observación live.</p>
+<div class="chapters" id="chapters" aria-label="Saltar a una decisión"></div>
+<div class="panel"><h2>Percepción → decisión → acción → nueva percepción</h2>
+<div id="state" class="state" aria-live="polite">NORMAL</div><p id="reason" class="muted">Esperando evidencia registrada.</p>
+<div class="stats"><div class="stat"><small>Captura efectiva · FPS</small><strong id="capture">—</strong></div><div class="stat"><small>Envío live efectivo · FPS</small><strong id="transmit">—</strong></div><div class="stat"><small>Solicitado por el agente · FPS</small><strong id="target">—</strong></div></div>
+<p class="caption">Las tasas corresponden a la última ventana reportada por el Edge y recibida en AWS.</p>
+<div class="timeline" id="timeline" aria-label="Estados registrados"></div>
+</div>
+<div class="panel"><h2>Resultado de esta ejecución</h2><table><thead><tr><th>Medición</th><th>Resultado</th></tr></thead><tbody id="summary"></tbody></table>
+<footer>Bytes: payload JPEG, sin overhead de transporte. CPU: proceso cloud, 100% equivale a un núcleo; incluye arranque y cierre. No se comparó contra sensing fijo ni se calculó ahorro.</footer></div>
+</section><aside>
+<div class="panel"><h2>Evidencia disponible</h2><dl>
+<dt>Tiempo AWS</dt><dd id="time">0,0 s</dd><dt>Frame fuente</dt><dd id="frame">—</dd>
+<dt>Vista / resolución</dt><dd id="view">—</dd><dt>Movimiento</dt><dd id="motion">—</dd>
+<dt>Confianza del detector</dt><dd id="confidence">—</dd><dt>Procesamiento</dt><dd id="latency">—</dd>
+<dt>Históricos procesados</dt><dd id="history">0</dd><dt>Red reportada</dt><dd id="network">—</dd>
+<dt>Entrega live / sesión</dt><dd id="pipeline">—</dd><dt>Feedback cloud</dt><dd id="feedback">—</dd>
+<dt>Descartes / fuera de plazo</dt><dd id="cloud-gaps">—</dd><dt>Cola cloud reportada</dt><dd id="cloud-queue">—</dd>
+<dt>CPU cloud / 1 núcleo</dt><dd id="cpu">—</dd><dt>RSS cloud</dt><dd id="rss">—</dd>
+</dl><p class="caption">La entrega live conserva los descartes de la sesión aunque el RTT sea bueno. Feedback y cola: última muestra reportada, no medición instantánea. La confianza corresponde a persona; la incertidumbre de incidente aún no está calibrada. El histórico no decide el estado live.</p></div>
+<div class="panel"><h2>Comandos y confirmaciones</h2><div id="events"><p class="muted">Esperando primer comando.</p></div></div>
+<div class="panel"><h2>Evidencia verificable</h2><p id="checks"></p><p class="muted">Logs completos, hashes de código, runtime y video conservados en el paquete local.</p><p><a href="summary.json">Reporte y métricas</a> · <a href="replay.json">Cronología</a> · <a href="replay.mp4" download>Video de respaldo</a></p></div>
+</aside></div>
+<footer>CARE-Vision · Adaptive Agentic Vision for Safer Independent Living · <span id="source-note"></span></footer>
+</main><script>
+const evidence=__EVIDENCE_JSON__;
+const rows=evidence.rows, s=evidence.summary, $=id=>document.getElementById(id), video=$('video');
+$('source-note').textContent=s.source_kind==='physical_camera'?'Ensayo con cámara física del Mac; reproducción de la ejecución registrada.':'Ensayo con archivo de video, pendiente validación con cámara física.';
+const fmt=(v,n=1)=>v==null?'—':Number(v).toLocaleString('es-AR',{maximumFractionDigits:n,minimumFractionDigits:n});
+const put=(id,value)=>{$(id).textContent=value};
+const loop=s.checks.loop.report, metrics=s.metrics;
+if(evidence.attempts){put('attempt-note',evidence.attempts.note)}
+put('runtime',`${loop.cloud_runtime.ec2.instanceType} · Graviton · OpenCV ${loop.cloud_runtime.opencv_version} + COOL`);
+put('checks',`${Object.values(s.checks).filter(c=>c.passed).length}/${Object.keys(s.checks).length} verificaciones aprobadas`);
+const summary=[['Frames enviados / recibidos / procesados',`${loop.frames_sent} / ${loop.frames_received} / ${loop.observations}`],['Captura mediana',`${fmt(loop.capture_fps_median)} FPS`],['Procesamiento live · mediana / p95',`${fmt(metrics.live_processing_ms.median)} / ${fmt(metrics.live_processing_ms.p95)} ms`],['Payload JPEG total',`${fmt(metrics.jpeg_payload_bytes/1e6,2)} MB`],['CPU cloud media / 1 núcleo',`${fmt(metrics.cloud_resources.cpu_percent_one_core_mean)} %`],['RSS cloud máximo muestreado',`${fmt(metrics.cloud_resources.rss_bytes.max/1048576)} MiB`],['Cierre confirmado',`${fmt(s.checks.history.report.eof_drain_seconds,2)} s`]];
+for(const [label,value] of summary){const tr=document.createElement('tr');for(const t of [label,value]){const td=document.createElement('td');td.textContent=t;tr.append(td)}$('summary').append(tr)}
+const transitions=rows.filter(r=>r.event==='agent_state_transition');
+for(const r of [{t:0,to_state:'Inicio'},...transitions]){const b=document.createElement('button');b.textContent=`${fmt(r.t)} s · ${r.to_state}`;b.onclick=()=>{video.currentTime=r.t;render(r.t)};$('chapters').append(b)}
+const duration=rows.at(-1).t;
+for(const [i,r] of [{t:0,to_state:'NORMAL'},...transitions].entries()){const end=transitions[i]?.t??duration;const b=document.createElement('button');b.style.flex=String(Math.max(.05,end-r.t));b.setAttribute('aria-label',`${r.to_state}, ${fmt(r.t)} segundos`);b.onclick=()=>{video.currentTime=r.t;render(r.t)};$('timeline').append(b)}
+const reasonText={motion_above_high_threshold:'La señal de movimiento supera el umbral experimental.',sustained_motion_requires_more_evidence:'El movimiento sostenido requiere más evidencia.',new_evidence_is_quiet_return_to_baseline:'La nueva evidencia presenta poco movimiento: volver a baja tasa.',quiet_recovery_confirmed:'Se confirmó estabilidad de la señal: estado NORMAL.'};
+function render(t){let state='NORMAL',reason='Esperando evidencia registrada.',obs=null,status=null,resource=null,hist=0,events=[];
+for(const r of rows){if(r.t>t)break;if(r.event==='agent_state_transition'){state=r.to_state;reason=reasonText[r.reason]??r.reason}if(r.event==='observation'){if(r.evidence_kind==='historical')hist++;else obs=r}if(r.event==='status_received')status=r;if(r.event==='process_resources')resource=r;if(['agent_action','ack_received','buffer_processed','drain_confirmed'].includes(r.event))events.push(r)}
+put('state',state);put('reason',reason);put('time',`${fmt(t)} s`);put('frame',obs?.capture_seq??'—');put('view',obs?`${obs.view_kind==='roi'?'ROI':'Full frame'} · ${obs.width}×${obs.height}`:'—');put('motion',obs?.primary_motion_direction??'—');put('confidence',fmt(obs?.primary_person_confidence,2));put('latency',obs?`${fmt(obs.processing_ms)} ms`:'—');put('history',hist);put('capture',fmt(status?.capture_fps));put('transmit',fmt(status?.transmit_fps));put('target',fmt(status?.target_transmit_fps,0));put('network',status?.network_quality??'—');put('cpu',resource?`${fmt(resource.cpu_percent_one_core)} %`:'—');put('rss',resource?.rss_bytes!=null?`${fmt(resource.rss_bytes/1048576)} MiB`:'—');
+put('pipeline',status?.pipeline_quality??'—');put('feedback',status?.cloud_feedback_state??'—');put('cloud-gaps',status?.cloud_live_dropped!=null?`${status.cloud_live_dropped} / ${status.cloud_live_stale}`:'—');put('cloud-queue',status?.cloud_queue_depth??'—');
+$('events').replaceChildren();for(const r of events.slice(-9)){const div=document.createElement('div');div.className='event';const time=document.createElement('span');time.textContent=`${fmt(r.t)}s`;const text=document.createElement('b');text.textContent=r.event==='agent_action'?`${r.type}${r.transmit_fps!=null?'('+r.transmit_fps+')':''}`:r.event==='ack_received'?`ACK ${r.command_type} · ${r.result}`:r.event==='buffer_processed'?`Histórico completo · ${r.frames_processed} frames`:'DRAINED · cierre confirmado';div.append(time,text);$('events').append(div)}}
+video.addEventListener('timeupdate',()=>render(video.currentTime));video.addEventListener('seeked',()=>render(video.currentTime));render(0);
+</script></body></html>
