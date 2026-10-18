@@ -1,3 +1,4 @@
+import math
 import os
 import sqlite3
 import stat
@@ -65,7 +66,13 @@ def test_video_source_retains_offline_samples_across_restart(tmp_path):
     source.thread.join(timeout=5)
     assert source.done and source.error is None and source.count == 60
     before = source.buffer_status()
-    assert 3 <= before["spool_frames"] <= 5
+    # Offline retention samples capture monotonic time, not file-media duration.
+    # SQLite/encryption and a loaded runner can make 60 captured frames span
+    # more than two wall-clock seconds without changing the 2 FPS policy.
+    frames = tuple(source.buffer.frames)
+    assert len(frames) == source.count
+    capture_seconds = (frames[-1].mono_ns - frames[0].mono_ns) / 1e9
+    assert 3 <= before["spool_frames"] <= math.ceil(2 * capture_seconds) + 2
     boot_id = source.boot_id
     source.close()
 

@@ -30,8 +30,8 @@ identity is insufficient; alerts are experimental and test-only.
 
 This repository starts from the experimentally evaluated WebP80 / regular-sampling
 candidate, derived from the archived v4 code. Core `src/` files match that candidate;
-publication adds documentation, privacy checks and parameterized connection settings
-in five historical tools. It is a separate code-only workspace.
+publication adds documentation, privacy checks, parameterized connection settings
+in five historical tools and a capture-time-based assertion in a historical test. It is a separate code-only workspace.
 
 The known-development regression used four recordings in five conditions on
 Graviton with OpenCV 5 + COOL / CLASSIC, eight threads:

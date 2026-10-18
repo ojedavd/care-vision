@@ -41,3 +41,14 @@ RTT limiting; actual transmit FPS and experimental frame headers expose the extr
 The original detailed register and raw evidence remain in the owner's private
 experiment workspace. The repository adds privacy guards and sanitized documentation;
 its own test results must be reported separately from archived AWS measurements.
+
+## Publication CI: wall-clock retention assertion
+
+The first private GitHub Actions run passed privacy/protocol/sampling checks and
+29 of 30 synthetic/core tests, including the closed loop. The offline spool test
+failed because it assumed two seconds of video always complete within a two-second
+capture interval: CI retained seven samples versus the test's fixed maximum five.
+Retention uses monotonic capture timestamps; SQLite/encryption and runner load can
+extend playback. The test now bounds sample count using measured capture elapsed
+time and retains its restart, identity and decryption checks. Core source is
+unchanged. This is a test portability correction, not a new AWS/network result.

@@ -1,7 +1,7 @@
 {
   "base_source_zip_sha256": "b19b27ad83d4246908e6ad0ee8d7b8c64b7c934ad3b6a476448433fde7931936",
   "source_src_unchanged": true,
-  "publication_changes": "New documentation/privacy guards; five historical helper connection defaults removed; two synthetic credential fixtures constructed at runtime. No primary CV/model/controller/threshold changes.",
+  "publication_changes": "New documentation/privacy guards; five historical helper connection defaults removed; two synthetic credential fixtures constructed at runtime. No primary CV/model/controller/threshold changes. Historical spool integration assertion now uses actual capture elapsed time on loaded CI runners.",
   "source_files": [
     {
       "path": "src/care_vision/__init__.py",
