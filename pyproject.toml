@@ -16,6 +16,7 @@ dependencies = [
 [dependency-groups]
 dev = ["pytest>=8,<9", "ruff>=0.11,<1"]
 standard-cv = ["opencv-python-headless>=4.10,<5"]
+https-check = ["cfn-lint==1.57.2"]
 
 [tool.uv]
 default-groups = ["dev", "standard-cv"]

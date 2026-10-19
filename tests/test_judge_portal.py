@@ -265,3 +265,24 @@ def test_historical_evidence_cannot_make_live_vision_appear_current():
     assert p.counts["historical_processed"] == 1 and p.counts["live_processed"] == 0
     emit(p, "server_ready", 3, phase=3, cool_verified=True, opencv_version="5.0.0-dev")
     assert p.snapshot()["runtime"]["opencv"] == "5.0.0-dev"
+
+
+@pytest.mark.parametrize(
+    "address", ["0.0.0.0", "8.8.8.8", "127.0.0.1", "169.254.169.254", "::", "::1"]
+)
+def test_vpc_binding_rejects_public_wildcard_loopback_and_metadata_addresses(address):
+    from care_vision.judge.__main__ import bind_address
+
+    with pytest.raises(ValueError):
+        bind_address(address, "https://review.example.org")
+
+
+def test_vpc_binding_requires_https_and_keeps_default_loopback():
+    from care_vision.judge.__main__ import bind_address
+
+    assert bind_address(None, None) == "127.0.0.1"
+    for origin in (None, "http://review.example.org"):
+        with pytest.raises(ValueError):
+            bind_address("10.1.2.3", origin)
+    for address in ("10.1.2.3", "172.20.1.2", "192.168.1.8"):
+        assert bind_address(address, "https://review.example.org") == address

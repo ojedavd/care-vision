@@ -72,3 +72,18 @@ full regression success, person/fall accuracy or COOL acceleration is claimed.
 Original protected episode files remained unchanged. The current portal has no
 visual preview or external HTTPS URL; viewer access is role-based rather than
 individual accounts. See [portal guide](private-judge-portal.md).
+
+## HTTPS preparation while AWS console session is expired
+
+Prepared a disabled-by-default CloudFront/VPC-origin template, cache-off and
+viewer Host/Origin/cookie forwarding, with a dedicated ingress group restricted
+to the verified AWS-managed origin group. An opt-in RFC1918-only portal bind
+requires an HTTPS viewer origin; the default remains loopback. No real account
+identifiers, credentials or recordings are in the template. The optional schema
+checker is pinned and locked; previously locked dependency versions are retained.
+
+28 local tests and cfn-lint1.57.2 passed. These are local preparation checks, not
+an AWS deployment or eligibility result. The console session expired; authenticated
+network/AZ/subnet/group-union discovery is pending. No CloudFront resource, group
+attachment, ingress rule or new external endpoint was created. The existing SSH
+portal still denies unauthenticated API access. See [HTTPS runbook](judge-https-deployment.md).

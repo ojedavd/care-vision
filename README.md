@@ -85,6 +85,8 @@ a separately authorized external input root; otherwise it uses a synthetic grid.
 A separate [judge portal](docs/private-judge-portal.md) can launch bounded cloud
 sessions and display allowlisted runtime metrics and the perception/action chain.
 The first deployment is private via SSH; an external HTTPS endpoint is pending.
+A [disabled CloudFront/VPC-origin plan](docs/judge-https-deployment.md) is prepared
+and locally validated; it has not been deployed or verified in the AWS account.
 It serves no images or recordings. The original evaluated core modules are
 unchanged. The new guided synthetic AWS probe executed COOL but failed the full
 20FPS rate audit (14FPS achieved); it is not the frozen WebP80 regression.

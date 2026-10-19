@@ -3,6 +3,7 @@
 import argparse
 import hashlib
 import hmac
+import ipaddress
 import json
 import os
 import secrets
@@ -215,9 +216,25 @@ class Handler(BaseHTTPRequestHandler):
         return self.reply(200, {"ok": True})
 
 
+def bind_address(private_bind, https_origin):
+    """An internal VPC origin is opt-in and cannot listen on a public/wildcard IP."""
+    if private_bind is None:
+        return "127.0.0.1"
+    if not https_origin or not https_origin.startswith("https://"):
+        raise ValueError("private VPC bind requires an exact HTTPS viewer origin")
+    address = ipaddress.IPv4Address(private_bind)
+    networks = ("10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16")
+    if not any(address in ipaddress.IPv4Network(value) for value in networks):
+        raise ValueError("only an explicit RFC1918 IPv4 interface is allowed")
+    return str(address)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--port", type=int, default=8780)
+    parser.add_argument(
+        "--private-bind", help="opt-in RFC1918 interface for a restricted VPC origin"
+    )
     parser.add_argument("--credentials-file", type=Path, required=True)
     parser.add_argument("--state-root", type=Path, required=True)
     parser.add_argument("--synthetic-local", action="store_true")
@@ -231,6 +248,10 @@ def main():
     args = parser.parse_args()
     if not 40 <= args.seconds <= 600:
         parser.error("session lifetime must be 40..600 seconds")
+    try:
+        address = bind_address(args.private_bind, args.https_origin)
+    except ValueError as error:
+        parser.error(str(error))
     if args.credentials_file.stat().st_mode & 0o077:
         parser.error("credentials file must have private owner-only permissions")
     origin = args.https_origin
@@ -280,13 +301,13 @@ def main():
         seconds=args.seconds,
     )
     server = Portal(
-        ("127.0.0.1", args.port),
+        (address, args.port),
         sessions,
         Auth(json.loads(args.credentials_file.read_text())),
         origin,
     )
     print(
-        f"Private judge portal listening on loopback port {server.server_port}; no images served.",
+        f"Private judge portal listening on {address}:{server.server_port}; no images served.",
         flush=True,
     )
 

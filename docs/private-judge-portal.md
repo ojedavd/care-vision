@@ -92,6 +92,11 @@ Keep SSH host-key verification enabled. All credentials stay outside GitHub.
 
 ## External HTTPS remains a separate deployment step
 
+The disabled CloudFront/VPC-origin plan and local schema/security checks are now
+prepared. Follow the [staged HTTPS runbook](judge-https-deployment.md). No external
+resources, network changes or working endpoint are established by generating it.
+
+
 Do not open port8780 directly to the Internet or expose the private experiment
 file server. Configure a trusted HTTPS reverse proxy with the exact public origin:
 
