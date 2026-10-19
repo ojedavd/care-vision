@@ -38,7 +38,7 @@ function render(s) {
 async function refresh() {
   if (polling) return; polling = true;
   try { render(await request('/api/state')); text('error', ''); }
-  catch (e) { text('connection','Connection unavailable'); if (signedIn) { text('freshness','Connection unavailable. Displayed metrics are historical; live analysis is unconfirmed.'); text('error',e.message); } }
+  catch (e) { if (signedIn) { text('connection','Connection unavailable'); text('freshness','Connection unavailable. Displayed metrics are historical; live analysis is unconfirmed.'); text('error',e.message); } }
   finally { polling = false; }
 }
 el('login-form').addEventListener('submit', async event => {
