@@ -169,3 +169,38 @@ pose calibration or full frozen-profile rehearsal was used in this acceptance.
 The UI correctly showed no fresh evidence while no Edge was connected. HTTPS
 availability does not resolve the previous14-versus20FPS probe or establish
 incident accuracy. Arrange a guided session and private judge access separately.
+
+## Recorded-source operation and measured scope
+
+**Start session starts the AWS worker only.** It does not start the local Edge,
+select a recording, open a camera or show images. To reproduce a guided run, the
+operator starts the portal session, forwards its loopback worker port through the
+existing trusted SSH connection, and launches the separately authorized local Edge:
+
+```sh
+uv run --frozen python -m care_vision.edge --video /PRIVATE/demo.avi --replay-captures /PRIVATE/demo.captures.jsonl --capture-fps 25 --capture-resolution 1280x720 --baseline-resolution 1280x720 --replay-sampling-phase-ms 0 --url ws://127.0.0.1:LOCAL_TUNNEL_PORT --log /PRIVATE/new-run/edge.jsonl
+```
+
+Replace LOCAL_TUNNEL_PORT with the operator's owned forward. The video must match
+its capture manifest; use a new external log directory and original timestamps.
+This original-Edge command is an unshaped JPEG path. It is deliberately separate
+from the constrained WebP80 adapter/proxy profile. Source selection remains a local
+operator step; the web application has no clip picker or visual preview.
+
+Four recorded person-only sessions completed with324/324 frames and14 causal
+commands after one retained interrupted attempt. An additional unshaped recovery
+run measured actual2 →5 →2FPS transmission and140/140 processed frames. See the
+[evidence register](obstacle-and-evidence-register.md) for conditions, the failed
+attempt, distinct transport profiles and calibration/accuracy limitations.
+
+Normal native session_finished and session_error now clear the live indicator
+immediately, as do legacy session_ended and server_stopped. Retained counters are
+historical after closure. This display correction does not determine whether a
+person has recovered or an incident has ended; that remains the vision/controller's
+separate evidence-dependent state. Recordings and original inference inputs are
+never served by the panel.
+
+The projection fix was also checked with a subsequent live recorded run:140 frames
+processed, two causal commands and no fresh-evidence indicator at video EOF even
+while the bounded worker remained RUNNING. Stopping a source and stopping the AWS
+worker are separate events; the panel now reflects both without a false live label.

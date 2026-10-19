@@ -89,3 +89,17 @@ CARE-Vision is a research prototype for safety support. Medical diagnosis, valid
 Presentation copies can apply head blur after inference; this does not anonymize the original inputs or automatically protect a live screen-share. Personal recordings remain restricted to authorized private judge access.
 
 Next steps are to freeze the chosen delivery profile, evaluate newly recorded everyday activities with annotations defined before examining predictions, strengthen network and uncertainty evaluation, and rehearse the final judge demonstration. The implementation, measured limitations, and failed experiments are documented alongside pinned dependencies and reproducible run instructions.
+
+## Subsequent recorded-source portal check
+
+Known local recordings were also streamed through the actual HTTPS-portal-owned
+person-only Graviton worker. Four completed constrained sessions processed324/324
+frames with14 causal command chains, after one retained interrupted attempt with
+an undetermined cause. The frozen full person/pose configuration was not enabled.
+A separate original-Edge/JPEG recovery run processed140/140 frames and measured
+live transmission changing from approximately2 to5 and back to2FPS, with nominal
+25FPS acquisition preserved. This verifies an achieved sensing change on that
+connection, not a general bandwidth, clinical-accuracy or COOL-acceleration result.
+The [evidence register](obstacle-and-evidence-register.md) retains both the
+interruption and profile differences. The portal's native end-of-stream freshness
+indicator was corrected separately; CV decisions and thresholds were unchanged.

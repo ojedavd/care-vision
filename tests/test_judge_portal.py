@@ -256,6 +256,21 @@ def test_cloud_worker_uses_explicit_interpreter_without_resolving_it(tmp_path, m
     sessions.stop()
 
 
+@pytest.mark.parametrize(
+    "terminal", ["session_finished", "session_error", "session_ended", "server_stopped"]
+)
+def test_cloud_terminal_events_immediately_end_live_indicator(terminal):
+    p = Projection()
+    emit(p, "session_started", 1)
+    emit(p, "observation", 2, evidence_kind="live", valid=True)
+    assert p.snapshot()["vision_live"]
+    emit(p, terminal, 3)
+    assert not p.snapshot()["vision_live"]
+    assert not p.snapshot()["edge_connected"]
+    emit(p, "observation", 4, evidence_kind="historical", valid=True)
+    assert not p.snapshot()["vision_live"]
+
+
 def test_historical_evidence_cannot_make_live_vision_appear_current():
     p = Projection()
     emit(p, "session_started", 1)

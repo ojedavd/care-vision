@@ -88,8 +88,10 @@ A separate supervised [CloudFront/VPC-origin HTTPS entry](docs/judge-https-deplo
 is deployed and externally verified. Viewer/operator access remains authenticated;
 judge credentials and repository access are supplied separately. The original SSH
 portal remains available. See the runbook for measured checks and retained limits.
-It serves no images or recordings. The original evaluated core modules are
-unchanged. The new guided synthetic AWS probe executed COOL but failed the full
+Start session launches only the AWS worker; the operator starts the local Edge
+and selects an authorized source separately. There is no automatic recording
+playback or camera start. It serves no images or recordings. The original
+evaluated core modules are unchanged. The new guided synthetic AWS probe executed COOL but failed the full
 20FPS rate audit (14FPS achieved); it is not the frozen WebP80 regression.
 
 ## AWS deployment

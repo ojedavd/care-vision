@@ -11,6 +11,8 @@ EVENTS = {
     "server_ready",
     "session_started",
     "session_ended",
+    "session_finished",
+    "session_error",
     "agent_action",
     "ack_received",
     "agent_state_transition",
@@ -88,7 +90,7 @@ class Projection:
             self.cloud_port = row.get("port") if type(row.get("port")) is int else None
         elif event == "session_started":
             self.edge_connected = True
-        elif event in {"session_ended", "server_stopped"}:
+        elif event in {"session_ended", "session_finished", "session_error", "server_stopped"}:
             self.edge_connected = False
         elif event == "frame_received":
             self.counts["received"] += 1

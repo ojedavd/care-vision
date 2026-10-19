@@ -129,3 +129,49 @@ The endpoint and guided, credential-free testing instructions were saved in
 Devpost. The app serves no images or videos; judge access delivery and full
 new-scene/profile rehearsal remain pending. No incident accuracy, COOL acceleration
 or resolution of the earlier14-versus20FPS failure is inferred from this deployment.
+
+## Recorded inputs through the HTTPS portal — person-only scope
+
+Four known development recordings were replayed by the local Edge into the actual
+portal-owned Graviton/OpenCV5/COOL worker. The WebP80 adapter used a1.34FPS full-frame
+cap,112KiB/s admission and128KiB/s local proxy. Four completed sessions each sent,
+received and processed81 frames (324 total), with no declared drops or connection
+errors in those completed sessions. Fourteen commands passed source-observation,
+matching cloud/Edge ACK and subsequent valid live-evidence checks. Recovery and
+sit-return ended NORMAL; no-recovery and sit-hold remained UNRESOLVED. The latter
+is an open episode, not a confirmed incident. Pose/scene calibration was disabled,
+so this is not the original five-condition person/pose regression or independent
+incident accuracy. No TEST20 override or caregiver notification was used.
+
+An earlier no-recovery attempt failed after25 frames sent and24 received/processed,
+with a connection error and refused reconnect to the worker's loopback port. The
+last UI sample had23 processed; final raw logs had24. No worker stderr or matching
+kernel OOM/segfault entry was found. Its cause remains undetermined; a later run
+completed unchanged. The failure and unmatched in-flight frame remain part of the
+evidence, and completion on repetition does not establish a network fix.
+
+The capped profile applies requested2/5FPS changes but stays near1.34FPS for full
+frames; its command chains alone do not prove higher achieved observation density.
+A separate unshaped original-Edge/JPEG80 recovery trial completed140/140 frames,
+zero declared drops/errors, two causal commands and NORMAL. Within-policy live
+send-completion cadence measured1.997 →5.000 →1.999FPS while replay acquisition
+retained the original nominal25FPS timeline. JPEG/codec and shaping differ from
+the capped profile; no isolated bandwidth/accuracy improvement or general WAN
+resilience is inferred. The earlier requested20FPS probe remains unresolved.
+
+The recording runs exposed a portal-only freshness defect: native normal closure
+uses session_finished, while the projection recognized session_ended. The live
+indicator could linger until its five-second age cutoff. It now treats actual
+session_finished/session_error and existing terminal events as disconnected
+immediately. Thirty-two focused portal/HTTPS tests passed; native log re-projection
+verified live before closure and false immediately afterward. The CV/controller,
+model, scene calibration and thresholds were not changed. Raw clips, personal
+traces, private inputs and screenshots remain outside GitHub.
+
+After deploying only the projection change, one live recorded-source acceptance
+run repeated the separate unshaped recovery condition:140/140 frames, two causal
+commands, NORMAL and no declared drops/errors. Before manual stop, the worker was
+still RUNNING but vision_live was already false at normal recording EOF. Actual
+within-policy transmission was1.997 →4.998 →2.000FPS. This verifies the display
+fix on the real connection; it does not add an independent recording or validate
+incident accuracy. All eight original video/capture files remained unchanged.
