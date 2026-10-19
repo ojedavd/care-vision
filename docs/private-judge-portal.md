@@ -21,7 +21,8 @@ flowchart LR
   start/stop workers. Credentials currently identify roles, not individual accounts.
 - HttpOnly/SameSite cookies, half-hour sessions, Origin/Host and CSRF checks,
   bounded login attempts, no-store responses and no access/request logging.
-- A loopback-only service: raw logs, arbitrary files, images, recordings and
+- Loopback by default, with an explicit restricted VPC-bind option for HTTPS:
+  raw logs, arbitrary files, images, recordings and
   per-person identifiers have no HTTP route. An unknown route cannot expose files.
 - Private per-run directories, 40–600 second worker limits, process-group
   stop, stale-evidence visibility and truthful local-versus-COOL runtime labels.

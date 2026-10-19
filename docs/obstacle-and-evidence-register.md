@@ -87,3 +87,22 @@ an AWS deployment or eligibility result. The console session expired; authentica
 network/AZ/subnet/group-union discovery is pending. No CloudFront resource, group
 attachment, ingress rule or new external endpoint was created. The existing SSH
 portal still denies unauthenticated API access. See [HTTPS runbook](judge-https-deployment.md).
+
+## HTTPS account staging after restored sign-in
+
+The authenticated preflight passed for the existing Arm instance and supported AZ.
+The original subnet is publicly routed; AWS reports the VPC origin deployed
+without modifying shared routes, the public address or SSH. A disabled distribution
+and dedicated no-ingress group were created. External ingress, group attachment,
+distribution enablement and external acceptance remain pending; this is not yet a
+working web endpoint.
+
+A separate supervised private-interface portal passed role/Host/Origin/CSRF/cookie,
+no-store/private-file-route and real COOL worker start/stop checks. The approved
+existing person-model hash matched; native CLASSIC inference on a generated blank
+frame returned zero people. Person detection is configured, but no inherited pose
+calibration or full evaluated sensing profile is claimed. All 87 staged package
+files matched, no owned worker remained and the three protected episode files
+checked were unchanged. No camera or personal media was used. The original SSH
+portal remains available. The earlier 14-versus-20FPS failure remains unresolved.
+See the [staging result and acceptance checklist](judge-https-deployment.md).

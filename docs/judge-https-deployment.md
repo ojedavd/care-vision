@@ -1,6 +1,6 @@
-# HTTPS entry for the private judge portal — prepared, not deployed
+# HTTPS entry for the private judge portal — staged, not enabled
 
-The proposed entry is CloudFront with an AWS-managed hostname and an EC2 VPC
+The staged entry is CloudFront with an AWS-managed hostname and an EC2 VPC
 origin. It forwards only the authenticated, image-free judge HTTP application.
 The vision worker, Edge command channel and COOL workload retain their existing
 Graviton/SSH boundary. No input recordings, model files, SDK or private evidence
@@ -8,9 +8,10 @@ are part of the CloudFormation plan.
 
 This adds one managed HTTPS entry because no owned DNS name has been supplied.
 CloudFront traffic has its own pricing; this plan does not assert that the compute
-grant covers it or that deployment is free. No new resources were created during
-local preparation. The existing private SSH portal stays unchanged until actual
-network checks and deployment are completed.
+grant covers it or that deployment is free. Local preparation created no AWS resources. A later authenticated deployment
+created a disabled stack and a separate supervised origin; external ingress and
+endpoint enablement are still pending. The existing private SSH portal remains
+available. See the dated status below.
 
 ## Generate and validate without AWS
 
@@ -67,7 +68,7 @@ Before creating even a disabled stack, inspect the existing instance and VPC:
 
 A failed eligibility check leaves the currently working private portal in place.
 Do not fall back to public HTTP carrying credentials or to a self-signed browser
-warning. This preflight still requires an authenticated AWS session.
+warning. Repeat this preflight from an authenticated AWS session for each deployment.
 
 ## Staged deployment after preflight
 
@@ -159,3 +160,37 @@ recordings, models, original groups, instance, subnet or SDK.
 - [CloudFront VPC origin prerequisites and managed security group](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-vpc-origins.html)
 - [CloudFormation VPC origin schema](https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-cloudfront-vpcorigin.html)
 - [EC2 group defaults and restrictive egress](https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-ec2-securitygroup.html)
+
+## Staged-account result — 19 October 2026
+
+Authenticated discovery confirmed the existing Arm instance, supported AZ, spare
+subnet IPv4 addresses, Internet gateway, return-traffic ACL and complete attached
+security-group union. The original group permits SSH but does not expose the
+portal port. The existing subnet **is publicly routed**; no subnet conversion,
+route, public address or original SSH group was changed. AWS reports the EC2 VPC
+origin as deployed on this topology. This is a private origin connection to an
+instance in a publicly routed subnet, not a claim that the subnet is private.
+
+A disabled CloudFront distribution, cache/request policies and a dedicated group
+with no ingress were created. The group has not been attached to the instance.
+A separate systemd-supervised portal is active on the private interface, with the
+exact assigned HTTPS viewer origin and a 120-second worker limit. The original
+loopback portal remains separately bound. Enabling the reviewed external path
+still requires the managed-source ingress rule, group attachment and distribution
+update, followed by external acceptance. No working endpoint has been added to
+Devpost from this staging result.
+
+The isolated locked runtime verified OpenCV5.1.0-dev and COOL on Arm. The approved
+person model already present on the instance matched its frozen SHA256; native
+CLASSIC inference on a generated blank frame returned zero people. The portal now
+configures that experimental person detector, without inherited pose/scene
+calibration or a shortened TEST-alert threshold. This is **not** the complete
+frozen person/pose evaluation profile or evidence of incident accuracy.
+
+Private-origin API checks passed anonymous denial, viewer start denial and hidden
+worker port, Host/Origin/CSRF guards, Secure/HttpOnly/SameSite cookies, no-store,
+missing file/log/model routes, real phase3 COOL worker start and operator stop.
+All 87 source/runtime-package files matched the staged manifest; no owned worker
+remained and the three protected episode files checked in this run were unchanged.
+No personal media or live camera was used. These checks do not establish external
+HTTPS acceptance or resolve the prior 14-versus-20FPS probe failure.
