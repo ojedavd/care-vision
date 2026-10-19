@@ -52,3 +52,23 @@ Retention uses monotonic capture timestamps; SQLite/encryption and runner load c
 extend playback. The test now bounds sample count using measured capture elapsed
 time and retains its restart, identity and decryption checks. Core source is
 unchanged. This is a test portability correction, not a new AWS/network result.
+
+## Private live review deployment
+
+A new image-free authenticated portal was deployed separately on the existing
+Graviton host, on loopback only. It launches a bounded phase3 worker without
+changing the original CV/controller modules. Generated geometric frames originated
+at the local Edge; no personal videos were used or uploaded. Initial cloud launch
+failed because resolving the venv Python symlink selected system Python without
+websockets; preserving the explicit interpreter fixed that launch. An earlier uv
+preflight falsely rejected the platform suffix of the pinned uv version; the
+private procedure now compares version tokens. Both failures remain documented.
+
+The real COOL motion/transport probe processed383/383 frames, no declared drops,
+with two observed complete live command chains and an eventual NORMAL state.
+The full auditor **failed** the requested20FPS check (achieved14FPS). This probe
+uses different launch/transport settings from the frozen WebP80 regression; no
+full regression success, person/fall accuracy or COOL acceleration is claimed.
+Original protected episode files remained unchanged. The current portal has no
+visual preview or external HTTPS URL; viewer access is role-based rather than
+individual accounts. See [portal guide](private-judge-portal.md).

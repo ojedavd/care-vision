@@ -29,7 +29,7 @@ identity is insufficient; alerts are experimental and test-only.
 ## Current source and measured scope
 
 This repository starts from the experimentally evaluated WebP80 / regular-sampling
-candidate, derived from the archived v4 code. Core `src/` files match that candidate;
+candidate, derived from the archived v4 code. The original core modules match that candidate;
 publication adds documentation, privacy checks, parameterized connection settings
 in five historical tools and a capture-time-based assertion in a historical test. It is a separate code-only workspace.
 
@@ -79,6 +79,15 @@ Historical tests and experiment tools can require external private inputs. The
 entire test suite is not a supported data-free acceptance command. The sampler
 check can use real capture timestamps only when `CARE_VISION_ASSET_ROOT` is set to
 a separately authorized external input root; otherwise it uses a synthetic grid.
+
+## Private live review application
+
+A separate [judge portal](docs/private-judge-portal.md) can launch bounded cloud
+sessions and display allowlisted runtime metrics and the perception/action chain.
+The first deployment is private via SSH; an external HTTPS endpoint is pending.
+It serves no images or recordings. The original evaluated core modules are
+unchanged. The new guided synthetic AWS probe executed COOL but failed the full
+20FPS rate audit (14FPS achieved); it is not the frozen WebP80 regression.
 
 ## AWS deployment
 

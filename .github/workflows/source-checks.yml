@@ -22,6 +22,6 @@ jobs:
           python3 -m pip install uv==0.11.32
           uv sync --frozen
       - name: Privacy, protocol and sampling tests
-        run: uv run --frozen pytest -q tests/test_repository_hygiene.py tests/test_contracts.py tests/test_webp_wire.py tests/test_uniform_budget_sampling.py
+        run: uv run --frozen pytest -q tests/test_judge_portal.py tests/test_repository_hygiene.py tests/test_contracts.py tests/test_webp_wire.py tests/test_uniform_budget_sampling.py
       - name: Synthetic local closed loop
         run: uv run --frozen pytest -q tests/test_sampler.py tests/test_commands.py tests/test_controller.py tests/test_spool.py tests/test_closed_loop.py
