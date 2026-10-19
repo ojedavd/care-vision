@@ -1,6 +1,6 @@
 # CARE-Vision — technical report summary
 
-Code-only publication summary, 18 October 2026. Personal evidence and deployment
+Code-only publication summary, updated 19 October 2026. Personal evidence and deployment
 identifiers are omitted. See the source provenance and evaluation register.
 
 ## Inspiration
@@ -25,6 +25,39 @@ I built CARE-Vision as an individual project in Argentina, supported by an AWS C
 The implementation uses Python, persistent WebSocket communication, bounded queues, capture timestamps, and explicit command acknowledgements. The cloud pipeline combines person detection and tracking, posture and temporal evidence, and an experimental pose-assisted ROI workflow. The evaluated cloud configuration uses an m8g.4xlarge Graviton instance, an OpenCV 5 development build supplied with the COOL SDK, YOLOX-S with the CLASSIC engine, and eight OpenCV threads.
 
 The controller uses reproducible rules and temporal state. Each sensing action is linked to the observation that caused it, its acknowledgement, and subsequent visual observations. The gateway performs acquisition, representation, encoding, and transport; inference remains in AWS.
+
+## Judge-facing AWS deployment
+
+A separate authenticated, image-free review portal is supervised on the existing
+Graviton instance. CloudFront supplies the managed HTTPS hostname and certificate;
+a VPC origin reaches only the private-interface portal port through the verified
+AWS-managed origin security group. The existing publicly routed subnet, instance
+address, SSH group and CV worker boundary were preserved. The vision WebSocket
+remains loopback-only and the local Edge connects through the authorized SSH path.
+
+```mermaid
+flowchart LR
+    J[Authenticated judge browser] -->|HTTPS / no cache| F[CloudFront]
+    F -->|VPC origin / restricted group| P[Image-free review portal]
+    P -->|Allowlisted runtime metrics| J
+    O[Authenticated operator] -->|Bounded start / stop| P
+    P --> W[Graviton: OpenCV 5 + COOL and agent]
+    E[Local Edge: acquisition and transport] -->|SSH / visual evidence| W
+    W -->|Sensing commands| E
+    W -->|Private log / safe projection| P
+```
+
+External checks verified authentication/role isolation, trusted HTTPS, no cache,
+CSRF/Origin controls, private-file denial and worker lifecycle. The real phase3
+worker self-terminated at its native120-second limit, then restarted and stopped.
+The approved existing person-model hash matched and native CLASSIC inference on a
+generated blank frame returned zero people. These checks used no personal videos
+or camera and do not validate person/incident accuracy. The new portal's person
+configuration has no inherited pose/scene calibration and is not the complete
+frozen sensing profile. The earlier geometric motion/transport portal probe
+failed its full rate audit at14FPS versus20 requested; HTTPS does not resolve it.
+Details and failed harness expectations are retained in the
+[HTTPS runbook](judge-https-deployment.md) and evaluation register.
 
 ## Results so far
 

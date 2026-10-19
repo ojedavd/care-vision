@@ -106,3 +106,26 @@ files matched, no owned worker remained and the three protected episode files
 checked were unchanged. No camera or personal media was used. The original SSH
 portal remains available. The earlier 14-versus-20FPS failure remains unresolved.
 See the [staging result and acceptance checklist](judge-https-deployment.md).
+
+## HTTPS activated and externally checked
+
+After explicit owner confirmation, the restricted CloudFront-source rule and
+portal group attachment were applied while preserving the original SSH group.
+The stack completed and the HTTPS distribution was enabled/deployed. Real browser
+and external API checks passed authentication, read-only viewer isolation, cookie/
+Origin/CSRF and no-store controls, missing private routes, real phase3 COOL worker
+start, no false live status without Edge input, native expiry at120.0009 seconds,
+restart, explicit stop and logout. The public origin port was not reachable from
+the test client; the security-group union grants it only to the managed origin.
+
+The harness retained three failed assumptions: a system Python issuer-store
+problem, CloudFront400 traversal rejection instead of origin404, and native clean
+COMPLETED at the time limit before the portal watchdog TIME_LIMIT state. TLS stayed
+validated; native stop reason/duration were checked from the private log and a
+separate external continuation completed lifecycle checks. No deployed code or
+security protection was changed to satisfy these checks.
+
+The endpoint and guided, credential-free testing instructions were saved in
+Devpost. The app serves no images or videos; judge access delivery and full
+new-scene/profile rehearsal remain pending. No incident accuracy, COOL acceleration
+or resolution of the earlier14-versus20FPS failure is inferred from this deployment.

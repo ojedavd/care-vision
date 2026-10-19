@@ -91,11 +91,12 @@ using an existing trusted host/key. The operator can see the current cloud port
 and create a second loopback tunnel for the Edge. Viewers do not receive that port.
 Keep SSH host-key verification enabled. All credentials stay outside GitHub.
 
-## External HTTPS remains a separate deployment step
+## External HTTPS deployment
 
-The disabled CloudFront/VPC-origin plan and local schema/security checks are now
-prepared. Follow the [staged HTTPS runbook](judge-https-deployment.md). No external
-resources, network changes or working endpoint are established by generating it.
+The CloudFront/VPC-origin entry is deployed and externally verified; follow the
+[HTTPS runbook](judge-https-deployment.md) for the staged procedure and measured
+acceptance scope. A newly generated template still starts disabled and performs
+no AWS calls on its own. Credentials remain private and role-based.
 
 
 Do not open port8780 directly to the Internet or expose the private experiment
@@ -142,3 +143,29 @@ full regression, a COOL speedup result, or incident accuracy evidence. Its sourc
 and launch differ from the frozen WebP80/byte-budget profile. Personal clips,
 independent incident validation, per-person credentials, visual previews and an
 external HTTPS endpoint remain outside this verified first deployment.
+
+## Subsequent HTTPS acceptance — 19 October 2026
+
+The separate supervised private-interface origin now receives the authenticated
+HTTPS entry through CloudFront's VPC origin connection. Only the AWS-managed
+CloudFront origin group can enter the portal port; the previous SSH group and
+loopback application were preserved. Viewer API/browser checks passed without
+exposing the worker port or operator controls. HTTP, anonymous API requests,
+invalid Origin/CSRF and private file routes were denied. Cache TTLs are zero and
+access/cookie logging is disabled on this distribution.
+
+The real Graviton/OpenCV5.1.0-dev/COOL worker started, self-terminated at its native
+120-second limit, restarted and stopped explicitly. Native expiry can surface as
+COMPLETED before the portal watchdog reports TIME_LIMIT; both are bounded outcomes.
+The external harness initially assumed only TIME_LIMIT. The native log confirmed
+its demonstration_time_limit reason at120.0009 seconds; a separate external
+continuation verified restart, stop and logout. Raw failed assertions remain in
+private evidence. Other harness corrections retained TLS validation using Python
+3.11's OS CA store and accepted CloudFront's400 traversal rejection before origin.
+
+The configured experimental YOLOX person model matched the approved existing
+hash and ran a generated blank frame natively. No personal footage, camera,
+pose calibration or full frozen-profile rehearsal was used in this acceptance.
+The UI correctly showed no fresh evidence while no Edge was connected. HTTPS
+availability does not resolve the previous14-versus20FPS probe or establish
+incident accuracy. Arrange a guided session and private judge access separately.

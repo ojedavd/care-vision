@@ -84,9 +84,10 @@ a separately authorized external input root; otherwise it uses a synthetic grid.
 
 A separate [judge portal](docs/private-judge-portal.md) can launch bounded cloud
 sessions and display allowlisted runtime metrics and the perception/action chain.
-The first deployment is private via SSH; an external HTTPS endpoint is pending.
-A [disabled CloudFront/VPC-origin plan](docs/judge-https-deployment.md) is prepared
-and locally validated; it has not been deployed or verified in the AWS account.
+A separate supervised [CloudFront/VPC-origin HTTPS entry](docs/judge-https-deployment.md)
+is deployed and externally verified. Viewer/operator access remains authenticated;
+judge credentials and repository access are supplied separately. The original SSH
+portal remains available. See the runbook for measured checks and retained limits.
 It serves no images or recordings. The original evaluated core modules are
 unchanged. The new guided synthetic AWS probe executed COOL but failed the full
 20FPS rate audit (14FPS achieved); it is not the frozen WebP80 regression.
@@ -97,7 +98,9 @@ unchanged. The new guided synthetic AWS probe executed COOL but failed the full
 separate locked cloud environment and external COOL SDK. Keep standard OpenCV
 wheels out of that cloud environment. Models, SDK entitlement and scene calibration
 must be supplied separately. Services bind to loopback and use an authenticated
-SSH tunnel; this repository supplies no public endpoint or account credentials.
+SSH tunnel. The HTTPS entry exposes only the authenticated, image-free review
+portal; vision WebSockets stay on loopback. This repository supplies no account
+credentials, model weights or personal deployment identifiers.
 
 The experimental runner requires an explicit budget and an external frozen
 input/source profile. A prepare-only invocation contacts no AWS host:

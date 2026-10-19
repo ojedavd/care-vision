@@ -1,6 +1,6 @@
-# HTTPS entry for the private judge portal — staged, not enabled
+# HTTPS entry for the private judge portal — deployed and externally verified
 
-The staged entry is CloudFront with an AWS-managed hostname and an EC2 VPC
+The deployed entry is CloudFront with an AWS-managed hostname and an EC2 VPC
 origin. It forwards only the authenticated, image-free judge HTTP application.
 The vision worker, Edge command channel and COOL workload retain their existing
 Graviton/SSH boundary. No input recordings, model files, SDK or private evidence
@@ -9,9 +9,9 @@ are part of the CloudFormation plan.
 This adds one managed HTTPS entry because no owned DNS name has been supplied.
 CloudFront traffic has its own pricing; this plan does not assert that the compute
 grant covers it or that deployment is free. Local preparation created no AWS resources. A later authenticated deployment
-created a disabled stack and a separate supervised origin; external ingress and
-endpoint enablement are still pending. The existing private SSH portal remains
-available. See the dated status below.
+created a disabled stack and a separate supervised origin, then enabled the
+restricted external path after review. External acceptance has passed within the
+image-free review scope below. The existing private SSH portal remains available.
 
 ## Generate and validate without AWS
 
@@ -140,8 +140,8 @@ Verify from a separate network/browser, without the SSH tunnel:
 - Explicit stale/offline status and a controlled end-to-end rehearsal. The prior
   probe failed its requested20FPS rate audit; HTTPS does not resolve that result.
 
-The current locked checks are local schema/security tests, not evidence that these
-real CloudFront checks passed. Leave Devpost's working endpoint empty until the
+Local locked schema/security tests alone cannot establish these real CloudFront
+checks. For a new deployment, leave Devpost's working endpoint empty until the
 external entry is verified. Sharing a URL does not authorize sharing private
 viewer credentials, judge invitations, recordings or real incident information.
 
@@ -161,7 +161,7 @@ recordings, models, original groups, instance, subnet or SDK.
 - [CloudFormation VPC origin schema](https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-cloudfront-vpcorigin.html)
 - [EC2 group defaults and restrictive egress](https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-ec2-securitygroup.html)
 
-## Staged-account result — 19 October 2026
+## Initial staged-account result — 19 October 2026
 
 Authenticated discovery confirmed the existing Arm instance, supported AZ, spare
 subnet IPv4 addresses, Internet gateway, return-traffic ACL and complete attached
@@ -194,3 +194,40 @@ All 87 source/runtime-package files matched the staged manifest; no owned worker
 remained and the three protected episode files checked in this run were unchanged.
 No personal media or live camera was used. These checks do not establish external
 HTTPS acceptance or resolve the prior 14-versus-20FPS probe failure.
+
+## Activation and external acceptance — 19 October 2026
+
+After the owner's specific activation confirmation, the template added TCP8780
+from the verified AWS-managed CloudFront group. The portal group was appended to
+the freshly read primary-interface group set, preserving the original SSH group.
+The distribution was then enabled. CloudFormation finished UPDATE_COMPLETE and
+CloudFront reported Deployed/Enabled. Its actual origin configuration uses the
+VPC origin, its viewer policy is HTTPS-only, all cache TTLs are0, Host/Origin/
+cookies are forwarded, and distribution access/cookie logging is disabled.
+
+External browser/API checks passed the trusted HTTPS login page and JavaScript,
+HTTP403, anonymous API401, invalid login denial, distinct viewer/operator roles,
+Secure/HttpOnly/SameSite cookies, no-store, read-only viewer/no worker port,
+Origin/CSRF rejection, absent private file routes, real phase3 COOL worker start,
+explicitly absent live evidence without an Edge, native expiry, restart, explicit
+stop and logout revocation. A direct connection to the instance's public8780
+port timed out from the test client; the reviewed security-group union contains
+no Internet grant for that port. This is scoped acceptance, not a comprehensive
+security assessment or general-network resilience result.
+
+The native worker stopped with demonstration_time_limit at120.0009 seconds.
+It completed cleanly before the portal watchdog could label TIME_LIMIT. The
+initial harness's stricter state assertion failed, so the native log was verified
+and an external continuation completed restart/stop/logout checks. Two other
+harness attempts are retained: system Python lacked a local issuer store (the
+locked Python3.11 OS CA store validated TLS), and traversal was rejected400 by
+CloudFront rather than reaching the origin's404. No TLS validation, firewall or
+application control was weakened to pass these checks.
+
+The working endpoint and credential-free guided testing instructions were saved
+in Devpost and read back from the saved form. The submission remains a draft;
+no final submission, terms acceptance, personal-media upload or judge invitation
+was performed. Judge key/repository access delivery still requires authorized
+recipients. The portal is a guided image-free interface; pose calibration, new
+scenes and exact-profile rehearsal remain pending. The previous14-versus20FPS
+result and COOL baseline limitations remain unchanged.
