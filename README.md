@@ -1,3 +1,5 @@
+> Current delivery profile (23 October 2026): read the [technical report](docs/technical-report.md) and [demonstrated seated profile](docs/demo-profile-20261021.md). The integrated portal includes an explicit experimental pose-assisted closure. Historical WebP capped regression results below describe a different profile. Current endpoint availability and private judge access require separate verification.
+
 # CARE-Vision
 
 **Adaptive Agentic Vision for Safer Independent Living**

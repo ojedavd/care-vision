@@ -5,6 +5,7 @@ import hashlib
 import hmac
 import ipaddress
 import json
+import math
 import os
 import secrets
 import signal
@@ -229,6 +230,35 @@ def bind_address(private_bind, https_origin):
     return str(address)
 
 
+def cloud_arguments(options):
+    allowed = {
+        "person-model", "person-detector", "person-input-size", "pose-shadow-config",
+        "experimental-s-only-5fps", "experimental-weak-association",
+        "experimental-yolox-classic-engine", "experimental-episode-continuity",
+        "experimental-pose-observation", "experimental-alert-after-seconds",
+        "experimental-seated-closure-seconds",
+    }
+    if not isinstance(options, dict) or set(options) - allowed:
+        raise ValueError("unsupported cloud option")
+    if "experimental-seated-closure-seconds" in options:
+        seconds = options["experimental-seated-closure-seconds"]
+        if type(seconds) not in (int, float) or not math.isfinite(seconds) or seconds <= 0:
+            raise ValueError("seated closure requires a finite positive number of seconds")
+        if options.get("experimental-s-only-5fps") is not True or not isinstance(
+            options.get("pose-shadow-config"), str
+        ) or not options["pose-shadow-config"].strip():
+            raise ValueError("seated closure requires S-only mode and pose configuration")
+    argv = []
+    for key, value in options.items():
+        if value is True:
+            argv.append("--" + key)
+        elif type(value) in (str, int, float) and value is not False:
+            argv.extend(("--" + key, str(value)))
+        else:
+            raise ValueError("invalid cloud option value")
+    return argv
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--port", type=int, default=8780)
@@ -269,28 +299,10 @@ def main():
     if args.synthetic_local and (args.cloud_options or args.cloud_python or args.cloud_source):
         parser.error("synthetic local mode cannot accept cloud options")
     options = json.loads(args.cloud_options.read_text()) if args.cloud_options else {}
-    allowed = {
-        "person-model",
-        "person-detector",
-        "person-input-size",
-        "pose-shadow-config",
-        "experimental-s-only-5fps",
-        "experimental-weak-association",
-        "experimental-yolox-classic-engine",
-        "experimental-episode-continuity",
-        "experimental-pose-observation",
-        "experimental-alert-after-seconds",
-    }
-    if not isinstance(options, dict) or set(options) - allowed:
-        parser.error("unsupported cloud option")
-    argv = []
-    for key, value in options.items():
-        if value is True:
-            argv.append("--" + key)
-        elif type(value) in (str, int, float) and value is not False:
-            argv.extend(("--" + key, str(value)))
-        else:
-            parser.error("invalid cloud option value")
+    try:
+        argv = cloud_arguments(options)
+    except ValueError as error:
+        parser.error(str(error))
     os.umask(0o077)
     sessions = Sessions(
         args.state_root,

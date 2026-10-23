@@ -1,5 +1,25 @@
 # HTTPS entry for the private judge portal — deployed and externally verified
 
+## Experimental seated closure profile
+
+The portal can explicitly enable the evaluated seated-pattern controller using
+`experimental-seated-closure-seconds` in its private cloud-options JSON. This
+requires `experimental-s-only-5fps: true` and a `pose-shadow-config` file for the
+reviewed camera/chair scene. The pose model and scene configuration remain outside
+Git. Use a finite positive numeric duration; five seconds is an uncalibrated
+development value. This does not change the default cloud policy.
+
+The worker reports the active pose/closure profile after startup, and the web
+projection shows an experimental seated-pattern resolution in its timeline.
+No configuration paths, tracks, pose keypoints or images are exposed. Pose ROI
+cycles and alerts are separate options; neither is needed for this closure path.
+Starting a cloud session still requires a separately connected local Edge.
+
+Scene regions need review after camera/chair movement. This profile has only
+development evidence for a small set of activities; it does not verify physical
+seat support, health or general fall accuracy. Keep previous per-session logs and
+protected episode snapshots separate when changing profiles.
+
 The deployed entry is CloudFront with an AWS-managed hostname and an EC2 VPC
 origin. It forwards only the authenticated, image-free judge HTTP application.
 The vision worker, Edge command channel and COOL workload retain their existing

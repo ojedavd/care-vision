@@ -1,6 +1,8 @@
 import asyncio
 import threading
 
+import cv2
+import numpy as np
 import pytest
 from conftest import frame, status
 from test_incident_episode import opened
@@ -13,6 +15,16 @@ from care_vision.cloud.server import Session
 from care_vision.cloud.vision import MotionVision
 from care_vision.common.contracts import dumps, loads, pack_frame
 from care_vision.common.metrics import EventLog
+
+
+def s_only_frame(*args, **kwargs):
+    header, jpeg = frame(*args, **kwargs)
+    image = cv2.imdecode(np.frombuffer(jpeg, dtype=np.uint8), cv2.IMREAD_COLOR)
+    ok, encoded = cv2.imencode('.jpg', cv2.resize(image, (1280, 720)))
+    assert ok
+    jpeg = encoded.tobytes()
+    header.update(width=1280, height=720, payload_bytes=len(jpeg))
+    return header, jpeg
 
 
 async def eventually(predicate):
@@ -73,7 +85,8 @@ def test_socket_close_accounts_queue_and_inference_without_late_decisions(
                 async with connect(f'ws://127.0.0.1:{port}', proxy=None) as ws:
                     await ws.send(dumps(status(identity)))
                     for index in range(1, count + 1):
-                        header, jpeg = frame(identity, index, 1_000_000_000 + index * 50_000_000)
+                        header, jpeg = s_only_frame(
+                            identity, index, 1_000_000_000 + index * 50_000_000)
                         await ws.send(pack_frame(header, jpeg))
                         if index == 1:
                             await eventually(entered.is_set)
@@ -118,12 +131,12 @@ def test_frame_arriving_during_diagnostic_close_is_explicitly_dropped(tmp_path, 
                 return await self.queue.get()
 
             async def close(self, **kwargs):
-                header, jpeg = frame(identity, 2, 1_100_000_000)
+                header, jpeg = s_only_frame(identity, 2, 1_100_000_000)
                 self.queue.put_nowait(pack_frame(header, jpeg))
                 await eventually(lambda: session.received == 2)
 
         socket = Socket()
-        header, jpeg = frame(identity)
+        header, jpeg = s_only_frame(identity)
         socket.queue.put_nowait(pack_frame(header, jpeg))
         session = Session(socket, identity, log, experimental_s_only_5fps=True,
                           diagnostic_disconnect_check=lambda *_: True)

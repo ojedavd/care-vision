@@ -176,6 +176,32 @@ within-policy transmission was1.997 →4.998 →2.000FPS. This verifies the disp
 fix on the real connection; it does not add an independent recording or validate
 incident accuracy. All eight original video/capture files remained unchanged.
 
+## 23 October - integrated seated profile and delivery reconciliation
+
+The portal explicitly accepts the scene-specific pose configuration and five-second
+experimental seated closure; defaults remain off, with pose ROI and alerts disabled
+in the demonstrated profile. The restarted physical-camera development run captured
+1,501 frames and sent/received/processed 140. Two causal sensing commands passed;
+measured transmission was 2.007598 / 5.001160 / 2.001002 FPS. The episode resolved
+at source time 24.863 s while sampled original frames remained seated. The first
+integrated trial was UNKNOWN with no episode and did not exercise the function.
+The second physical descent after closure remains unevaluated. No general accuracy,
+fixed/adaptive saving or clinical benefit is inferred from these development runs.
+
+The seven implementation files preserve the recorded deployed bytes. The focused
+HTTPS, portal, seated, geometry and shutdown set passes 116 tests locally. The full
+suite retains omitted private-fixture requirements and previous failures. Current
+report and diagram text now distinguish this JPEG 2/5 FPS trial from the historical
+WebP capped regression, and retain the negative COOL comparison.
+
+On 23 October the HTTPS root and app.js returned 504; SSH to the prior destination
+expired. A cached, signed-out console page showed a user-initiated instance stop
+on 21 October, but current instance state was not authenticated/verified. Do not
+interpret recorded success as current live availability. Endpoint restoration and
+private judge access remain delivery conditions. No new capture, inference or AWS
+mutation was performed for this reconciliation. Personal traces, exported diagrams,
+benchmark evidence and presentation media remain outside Git.
+
 ## 24 October — English Local Lab and product-perspective previews
 
 Added `care-lab`: a loopback-only, English UI around the existing bounded
