@@ -9,7 +9,8 @@ uv sync --frozen
 uv run --frozen care-lab
 ```
 
-Use Python 3.11 and `uv`. The command opens your browser at
+Use macOS or Linux, Python 3.11 and `uv`. Native Windows is not supported by
+the current POSIX worker-group lifecycle. The command opens your browser at
 `http://127.0.0.1:8781`. Choose **Start synthetic run**. If the browser does not
 open, use the printed URL. If the port is occupied:
 

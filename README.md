@@ -12,7 +12,7 @@ Individual project by Victor Ojeda, Argentina, for the OpenCV AI Competition
 
 ## Try the visual Local Lab
 
-With Python 3.11 and `uv` installed:
+On macOS or Linux, with Python 3.11 and `uv` installed:
 
 ```sh
 git clone https://github.com/ojedavd/care-vision.git

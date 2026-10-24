@@ -2,6 +2,7 @@
 
 import argparse
 import json
+import os
 import secrets
 import signal
 import tempfile
@@ -132,6 +133,8 @@ def main():
     parser.add_argument('--port', type=int, default=8781)
     parser.add_argument('--no-browser', action='store_true')
     args = parser.parse_args()
+    if os.name != 'posix':
+        parser.error('The local lab requires macOS or Linux (POSIX process groups).')
     if not 0 <= args.port <= 65535:
         parser.error('port must be in 0..65535')
     root = Path(tempfile.mkdtemp(prefix='care-vision-lab-'))
