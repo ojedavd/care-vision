@@ -72,6 +72,7 @@ class Session:
         episode_store=None,
         pose_shadow_factory=None,
         experimental_pose_observation=False,
+        experimental_seated_closure_seconds=None,
     ):
         self.websocket, self.identity, self.log = websocket, identity, log
         self.pose_shadow = pose_shadow_factory(log) if pose_shadow_factory else None
@@ -79,6 +80,8 @@ class Session:
             self.pose_shadow is None or not experimental_s_only_5fps
         ):
             raise ValueError("pose observation requires shadow config and S-only mode")
+        if experimental_seated_closure_seconds is not None and self.pose_shadow is None:
+            raise ValueError("seated closure requires shadow config and S-only mode")
         self.pose_planner = (
             PoseObservationPlanner(
                 self.pose_shadow.processor.geometry, self.pose_shadow.processor.hips
@@ -98,8 +101,10 @@ class Session:
                 experimental_s_only_5fps=experimental_s_only_5fps,
                 experimental_alert_after_seconds=experimental_alert_after_seconds,
                 experimental_episode_continuity=experimental_episode_continuity,
+                experimental_seated_closure_seconds=experimental_seated_closure_seconds,
             ),
         )
+        self.seated_closure = experimental_seated_closure_seconds is not None
         self.episode_store = episode_store
         self.diagnostic_disconnect_check = diagnostic_disconnect_check
         if episode_store and episode_store.restore(self.controller):
@@ -176,6 +181,22 @@ class Session:
                 header, jpeg = unpack_frame(raw)
                 self.check_identity(header)
                 historical = header.get("evidence_kind", "live") == "historical"
+                if (
+                    not historical
+                    and self.controller.policy.experimental_s_only_5fps
+                    and header.get("view_kind", "full_frame") == "full_frame"
+                    and (header["width"], header["height"]) != (1280, 720)
+                ):
+                    # The experimental controller intentionally excludes other
+                    # full-frame geometries. Reject them before inference rather
+                    # than presenting a silent NORMAL stream with no policy.
+                    self.log.emit(
+                        "frame_rejected", **self.identity,
+                        frame_id=header["frame_id"], capture_seq=header["capture_seq"],
+                        reason="s_only_profile_requires_1280x720_full_frame",
+                        width=header["width"], height=header["height"],
+                    )
+                    raise ProtocolError("S-only profile requires 1280x720 full-frame evidence")
                 if header["frame_id"] in self.seen or (
                     not historical and header["capture_seq"] <= self.last_seq
                 ):
@@ -283,7 +304,7 @@ class Session:
             self.processed += 1
             self.log.emit("observation", **observation)
             self.processing_frame = None
-            if self.pose_planner is not None:
+            if self.pose_planner is not None or self.seated_closure:
                 self.pose_latest_observation = observation
                 if self.pose_cycle:
                     result = self.pose_cycle.observe(observation, time.monotonic())
@@ -359,6 +380,18 @@ class Session:
         if sample is None or self.drain_request is not None or self.actions_inflight:
             return
         obs, diagnostic, queued = sample
+        if self.seated_closure:
+            decision = self.controller.consider_seated_closure(
+                obs, diagnostic, result_age_seconds=now - queued
+            )
+            self.log.emit("seated_closure_decision", **self.identity, **decision)
+            for event in self.controller.pop_episode_events():
+                self.log.emit("incident_episode", **event)
+            for transition in self.controller.pop_transitions():
+                self.log.emit("agent_state_transition", **transition)
+            self.checkpoint_episode()
+            if decision["closed"] or self.pose_planner is None:
+                return
         latest = self.pose_latest_observation
         if latest is None or latest["capture_seq"] != obs["capture_seq"]:
             return
@@ -381,12 +414,11 @@ class Session:
         await self.dispatch(command, obs)
 
     async def control_pose_observations(self):
-        if self.pose_planner is None:
+        if self.pose_planner is None and not self.seated_closure:
             await asyncio.Future()
         while True:
             await asyncio.sleep(.02)
-            if self.pose_planner is not None:
-                await self.pose_observation_tick()
+            await self.pose_observation_tick()
 
     async def recover_offline(self):
         while True:
@@ -688,10 +720,16 @@ class CloudServer:
         diagnostic_disconnect_after_episode_seconds=None,
         pose_shadow_factory=None,
         experimental_pose_observation=False,
+        experimental_seated_closure_seconds=None,
     ):
         self.log = log
         self.pose_shadow_factory = pose_shadow_factory
         self.experimental_pose_observation = experimental_pose_observation
+        if experimental_seated_closure_seconds is not None and (
+            pose_shadow_factory is None or not experimental_s_only_5fps
+        ):
+            raise ValueError("seated closure requires shadow config and S-only mode")
+        self.experimental_seated_closure_seconds = experimental_seated_closure_seconds
         if experimental_pose_observation and (
             pose_shadow_factory is None or not experimental_s_only_5fps
         ):
@@ -772,6 +810,10 @@ class CloudServer:
             )
             if self.experimental_pose_observation:
                 shadow_options["experimental_pose_observation"] = True
+            if self.experimental_seated_closure_seconds is not None:
+                shadow_options["experimental_seated_closure_seconds"] = (
+                    self.experimental_seated_closure_seconds
+                )
             await Session(
                 websocket,
                 identity,
@@ -853,6 +895,7 @@ class CloudServer:
                 experimental_episode_continuity=self.experimental_episode_continuity,
                 pose_shadow_enabled=self.pose_shadow_factory is not None,
                 pose_observation_enabled=self.experimental_pose_observation,
+                seated_closure_seconds=self.experimental_seated_closure_seconds,
                 episode_state_durable=bool(self.episode_store and self.episode_store.path),
                 diagnostic_disconnect_after_episode_seconds=(
                     self.diagnostic_disconnect_after_episode_seconds

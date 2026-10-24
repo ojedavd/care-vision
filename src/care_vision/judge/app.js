@@ -21,6 +21,8 @@ function render(s) {
   text('target', fmt(s.metrics.target_transmit_fps)); text('latency', fmt(s.metrics.processing_ms, ' ms'));
   text('cycles', s.causal_cycles);
   text('runtime', `OpenCV ${s.runtime.opencv || 'not available'} · COOL verified: ${s.runtime.cool_verified ? 'yes' : 'no'} · phase ${s.runtime.phase ?? '—'}`);
+  const seated = s.profile?.seated_closure_seconds;
+  text('profile', typeof seated === 'number' ? `Experimental seated-pattern closure: ${fmt(seated, ' s')}. Requires a reviewed scene configuration; physical seat support is unverified.` : 'Seated-pattern closure is not active in this session.');
   text('freshness', s.vision_live ? `Last observation ${fmt(s.observation_age_seconds, ' s')} ago` : 'Analysis is not currently receiving fresh evidence. No safety conclusion can be drawn.');
   text('resources', `Live processed: ${s.counts.live_processed} · Historical processed: ${s.counts.historical_processed} · Process CPU: ${fmt(s.metrics.cpu_percent_one_core, '% of one core')} · RSS: ${fmt(typeof s.metrics.rss_bytes === 'number' ? s.metrics.rss_bytes / 1048576 : null, ' MiB')} · Received: ${s.counts.received} · Explicit drops: ${s.counts.dropped}`);
   el('start').hidden = !s.operator; el('stop').hidden = !s.operator;

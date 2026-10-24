@@ -38,7 +38,14 @@ def main():
     )
     parser.add_argument("--experimental-pose-observation", action="store_true",
                         help="Opt-in bounded pose-driven ROI/full-frame cycle")
+    parser.add_argument("--experimental-seated-closure-seconds", type=float,
+                        help="Opt-in: clear an uninterrupted posture-change episode after a "
+                        "sustained seated-pose pattern; uncalibrated, not seat support")
     args = parser.parse_args()
+    if args.experimental_seated_closure_seconds is not None and (
+        not args.pose_shadow_config or not args.experimental_s_only_5fps or args.phase != 3
+    ):
+        parser.error("seated closure requires pose-shadow-config, S-only mode and phase 3")
     if args.experimental_pose_observation and (
         not args.pose_shadow_config or not args.experimental_s_only_5fps or args.phase != 3
     ):
@@ -93,6 +100,7 @@ def main():
             experimental_s_only_5fps=args.experimental_s_only_5fps,
             experimental_alert_after_seconds=args.experimental_alert_after_seconds,
             experimental_episode_continuity=args.experimental_episode_continuity,
+            experimental_seated_closure_seconds=args.experimental_seated_closure_seconds,
         )
     except ValueError as exc:
         parser.error(str(exc))
@@ -161,6 +169,7 @@ def main():
             args.diagnostic_disconnect_after_episode_seconds,
             pose_shadow_factory=pose_shadow_factory,
             experimental_pose_observation=args.experimental_pose_observation,
+            experimental_seated_closure_seconds=args.experimental_seated_closure_seconds,
         ).run(args.host, args.port, args.phase)
         if args.run_seconds is None:
             await service

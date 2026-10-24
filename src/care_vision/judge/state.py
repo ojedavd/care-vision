@@ -65,6 +65,7 @@ class Projection:
         self.metrics = {}
         self.runtime = {"cool_verified": False, "opencv": None, "phase": None}
         self.agent_state = "UNKNOWN"
+        self.profile = {"pose_enabled": False, "seated_closure_seconds": None}
         self.last_observation = None
         self.last_event = None
         self.edge_connected = False
@@ -88,6 +89,13 @@ class Projection:
                 "phase": phase if phase in (1, 2, 3) else None,
             }
             self.cloud_port = row.get("port") if type(row.get("port")) is int else None
+            duration = number(row.get("seated_closure_seconds"))
+            pose = row.get("pose_shadow_enabled") is True
+            self.profile = {
+                "pose_enabled": pose,
+                "seated_closure_seconds": duration
+                if pose and phase == 3 and duration is not None and duration > 0 else None,
+            }
         elif event == "session_started":
             self.edge_connected = True
         elif event in {"session_ended", "session_finished", "session_error", "server_stopped"}:
@@ -186,6 +194,11 @@ class Projection:
             state = row.get("to_state", row.get("to"))
             if state in STATES:
                 self.agent_state = state
+                if row.get("reason") == "experimental_seated_closure" and state == "NORMAL":
+                    self.timeline.append({
+                        "stage": "episode_resolved",
+                        "action": "EXPERIMENTAL_SEATED_PATTERN",
+                    })
         elif event == "test_alert":
             self.timeline.append({"stage": "test_alert", "action": "NO_EXTERNAL_NOTIFICATION"})
         elif event == "process_resources":
@@ -199,6 +212,7 @@ class Projection:
             fps = (len(self.fps_times) - 1) * 1e9 / (self.fps_times[-1] - self.fps_times[0])
         return {
             "runtime": self.runtime,
+            "profile": dict(self.profile),
             "counts": dict(self.counts),
             "metrics": dict(self.metrics),
             "agent_state": self.agent_state,
