@@ -22,8 +22,10 @@ PRIVATE_DIRS = {
     '__pycache__', '.pytest_cache', '.ruff_cache',
 }
 TEXT_SUFFIXES = {'.py', '.html', '.js', '.md', '.toml', '.lock', '.json', '.yml', '.yaml'}
-# Exact reviewed proposal figure; other media remain prohibited.
+# Exact reviewed architecture figures; other media remain prohibited.
 PUBLIC_DIAGRAMS = {
+    'docs/images/illustrated-architecture.png':
+        '4a92bc8d51bae319bca8409ea568da0d4b5fe07e521f66d4b24562341010f583',
     'docs/images/proposal-architecture.jpg':
         '0925117e969f322e235f31210cb92ba53d946c9fee81881a8f603b9917f84efc',
 }
@@ -58,7 +60,7 @@ def inspect_payload(name, content, mode='100644'):
     hook = name in {'.githooks/pre-commit', '.githooks/pre-push'}
     if name not in ROOT_FILES and not hook and path.suffix.lower() not in TEXT_SUFFIXES and not public_diagram:
         issues.append('unsupported file type; media/archives/weights are excluded')
-    if len(content) > 1_048_576:
+    if len(content) > (3_145_728 if public_diagram else 1_048_576):
         issues.append('file exceeds source-only size limit')
     if public_diagram:
         return issues

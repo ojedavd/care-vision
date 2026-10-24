@@ -1,12 +1,12 @@
 # Security and private material
 
-This repository distributes source, documentation and one reviewed proposal diagram. Personal test recordings, original inputs,
+This repository distributes source, documentation and two reviewed architecture diagrams. Personal test recordings, original inputs,
 photos, audio, logs, state snapshots, camera credentials, SSH keys, account IDs
 and private deployment addresses belong in a separate local workspace.
 
-The sole media exception is `docs/images/proposal-architecture.jpg`, extracted
-from Figure 1 of the approved proposal. Hygiene checks require its exact path
-and SHA-256; replacing it or adding other media remains blocked.
+The media exceptions are `docs/images/proposal-architecture.jpg` (original
+proposal Figure 1) and `docs/images/illustrated-architecture.png` (schematic of
+the 5 October trials). Hygiene checks require their exact paths and SHA-256; replacing it or adding other media remains blocked.
 
 ## Before a commit or push
 

@@ -84,3 +84,6 @@
 
 # Reviewed public diagram extracted from the approved proposal.
 !/docs/images/proposal-architecture.jpg
+
+# Reviewed illustrated architecture; exact content enforced by hygiene checks.
+!/docs/images/illustrated-architecture.png

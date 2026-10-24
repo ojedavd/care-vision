@@ -12,6 +12,17 @@ Individual project by Victor Ojeda, Argentina, for the OpenCV AI Competition
 
 ## Architecture
 
+### Illustrated experimental architecture
+
+![CARE-Vision cloud vision pipeline and active perception feedback loop](docs/images/illustrated-architecture.png)
+
+*Original diagram illustrating the controlled physical-camera trials of 5 October
+2026. Hardware drawings, frames, dashboard and timestamps are schematic examples.
+This historical profile does not establish general fall-detection accuracy or a
+COOL speedup; see the [technical report](docs/technical-report.md) for measured scope.*
+
+### Approved proposal
+
 ![CARE-Vision high-level architecture from the approved competition proposal](docs/images/proposal-architecture.jpg)
 
 *Original Figure 1 from the approved proposal (page 5). This depicts planned
@@ -131,7 +142,7 @@ repository, using an absolute output path in a private workspace. No recordings,
 personal images, audio, observations, logs, snapshots, model weights, SDK binaries, keys or
 personal deployment files are distributed here.
 
-The reviewed proposal architecture image above is the only media exception.
+The two reviewed architecture diagrams above are the only media exceptions.
 `.gitignore` excludes private media; source-only checks reject unsupported files,
 media signatures and obvious credentials even if a file is force-added or renamed.
 Install local protection before development:

@@ -78,8 +78,11 @@ def test_deleted_private_blob_is_still_rejected_in_history(tmp_path):
     assert 'ftypisom' not in result.stdout
 
 
-def test_only_exact_reviewed_proposal_diagram_is_allowed():
-    name = 'docs/images/proposal-architecture.jpg'
+@pytest.mark.parametrize('name', [
+    'docs/images/proposal-architecture.jpg',
+    'docs/images/illustrated-architecture.png',
+])
+def test_only_exact_reviewed_diagrams_are_allowed(name):
     content = (ROOT / name).read_bytes()
     assert HYGIENE.inspect_payload(name, content) == []
     assert HYGIENE.inspect_payload(name, content + b'changed')
