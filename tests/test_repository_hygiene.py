@@ -76,3 +76,12 @@ def test_deleted_private_blob_is_still_rejected_in_history(tmp_path):
     assert result.returncode == 1
     assert 'media/archive signature' in result.stdout
     assert 'ftypisom' not in result.stdout
+
+
+def test_only_exact_reviewed_proposal_diagram_is_allowed():
+    name = 'docs/images/proposal-architecture.jpg'
+    content = (ROOT / name).read_bytes()
+    assert HYGIENE.inspect_payload(name, content) == []
+    assert HYGIENE.inspect_payload(name, content + b'changed')
+    assert HYGIENE.inspect_payload('docs/images/other.jpg', content)
+    assert HYGIENE.inspect_payload(name, content, '120000')

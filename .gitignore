@@ -81,3 +81,6 @@
 **/.ruff_cache/
 **/*.egg-info/
 **/.DS_Store
+
+# Reviewed public diagram extracted from the approved proposal.
+!/docs/images/proposal-architecture.jpg

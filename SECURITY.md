@@ -1,8 +1,12 @@
 # Security and private material
 
-This is a code-only repository. Personal test recordings, original inputs,
+This repository distributes source, documentation and one reviewed proposal diagram. Personal test recordings, original inputs,
 photos, audio, logs, state snapshots, camera credentials, SSH keys, account IDs
 and private deployment addresses belong in a separate local workspace.
+
+The sole media exception is `docs/images/proposal-architecture.jpg`, extracted
+from Figure 1 of the approved proposal. Hygiene checks require its exact path
+and SHA-256; replacing it or adding other media remains blocked.
 
 ## Before a commit or push
 

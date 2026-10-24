@@ -6,6 +6,7 @@ Gitleaks supplies the complementary full secret scan. Findings never print data.
 """
 
 import argparse
+import hashlib
 import re
 import subprocess
 from pathlib import Path, PurePosixPath
@@ -21,6 +22,11 @@ PRIVATE_DIRS = {
     '__pycache__', '.pytest_cache', '.ruff_cache',
 }
 TEXT_SUFFIXES = {'.py', '.html', '.js', '.md', '.toml', '.lock', '.json', '.yml', '.yaml'}
+# Exact reviewed proposal figure; other media remain prohibited.
+PUBLIC_DIAGRAMS = {
+    'docs/images/proposal-architecture.jpg':
+        '0925117e969f322e235f31210cb92ba53d946c9fee81881a8f603b9917f84efc',
+}
 SECRET_FILES = {'credentials', 'credentials.json', 'id_rsa', 'id_ed25519', 'id_ecdsa', '.netrc', '.npmrc'}
 PATTERNS = {
     'private key marker': re.compile(rb'-----BEGIN (?:RSA |EC |OPENSSH |DSA |ENCRYPTED )?PRIVATE KEY-----'),
@@ -48,11 +54,14 @@ def inspect_payload(name, content, mode='100644'):
         issues.append('private/generated directory')
     if path.name.lower() in SECRET_FILES or path.name.lower().startswith('.env'):
         issues.append('credential/configuration file')
+    public_diagram = PUBLIC_DIAGRAMS.get(name) == hashlib.sha256(content).hexdigest()
     hook = name in {'.githooks/pre-commit', '.githooks/pre-push'}
-    if name not in ROOT_FILES and not hook and path.suffix.lower() not in TEXT_SUFFIXES:
+    if name not in ROOT_FILES and not hook and path.suffix.lower() not in TEXT_SUFFIXES and not public_diagram:
         issues.append('unsupported file type; media/archives/weights are excluded')
     if len(content) > 1_048_576:
         issues.append('file exceeds source-only size limit')
+    if public_diagram:
+        return issues
     if (content.startswith((b'\x89PNG', b'\xff\xd8\xff', b'GIF87a', b'GIF89a', b'\x1aE\xdf\xa3', b'PK\x03\x04'))
             or content[4:8] == b'ftyp'
             or (content[:4] == b'RIFF' and content[8:12] in {b'AVI ', b'WAVE', b'WEBP'})):

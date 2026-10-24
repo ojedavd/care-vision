@@ -1,7 +1,7 @@
 # Approved competition proposal — text reference
 
-This is a text extraction of the owner's approved proposal. Figure pixels and
-PDF metadata are excluded. The source describes planned scope; measured current
+This is a text extraction of the owner's approved proposal. The [original architecture figure](images/proposal-architecture.jpg) is published
+separately; PDF metadata is excluded. The source describes planned scope; measured current
 behavior and limitations are recorded separately in the README and evidence register.
 
 OpenCV AI Competition 2026, powered by AWS

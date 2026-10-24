@@ -12,6 +12,14 @@ Individual project by Victor Ojeda, Argentina, for the OpenCV AI Competition
 
 ## Architecture
 
+![CARE-Vision high-level architecture from the approved competition proposal](docs/images/proposal-architecture.jpg)
+
+*Original Figure 1 from the approved proposal (page 5). This depicts planned
+scope, including future services and integrations. The 80–95% reduction shown is
+an initial target, not a measured result; offline cloud vision is unavailable.
+The Edge remains responsible for acquisition and transport, with primary CV on
+Graviton. See the [proposal text](docs/approved-proposal.md) and measured scope below.*
+
 ```mermaid
 flowchart LR
     C[Camera / video] --> E[Edge: capture, ring buffer, sampling, encoding]
@@ -120,10 +128,11 @@ No live camera, external caregiver alert or AWS job starts by cloning/building.
 
 **Do not upload any old or new test video.** Record new scenes outside this
 repository, using an absolute output path in a private workspace. No recordings,
-images, audio, observations, logs, snapshots, model weights, SDK binaries, keys or
+personal images, audio, observations, logs, snapshots, model weights, SDK binaries, keys or
 personal deployment files are distributed here.
 
-`.gitignore` excludes these files; source-only checks reject unsupported files,
+The reviewed proposal architecture image above is the only media exception.
+`.gitignore` excludes private media; source-only checks reject unsupported files,
 media signatures and obvious credentials even if a file is force-added or renamed.
 Install local protection before development:
 
