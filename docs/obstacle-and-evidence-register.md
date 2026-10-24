@@ -175,3 +175,38 @@ still RUNNING but vision_live was already false at normal recording EOF. Actual
 within-policy transmission was1.997 →4.998 →2.000FPS. This verifies the display
 fix on the real connection; it does not add an independent recording or validate
 incident accuracy. All eight original video/capture files remained unchanged.
+
+## 24 October — English Local Lab and product-perspective previews
+
+Added `care-lab`: a loopback-only, English UI around the existing bounded
+synthetic Edge/vision demo. It shows actual Edge rate samples, counts, application
+bytes, buffer occupancy, motion observations, deterministic reasons, command
+source/ACK/later-perception checks and an owned generated-source preview.
+Capture, requested transmit and achieved transmit rates remain separate. Historical
+buffer completion is shown separately from live causal sensing cycles.
+
+Caregiver, Family and Operations perspectives include explicitly scripted browser
+walkthroughs for recovery, human review and outage. Human attention is separate
+from detection and notification delivery. They are product previews, not production
+roles, person monitoring or an alert-delivery service. No AWS resources, critical
+vision/controller policy, models or image routes in the existing private judge
+portal were changed. Local runtime is standard OpenCV, NOT COOL.
+
+Validation: the six new lab tests passed (36.98 s), including an actual generated
+run, preview, restart and stop; 63 privacy/protocol/sampling tests passed; 37
+lab/portal/HTTPS tests passed with the new paced lab test excluded (4.49 s).
+These sets overlap. The initial combined run had 74 passing tests and one failed
+assertion that incorrectly expected live re-perception for a historical buffer
+request; the local loop auditor itself passed. The UI/test now treat historical
+completion independently. No detector success is inferred from this correction.
+
+A separate browser-driven local run passed its full local loop auditor with
+397 sent/received/observed frames and COOL unverified. Browser checks covered the
+four English views, measured Edge data, scripted human handoff, outage, 360px
+light/dark layouts and no JavaScript errors. Selected text/background pairs had
+contrast >=5.66:1; this is not a complete accessibility certification. UI assets
+were verified in the built wheel. Private generated evidence, failed-test summary,
+reports and screenshots are retained in the owner's local evidence workspace.
+The README now documents a fresh-clone quick start. CloudFront deployment,
+production authorization, durable cases and external notification delivery remain
+separate future work; the earlier endpoint outage is not resolved by this change.

@@ -28,6 +28,14 @@ application data are anonymous. Review every addition. Hook configuration is loc
 to a clone and must be enabled again in a new clone. CI repeats the source-only
 check and synthetic tests, with read-only repository permissions and no AWS secrets.
 
+## Local Lab
+
+The loopback-only lab can preview only its own generated geometric fixture.
+It does not add image routes to the authenticated judge portal and accepts no
+camera/upload/file-path input. Scenario walkthroughs are browser-local product
+previews, not production access roles or delivered notifications. Do not expose
+this local demo as a public service. See [Local Lab](docs/local-lab.md).
+
 ## New recordings
 
 Use a private absolute directory outside this checkout for all capture outputs.

@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CARE-Vision · Local Lab</title>
+<link rel="stylesheet" href="/style.css">
+<script src="/app.js" defer></script>
+</head>
+<body>
+<div id="care-app">
+<header class="app-header">
+  <a class="brand" href="/" aria-label="CARE-Vision home"><span class="brand-mark" aria-hidden="true">CV</span><span>CARE-Vision<small>Adaptive vision. Visible decisions.</small></span></a>
+  <div class="header-context"><span class="badge neutral">LOCAL LAB</span><span class="header-note">Experimental prototype</span></div>
+</header>
+<nav class="role-nav" aria-label="Workspace">
+  <button type="button" data-role="lab" aria-pressed="true">Lab &amp; judges</button>
+  <button type="button" data-role="caregiver" aria-pressed="false">Caregiver</button>
+  <button type="button" data-role="family" aria-pressed="false">Family</button>
+  <button type="button" data-role="operations" aria-pressed="false">Operations</button>
+</nav>
+<main>
+  <div class="page-heading"><div><p class="eyebrow" id="workspace-label">SYSTEM EXPLORER</p><h1 id="page-title">See the loop in action.</h1><p class="page-description" id="page-description">Follow a frame from capture to the next agent decision.</p></div><div class="run-actions"><button type="button" id="start-run" class="button primary">Start synthetic run</button><button type="button" id="stop-run" class="button" disabled>Stop</button></div></div>
+  <section class="source-toolbar" aria-label="Data source">
+    <div class="segmented" aria-label="Data source"><button type="button" id="live-mode" aria-pressed="true">Live synthetic run</button><button type="button" id="walkthrough-mode" aria-pressed="false">Scenario walkthrough</button></div>
+    <span id="source-status" class="source-status">Ready when you are</span>
+  </section>
+  <div id="walkthrough-controls" class="walkthrough-controls" hidden>
+    <label for="scenario">Scenario <select id="scenario"><option value="recovery">Verification &amp; recovery</option><option value="review">Human review needed</option><option value="offline">Connection interrupted</option></select></label>
+    <div class="step-controls"><button type="button" id="previous-step" class="button compact">Previous</button><span id="step-label"></span><button type="button" id="next-step" class="button compact">Next event</button></div>
+  </div>
+  <div id="error" class="error-message" role="alert" hidden></div>
+  <div id="announcement" class="sr-only" aria-live="polite"></div>
+  <section id="workspace" aria-label="Current workspace"></section>
+</main>
+<footer class="app-footer"><span id="scope-label">Generated motion only · No AWS or COOL · No camera access</span><span>No external notifications · Local perspectives are previews, not access roles</span></footer>
+</div>
+</body>
+</html>

@@ -10,6 +10,28 @@ commands to a lightweight Edge Gateway.
 Individual project by Victor Ojeda, Argentina, for the OpenCV AI Competition
 2026 (COOL and Agentic Vision paths), selected for an AWS Compute Grant.
 
+## Try the visual Local Lab
+
+With Python 3.11 and `uv` installed:
+
+```sh
+git clone https://github.com/ojedavd/care-vision.git
+cd care-vision
+uv sync --frozen
+uv run --frozen care-lab
+```
+
+Choose **Start synthetic run** in the browser. In about 35 seconds, follow a
+moving shape through real local Edge/vision processes, measured capture and
+transmit rates, agent decisions, applied commands and new visual evidence.
+All four perspectives are in English: **Lab & judges**, **Caregiver**, **Family**
+and **Operations**. Scripted product walkthroughs are labeled separately from
+live measurements; no external notifications are sent.
+
+No AWS account, camera, model weights or private recordings are needed.
+This is standard local OpenCV, **not COOL**, and does not validate person/fall
+accuracy. [Local Lab guide and limitations](docs/local-lab.md).
+
 ## Architecture
 
 ### Illustrated experimental architecture
@@ -157,6 +179,6 @@ The pre-commit hook scans staged content. The pre-push hook checks committed
 history as well, so deleting a private file in a later commit is insufficient.
 [Security and sharing procedure](SECURITY.md).
 
-Private GitHub access must be explicitly granted to authorized judges. A repository
-URL alone does not give them access. No open-source license has been selected;
+This repository is public. Access to the authenticated judge portal and private
+evaluation inputs must still be supplied separately to authorized judges. No open-source license has been selected;
 third-party dependencies/assets retain their own terms.

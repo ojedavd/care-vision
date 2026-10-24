@@ -39,7 +39,7 @@ def run_demo(output: Path):
             if port is None:
                 raise RuntimeError("cloud readiness timeout")
             print(
-                f"Cloud local listo en puerto {port}; video de 34 s, captura a 30 FPS.", flush=True
+                f"Local vision worker ready on port {port}; 34 s video, 30 FPS capture.", flush=True
             )
             with (output / "edge.stderr").open("w") as edge_err:
                 subprocess.run(
@@ -74,7 +74,7 @@ def run_demo(output: Path):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Demostración local CARE-Vision 2 → 20 → 2 FPS")
+    parser = argparse.ArgumentParser(description="CARE-Vision local demonstration: 2 → 20 → 2 FPS")
     parser.add_argument(
         "--output", type=Path, default=Path("artifacts") / time.strftime("%Y%m%d-%H%M%S")
     )
@@ -87,7 +87,7 @@ def main():
     except Exception as exc:
         parser.exit(1, f"FAIL: {exc}\nLogs: {args.output.resolve()}\n")
     print(json.dumps(report, indent=2))
-    print(f"PASS: circuito local verificado. Evidencia: {args.output.resolve()}")
+    print(f"PASS: local loop verified. Evidence: {args.output.resolve()}")
 
 
 if __name__ == "__main__":

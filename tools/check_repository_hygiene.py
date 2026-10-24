@@ -21,7 +21,7 @@ PRIVATE_DIRS = {
     'logs', 'states', 'snapshots', 'models', 'private', '.aws', '.ssh', '.venv',
     '__pycache__', '.pytest_cache', '.ruff_cache',
 }
-TEXT_SUFFIXES = {'.py', '.html', '.js', '.md', '.toml', '.lock', '.json', '.yml', '.yaml'}
+TEXT_SUFFIXES = {'.css', '.py', '.html', '.js', '.md', '.toml', '.lock', '.json', '.yml', '.yaml'}
 # Exact reviewed architecture figures; other media remain prohibited.
 PUBLIC_DIAGRAMS = {
     'docs/images/illustrated-architecture.png':
