@@ -42,6 +42,7 @@ def test_loopback_assets_host_checks_and_no_arbitrary_inputs(lab):
     status, headers, body = call(lab, '/')
     assert status == 200 and b'lang="en"' in body
     assert headers['Cache-Control'] == 'no-store'
+    assert headers['Cross-Origin-Resource-Policy'] == 'same-origin'
     assert "frame-ancestors 'none'" in headers['Content-Security-Policy']
     for path in ('/app.js', '/style.css'):
         assert call(lab, path)[0] == 200
