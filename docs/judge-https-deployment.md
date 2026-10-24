@@ -1,5 +1,31 @@
 # HTTPS entry for the private judge portal — deployed and externally verified
 
+## Optional public read-only review — 24 October 2026
+
+At the owner's request, `--public-viewer` can expose the existing image-free
+viewer projection without credentials. The default remains authenticated. This
+option intentionally makes the displayed runtime, counts, agent state and
+sanitized timeline available to anyone with the endpoint, not only judges.
+No media, tracking identifiers, raw logs, configuration paths, worker port,
+authentication cookie or CSRF token is provided to an anonymous viewer.
+
+All POST actions retain login, Origin and CSRF checks; start/stop still require
+the operator role. Do not publish the operator key in Devpost or a URL. The page
+offers an operator sign-in button, and a link to the recorded demonstration for
+asynchronous review. No camera or inference worker starts when a visitor opens
+the page. IDLE/stale status is not replaced with historical trial metrics.
+
+Enable this explicit option only on the intended supervised portal, preserving
+its private VPC bind, HTTPS origin, network rules and owner-only credential file.
+Check that no guided session is running before restarting that portal. Retain
+the original service definition and source for rollback. Anonymous acceptance
+then expects `/api/state` 200, no cookie/CSRF/worker port, and POST start/stop 401;
+the earlier anonymous-401 acceptance below describes the original private mode.
+
+Judges no longer need a viewer credential for this public mode. A guided live
+demonstration still requires the owner to start the worker and connect the Edge.
+The older deployment history below remains an account of its original scope.
+
 ## Experimental seated closure profile
 
 The portal can explicitly enable the evaluated seated-pattern controller using

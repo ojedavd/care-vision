@@ -1,4 +1,4 @@
-"""Authenticated loopback portal. Expose only behind a reviewed HTTPS proxy."""
+"""Image-free review portal. Expose only behind a reviewed HTTPS proxy."""
 
 import argparse
 import hashlib
@@ -75,9 +75,10 @@ class Portal(ThreadingHTTPServer):
     daemon_threads = True
     request_queue_size = 16
 
-    def __init__(self, address, sessions, auth, origin=None):
+    def __init__(self, address, sessions, auth, origin=None, *, public_viewer=False):
         super().__init__(address, Handler)
         self.sessions, self.auth = sessions, auth
+        self.public_viewer = public_viewer
         self.origin = origin or f"http://127.0.0.1:{self.server_port}"
         self.host = urlsplit(self.origin).netloc
         self.secure = self.origin.startswith("https://")
@@ -156,6 +157,12 @@ class Handler(BaseHTTPRequestHandler):
                 "text/html" if name.endswith("html") else "application/javascript",
             )
         _, session = self.server.auth.get(self.headers.get("Cookie"))
+        if self.path == "/api/state" and self.server.public_viewer and not session:
+            # Reuse only the image-free viewer projection. Never grant a cookie,
+            # CSRF token, worker port, or permission to execute a POST action.
+            value = self.server.sessions.snapshot(operator=False)
+            value["public_viewer"] = True
+            return self.reply(200, value)
         if not session:
             return self.reply(401, {"error": "sign in required"})
         if self.path == "/api/state":
@@ -266,6 +273,10 @@ def main():
         "--private-bind", help="opt-in RFC1918 interface for a restricted VPC origin"
     )
     parser.add_argument("--credentials-file", type=Path, required=True)
+    parser.add_argument(
+        "--public-viewer", action="store_true",
+        help="allow anonymous image-free, read-only state; operator actions still require sign-in",
+    )
     parser.add_argument("--state-root", type=Path, required=True)
     parser.add_argument("--synthetic-local", action="store_true")
     parser.add_argument("--cloud-python", type=Path)
@@ -317,9 +328,11 @@ def main():
         sessions,
         Auth(json.loads(args.credentials_file.read_text())),
         origin,
+        public_viewer=args.public_viewer,
     )
     print(
-        f"Private judge portal listening on {address}:{server.server_port}; no images served.",
+        f"Judge portal listening on {address}:{server.server_port}; "
+        f"public read-only viewer: {args.public_viewer}; no images served.",
         flush=True,
     )
 

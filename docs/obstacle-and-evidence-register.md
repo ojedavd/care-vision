@@ -335,3 +335,48 @@ checks validate source behavior with synthetic inputs, not physical seat support
 fall accuracy, a new live demo or local COOL execution. Publication is reviewed in
 the reconciliation PR; main still needs that PR merged to expose the implementation
 at the default-branch code URL.
+
+
+## 24 October — Public read-only judge access, operator controls preserved
+
+At the owner's explicit request to remove judge login friction, the HTTPS portal
+now runs with an opt-in `--public-viewer` switch. Anonymous GET `/api/state`
+returns the existing image-free viewer projection: runtime, aggregate counters,
+agent state and sanitized action timeline. It issues no cookie/CSRF token and
+exposes no worker port, tracks, images, raw logs or configuration paths. This
+projection is now available to any endpoint visitor, not only invited judges.
+Authenticated defaults and all POST Origin/CSRF/operator checks remain in place.
+A separate operator sign-in retains start/stop control. Opening the page starts
+no camera, Edge or vision worker. A recorded-demo link supports asynchronous
+review while IDLE; historical trial metrics are not presented as live evidence.
+
+The reviewed three portal source files matched the live server before deployment.
+The portal was IDLE with zero processed frames. Owner-only original-file/service
+backups were retained; a systemd drop-in adds only the public-viewer flag to the
+existing command. After restart it remained IDLE. Cloud CV/controller, SDK,
+models, scene calibration, original logs, credentials, network rules and
+CloudFront infrastructure were not changed. No live capture or inference trial
+was started. The current host address was verified in the authenticated EC2
+console; strict existing SSH host-key verification was retained.
+
+Validation: 53 focused judge/HTTPS/seated-profile tests passed (3.09 s), with the
+paced synthetic-worker integration test excluded because no worker behavior was
+changed. Ruff, JavaScript syntax and diff-check passed. An initial run using the
+other checkout's editable Python environment imported the old Portal class and
+had six fixture errors; rerunning with explicit candidate `PYTHONPATH=src`
+resolved the environment selection. The AWS CLI was unavailable locally; EC2
+read-only discovery used the existing authenticated browser instead. The first
+remote `rg` inventory failed because rg is not installed there; grep found the
+service without changes.
+
+External HTTPS with no cookie verified state200, no-store, no Set-Cookie, no
+CSRF/worker port; anonymous start/stop/logout each returned401. Private file/log
+routes remained401. Remote operator login/state/logout passed without starting
+or stopping a worker. Browser checks confirmed the public notice, IDLE/stale
+status, hidden start/stop, optional sign-in form that survives polling, and the
+recorded-demo link. Devpost testing instructions were saved and read back with
+no viewer-key requirement. Submission remains DRAFT, not finally submitted.
+These results verify access boundaries, not incident accuracy or COOL speedup.
+
+Private deployment metadata, rollback location, external checks and screenshots:
+`artifacts/public-judge-viewer-20261024/` in the owner's evidence workspace.
