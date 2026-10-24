@@ -210,3 +210,33 @@ reports and screenshots are retained in the owner's local evidence workspace.
 The README now documents a fresh-clone quick start. CloudFront deployment,
 production authorization, durable cases and external notification delivery remain
 separate future work; the earlier endpoint outage is not resolved by this change.
+
+## 24 October — Explicit local webcam diagnostic, isolated from AWS
+
+The English Local Lab now offers a generated scene or an explicitly started local
+webcam/USB device. Start options accept only local indices and bounded durations;
+remote URLs/AWS source options are rejected. All views expose THIS_COMPUTER and
+aws_connected=false. No Graviton destination, shared credentials, AWS call,
+CloudFront distribution/origin or deployed judge-portal route was introduced or
+changed. The competition's primary CV workload remains Graviton/OpenCV5/COOL;
+this phase1 standard-OpenCV diagnostic is explicitly separate.
+
+Camera preview is opt-in, bounded to a latest-frame queue/pipe at approximately
+2 FPS, kept in memory and expired/cleared on stale/ended/stopped sessions.
+It does not block the acquisition thread or save camera images/video files.
+Structured diagnostic logs remain in an owner-only temporary directory. The
+source preview is not claimed as processed/cloud imagery. A spontaneous camera
+session reports completion without claiming the fixed synthetic-loop audit or
+incident accuracy passed.
+
+Tests used generated virtual input, never a physical webcam. The actual camera
+worker, Edge and local phase1 vision process completed that virtual trial without
+image/video output, alongside preview framing/expiry, source validation and worker
+launch tests. An initial 44-test lab/camera/judge set passed (43.96 s). After adding
+API-boundary cases, 51 tests passed with the paced synthetic test excluded
+(11.56 s); the sets overlap. The separate 63 privacy/protocol/sampling tests passed.
+Browser checks verified explicit camera selection/start payload, opt-in preview,
+location banner, stop state and mobile light/dark layout without JavaScript errors.
+Browser camera start/stop transport was stubbed to avoid opening hardware; these
+checks are not physical-camera validation. Target hardware, OS camera permissions
+and real-camera cadence still require a separate authorized trial.

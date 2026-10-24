@@ -22,8 +22,18 @@
 <main>
   <div class="page-heading"><div><p class="eyebrow" id="workspace-label">SYSTEM EXPLORER</p><h1 id="page-title">See the loop in action.</h1><p class="page-description" id="page-description">Follow a frame from capture to the next agent decision.</p></div><div class="run-actions"><button type="button" id="start-run" class="button primary">Start synthetic run</button><button type="button" id="stop-run" class="button" disabled>Stop</button></div></div>
   <section class="source-toolbar" aria-label="Data source">
-    <div class="segmented" aria-label="Data source"><button type="button" id="live-mode" aria-pressed="true">Live synthetic run</button><button type="button" id="walkthrough-mode" aria-pressed="false">Scenario walkthrough</button></div>
+    <div class="segmented" aria-label="Data source"><button type="button" id="live-mode" aria-pressed="true">Live local run</button><button type="button" id="walkthrough-mode" aria-pressed="false">Scenario walkthrough</button></div>
     <span id="source-status" class="source-status">Ready when you are</span>
+  </section>
+  <div class="processing-notice" id="processing-notice">Processing: this computer · Standard OpenCV · Not connected to AWS</div>
+  <section id="capture-controls" class="capture-controls" aria-label="Local source settings">
+    <label for="capture-source">Input source <select id="capture-source"><option value="synthetic">Generated motion scene</option><option value="camera">Local webcam / USB camera</option></select></label>
+    <div id="camera-settings" class="camera-settings" hidden>
+      <label for="camera-index">Device index <input id="camera-index" type="number" min="0" max="16" step="1" value="0"></label>
+      <label for="camera-seconds">Duration <select id="camera-seconds"><option value="30">30 seconds</option><option value="45" selected>45 seconds</option><option value="60">60 seconds</option><option value="120">120 seconds</option></select></label>
+      <label class="preview-option"><input id="camera-preview" type="checkbox">Enable local preview · memory only</label>
+    </div>
+    <p id="capture-help" class="caption">The generated demo needs no camera, models or AWS account.</p>
   </section>
   <div id="walkthrough-controls" class="walkthrough-controls" hidden>
     <label for="scenario">Scenario <select id="scenario"><option value="recovery">Verification &amp; recovery</option><option value="review">Human review needed</option><option value="offline">Connection interrupted</option></select></label>

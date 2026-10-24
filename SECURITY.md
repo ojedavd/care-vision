@@ -30,9 +30,10 @@ check and synthetic tests, with read-only repository permissions and no AWS secr
 
 ## Local Lab
 
-The loopback-only lab can preview only its own generated geometric fixture.
-It does not add image routes to the authenticated judge portal and accepts no
-camera/upload/file-path input. Scenario walkthroughs are browser-local product
+The loopback-only lab previews its generated fixture or an explicitly started
+local camera with optional, bounded memory-only preview. It accepts no upload,
+URL, AWS destination or file-path input, and saves no personal image/video files.
+It does not add image routes to the authenticated judge portal. Scenario walkthroughs are browser-local product
 previews, not production access roles or delivered notifications. Do not expose
 this local demo as a public service. See [Local Lab](docs/local-lab.md).
 

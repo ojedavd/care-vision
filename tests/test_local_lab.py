@@ -23,21 +23,22 @@ def lab(tmp_path):
     thread.join(timeout=3)
 
 
-def call(server, path, *, method='GET', token=None, origin=None, host=None):
+def call(server, path, *, method='GET', token=None, origin=None, host=None, body=None):
     connection = http.client.HTTPConnection('127.0.0.1', server.server_port, timeout=5)
     headers = {'Host': host or server.host}
     if token:
         headers['X-CSRF-Token'] = token
     if origin:
         headers['Origin'] = origin
-    connection.request(method, path, '{}' if method == 'POST' else None, headers)
+    connection.request(method, path, json.dumps(body or {}) if method == 'POST' else None,
+                       headers)
     response = connection.getresponse()
     result = response.status, dict(response.getheaders()), response.read()
     connection.close()
     return result
 
 
-def test_loopback_assets_host_checks_and_no_file_or_camera_access(lab):
+def test_loopback_assets_host_checks_and_no_arbitrary_inputs(lab):
     status, headers, body = call(lab, '/')
     assert status == 200 and b'lang="en"' in body
     assert headers['Cache-Control'] == 'no-store'
@@ -160,3 +161,16 @@ def test_local_lab_owns_a_complete_run_and_can_restart(lab):
     assert lab.sessions.process.poll() is not None
     stopped = json.loads(call(lab, '/api/state')[2])
     assert stopped['session_state'] == 'STOPPED' and not stopped['vision_live']
+
+
+@pytest.mark.parametrize('body', [
+    {'source': 'aws'}, {'source': []}, {'url': 'wss://example.invalid'},
+    {'aws_host': 'example.invalid'}, {'source': 'camera', 'camera_index': 17},
+    {'source': 'camera', 'seconds': 121}, {'preview': 'true'},
+])
+def test_start_api_rejects_remote_targets_and_invalid_camera_options(lab, body):
+    token = json.loads(call(lab, '/api/state')[2])['csrf']
+    status, _, _ = call(lab, '/api/start', method='POST', token=token,
+                        origin=lab.origin, body=body)
+    assert status == 400
+    assert lab.sessions.process is None

@@ -28,8 +28,13 @@ All four perspectives are in English: **Lab & judges**, **Caregiver**, **Family*
 and **Operations**. Scripted product walkthroughs are labeled separately from
 live measurements; no external notifications are sent.
 
-No AWS account, camera, model weights or private recordings are needed.
-This is standard local OpenCV, **not COOL**, and does not validate person/fall
+For a live local test, choose **Local webcam / USB camera** and press
+**Start camera**. Preview is optional and memory-only; no camera video is saved.
+The panel states **THIS COMPUTER · NOT connected to AWS Graviton**. Cloning does
+not connect to the owner's instance or replace the deployed CloudFront portal.
+
+No AWS account, camera, model weights or private recordings are needed for the
+generated demo. Both local modes use standard OpenCV, **not COOL**, and does not validate person/fall
 accuracy. [Local Lab guide and limitations](docs/local-lab.md).
 
 ## Architecture

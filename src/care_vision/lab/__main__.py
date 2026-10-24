@@ -1,4 +1,4 @@
-"""Launch the English, loopback-only synthetic observability lab."""
+"""Launch the English, loopback-only local observability lab."""
 
 import argparse
 import json
@@ -101,7 +101,7 @@ class Handler(BaseHTTPRequestHandler):
             payload = self.server.sessions.preview()
             if payload:
                 return self.reply(200, payload, 'image/jpeg')
-            return self.reply(404, {'error': 'No generated source frame is available yet.'})
+            return self.reply(404, {'error': 'No opted-in current preview is available.'})
         return self.reply(404, {'error': 'Not found.'})
 
     def do_POST(self):
@@ -115,16 +115,27 @@ class Handler(BaseHTTPRequestHandler):
             return self.reply(400, {'error': 'Invalid request length.'})
         if not 0 <= length <= 1024:
             return self.reply(413, {'error': 'Request too large.'})
-        self.rfile.read(length)
+        try:
+            body = json.loads(self.rfile.read(length) or b'{}')
+        except (ValueError, UnicodeError):
+            return self.reply(400, {'error': 'JSON object required.'})
+        if not isinstance(body, dict):
+            return self.reply(400, {'error': 'JSON object required.'})
         try:
             if self.path == '/api/start':
-                self.server.sessions.start()
+                if set(body) - {'source', 'camera_index', 'seconds', 'preview'}:
+                    return self.reply(400, {'error': 'Unsupported source or connection option.'})
+                self.server.sessions.start(**body)
             elif self.path == '/api/stop':
                 self.server.sessions.stop()
             else:
                 return self.reply(404, {'error': 'Not found.'})
-        except (OSError, ValueError):
-            return self.reply(409, {'error': 'Stop the active run before starting another.'})
+        except ValueError as error:
+            if str(error) == 'session already running':
+                return self.reply(409, {'error': 'Stop the active run before starting another.'})
+            return self.reply(400, {'error': str(error)})
+        except OSError:
+            return self.reply(503, {'error': 'Local worker could not start.'})
         return self.reply(200, {'ok': True})
 
 
@@ -145,7 +156,8 @@ def main():
         parser.exit(1, f'Cannot open the local port: {error}\nTry --port 0.\n')
     print(f'CARE-Vision Local Lab: {server.origin}', flush=True)
     print(f'Generated run evidence: {root}', flush=True)
-    print('Synthetic motion only. No AWS, COOL, camera or external notifications.', flush=True)
+    print('Local processing only. No automatic AWS connection or external notifications.',
+          flush=True)
     if not args.no_browser:
         webbrowser.open(server.origin)
 
