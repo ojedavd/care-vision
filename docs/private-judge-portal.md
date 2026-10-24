@@ -204,3 +204,12 @@ The projection fix was also checked with a subsequent live recorded run:140 fram
 processed, two causal commands and no fresh-evidence indicator at video EOF even
 while the bounded worker remained RUNNING. Stopping a source and stopping the AWS
 worker are separate events; the panel now reflects both without a false live label.
+
+
+## Cloud review visual identity
+
+The remote review portal uses a warm ivory/plum/copper identity distinct from the
+local lab. The 24 October visual deployment changed only CSS and preserved all
+existing HTML IDs, scripts, authenticated access and image-free projections.
+The local diagnostic is not the full competition architecture; the primary CV
+workload and controller remain on Graviton/OpenCV 5/COOL.

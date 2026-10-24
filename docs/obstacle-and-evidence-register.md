@@ -240,3 +240,30 @@ location banner, stop state and mobile light/dark layout without JavaScript erro
 Browser camera start/stop transport was stubbed to avoid opening hardware; these
 checks are not physical-camera validation. Target hardware, OS camera permissions
 and real-camera cadence still require a separate authorized trial.
+
+## 24 October — Distinct visual identity deployed on the CloudFront portal
+
+The existing authenticated judge portal now uses an ivory/plum/copper palette,
+serif brand treatment, stronger type hierarchy, clearer metric cards and responsive
+layout. The deployed update replaced only the inline CSS, preserving all non-style
+HTML bytes, element IDs, JavaScript, permissions, runtime and authentication.
+An owner-only rollback copy was retained on the server; original file mode was
+preserved. The portal service stayed active with the same process ID; no restart,
+vision worker, camera, inference session or AWS infrastructure change was required.
+The local lab's blue/teal identity and local diagnostic boundary remain separate.
+
+Before editing, CloudFront already returned HTTP200 with verified TLS. The first
+SSH attempt used a stale previously documented address and timed out. The current
+instance address was read from refreshed authenticated EC2 details, and SSH host
+identity was verified against the existing strict host-key alias; no network rule
+or credential change was used to regain access.
+
+After deployment, HTTPS root returned200 with no-store and the expected HTML/CSS
+hash; anonymous /api/state remained401. The browser's existing authenticated
+session rendered the new style in IDLE with zero processed frames and no fresh
+evidence. No worker was started. The live page fit360px without horizontal overflow
+and reported no browser JavaScript errors. Static dashboard/login layout was also
+reviewed locally, and32 existing judge/HTTPS tests passed (3.46 s). These checks
+verify appearance, delivery and preserved access behavior, not a CV/COOL or
+incident-detection result. Deployment metadata, original/revised hashes, local
+layout previews and live screenshots remain in the owner's private evidence.
