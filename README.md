@@ -128,14 +128,17 @@ entire test suite is not a supported data-free acceptance command. The sampler
 check can use real capture timestamps only when `CARE_VISION_ASSET_ROOT` is set to
 a separately authorized external input root; otherwise it uses a synthetic grid.
 
-## Private live review application
+## Live review application
 
 A separate [judge portal](docs/private-judge-portal.md) can launch bounded cloud
 sessions and display allowlisted runtime metrics and the perception/action chain.
 A separate supervised [CloudFront/VPC-origin HTTPS entry](docs/judge-https-deployment.md)
-is deployed and externally verified. Viewer/operator access remains authenticated;
-judge credentials and repository access are supplied separately. The original SSH
-portal remains available. See the runbook for measured checks and retained limits.
+is deployed and externally verified. The optional `--public-viewer` mode lets
+judges open the image-free metrics and timeline without credentials. Operator
+actions always require sign-in; the default deployment mode is still private.
+The public view includes a recorded-demo link for review when no live session is
+running. The original SSH portal remains available. See the runbook for measured
+checks and retained limits.
 Start session launches only the AWS worker; the operator starts the local Edge
 and selects an authorized source separately. There is no automatic recording
 playback or camera start. It serves no images or recordings. The original
@@ -148,8 +151,8 @@ evaluated core modules are unchanged. The new guided synthetic AWS probe execute
 separate locked cloud environment and external COOL SDK. Keep standard OpenCV
 wheels out of that cloud environment. Models, SDK entitlement and scene calibration
 must be supplied separately. Services bind to loopback and use an authenticated
-SSH tunnel. The HTTPS entry exposes only the authenticated, image-free review
-portal; vision WebSockets stay on loopback. This repository supplies no account
+SSH tunnel. The HTTPS entry exposes only the image-free review portal; optional
+anonymous access is read-only, and vision WebSockets stay on loopback. This repository supplies no account
 credentials, model weights or personal deployment identifiers.
 
 The experimental runner requires an explicit budget and an external frozen
@@ -186,6 +189,7 @@ The pre-commit hook scans staged content. The pre-push hook checks committed
 history as well, so deleting a private file in a later commit is insufficient.
 [Security and sharing procedure](SECURITY.md).
 
-This repository is public. Access to the authenticated judge portal and private
-evaluation inputs must still be supplied separately to authorized judges. No open-source license has been selected;
+This repository is public. Operator access and private evaluation inputs must
+still be supplied separately to authorized reviewers; the optional public viewer
+needs no credential. No open-source license has been selected;
 third-party dependencies/assets retain their own terms.

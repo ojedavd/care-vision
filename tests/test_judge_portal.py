@@ -16,10 +16,13 @@ def credentials():
 
 
 @pytest.fixture
-def portal(tmp_path):
+def portal(tmp_path, request):
     keys = credentials()
     sessions = Sessions(tmp_path / "sessions", synthetic=True, seconds=45)
-    server = Portal(("127.0.0.1", 0), sessions, Auth(keys))
+    server = Portal(
+        ("127.0.0.1", 0), sessions, Auth(keys),
+        public_viewer=getattr(request, "param", False),
+    )
     thread = threading.Thread(target=server.serve_forever, daemon=True)
     thread.start()
     yield server, keys
@@ -86,6 +89,55 @@ def test_roles_csrf_origin_logout_and_cookie_flags(portal):
     status, headers, _ = call(server, "/api/login", {"credential": keys["operator"]})
     assert status == 200
     assert "HttpOnly" in headers["Set-Cookie"] and "SameSite=Strict" in headers["Set-Cookie"]
+
+
+@pytest.mark.parametrize("portal", [True], indirect=True)
+def test_public_viewer_has_only_image_free_state_without_auth_material(portal):
+    server, keys = portal
+    emit(server.sessions.projection, "server_started", 1, port=45678)
+    emit(
+        server.sessions.projection, "observation", 2,
+        observation_id="private-observation", track_id="private-track", valid=True,
+        image="private-image", bbox=[1, 2, 3, 4],
+    )
+    status, headers, raw = call(server, "/api/state")
+    state = json.loads(raw)
+    assert status == 200 and state["public_viewer"] and not state["operator"]
+    assert state["session_state"] == "IDLE" and not state["vision_live"]
+    assert "csrf" not in state and "cloud_port" not in state
+    assert "Set-Cookie" not in headers and headers["Cache-Control"] == "no-store"
+    assert not server.auth.sessions
+    for secret in (*keys.values(), "private-observation", "private-track", "private-image"):
+        assert secret.encode() not in raw
+    assert call(server, "/api/state", cookie="care_session=invalid")[0] == 200
+    assert call(server, "/api/state", host="attacker.example")[0] == 403
+
+
+@pytest.mark.parametrize("portal", [True], indirect=True)
+def test_public_viewer_cannot_mutate_or_read_private_routes(portal):
+    server, _ = portal
+    for path in ("/api/start", "/api/stop", "/api/logout"):
+        assert call(server, path, {}, csrf="invented")[0] == 401
+    for path in ("/worker.stderr", "/cloud.jsonl", "/../credentials", "/api/start"):
+        assert call(server, path)[0] == 401
+    assert server.sessions.process is None and server.sessions.state == "IDLE"
+
+
+@pytest.mark.parametrize("portal", [True], indirect=True)
+def test_public_mode_preserves_authenticated_roles_csrf_and_logout(portal):
+    server, keys = portal
+    cookie, csrf = login(server, keys["viewer"])
+    state = json.loads(call(server, "/api/state", cookie=cookie)[2])
+    assert state["csrf"] == csrf and not state["operator"]
+    assert call(server, "/api/start", {}, cookie=cookie, csrf=csrf)[0] == 403
+    assert call(server, "/api/logout", {}, cookie=cookie, csrf=csrf)[0] == 200
+    assert json.loads(call(server, "/api/state", cookie=cookie)[2])["public_viewer"]
+    cookie, csrf = login(server, keys["operator"])
+    assert json.loads(call(server, "/api/state", cookie=cookie)[2])["operator"]
+    assert call(server, "/api/stop", {}, cookie=cookie)[0] == 403
+    assert call(server, "/api/stop", {}, cookie=cookie, csrf=csrf,
+                origin="https://attacker.example")[0] == 403
+    assert call(server, "/api/stop", {}, cookie=cookie, csrf=csrf)[0] == 200
 
 
 def test_secure_cookie_and_auth_expiry():

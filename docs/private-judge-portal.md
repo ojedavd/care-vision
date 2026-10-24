@@ -1,5 +1,13 @@
 # Private live review portal
 
+The default mode described below remains authenticated. An optional
+`--public-viewer` flag permits anonymous access to the image-free state projection
+only; operator actions, logs, credentials and worker ports remain protected.
+See [public read-only HTTPS review](judge-https-deployment.md#optional-public-read-only-review--24-october-2026)
+for the deployment change requested on 24 October. Opening either mode starts no
+camera or inference worker. The public page links to the recorded demonstration
+so judges can review it without coordinating a live session or receiving a key.
+
 The portal observes and starts an isolated cloud worker. Detection, tracking and
 agent policy remain in the existing Graviton/OpenCV5/COOL process. No inference
 moves to the browser or Edge. It is a guided review interface, not a caregiver

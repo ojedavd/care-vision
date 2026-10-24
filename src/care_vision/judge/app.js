@@ -1,5 +1,5 @@
 const el = id => document.getElementById(id);
-let csrf = '', signedIn = false, polling = false;
+let csrf = '', signedIn = false, polling = false, loginOpen = false;
 const text = (id, value) => { el(id).textContent = value; };
 const fmt = (v, suffix = '', digits = 1) => typeof v === 'number' && Number.isFinite(v) ? v.toFixed(digits) + suffix : '—';
 async function request(path, body) {
@@ -7,16 +7,21 @@ async function request(path, body) {
   if (body !== undefined) Object.assign(options, {method: 'POST', headers: {'Content-Type': 'application/json', 'X-CSRF-Token': csrf}, body: JSON.stringify(body)});
   const response = await fetch(path, options);
   const value = await response.json();
-  if (!response.ok) { if (response.status === 401) signOut(); throw new Error(value.error || 'Request failed'); }
+  if (!response.ok) { if (response.status === 401 && path !== '/api/login') signOut(); throw new Error(value.error || 'Request failed'); }
   return value;
 }
-function signOut() { signedIn = false; csrf = ''; el('panel').hidden = true; el('login').hidden = false; text('connection', 'Signed out'); }
+function signOut() { signedIn = false; csrf = ''; loginOpen = false; el('panel').hidden = true; el('login').hidden = false; el('public-notice').hidden = true; text('connection', 'Signed out'); }
 function render(s) {
-  csrf = s.csrf; signedIn = true; el('panel').hidden = false; el('login').hidden = true;
+  const publicView = s.public_viewer === true;
+  csrf = s.csrf || ''; signedIn = true; el('panel').hidden = false;
+  el('login').hidden = !publicView || !loginOpen;
+  el('public-notice').hidden = !publicView;
+  el('operator-login').hidden = !publicView;
+  el('logout').hidden = publicView;
   const synthetic = s.mode === 'SYNTHETIC_LOCAL_NOT_COOL';
   text('mode', synthetic ? 'Synthetic local demonstration · NOT COOL' : 'AWS Graviton / COOL session');
   text('session', s.session_state); text('connection', s.vision_live ? 'Evidence arriving' : 'No fresh visual evidence');
-  text('scope', synthetic ? 'Generated motion fixture; no person/fall validation and no AWS/COOL claim.' : (s.person_detector_configured ? 'Guided private person-detection session; experimental decisions.' : 'COOL motion/transport probe only. Person detection and fall verification are not configured.'));
+  text('scope', synthetic ? 'Generated motion fixture; no person/fall validation and no AWS/COOL claim.' : (s.person_detector_configured ? 'Guided person-detection session; experimental decisions.' : 'COOL motion/transport probe only. Person detection and fall verification are not configured.'));
   text('agent', s.agent_state); text('processed', s.counts.processed); text('fps', fmt(s.processed_fps));
   text('target', fmt(s.metrics.target_transmit_fps)); text('latency', fmt(s.metrics.processing_ms, ' ms'));
   text('cycles', s.causal_cycles);
@@ -52,6 +57,7 @@ for (const action of ['start','stop']) el(action).addEventListener('click',async
   el(action).disabled = true;
   try { await request('/api/' + action,{}); await refresh(); } catch (e) { text('error',e.message); }
 });
-el('logout').addEventListener('click',async () => { try { await request('/api/logout',{}); signOut(); } catch(e) { text('error',e.message); } });
+el('operator-login').addEventListener('click', () => { loginOpen = !loginOpen; el('login').hidden = !loginOpen; if (loginOpen) el('credential').focus(); });
+el('logout').addEventListener('click',async () => { try { await request('/api/logout',{}); signOut(); await refresh(); } catch(e) { text('error',e.message); } });
 setInterval(() => { if (signedIn) refresh(); },1000);
 refresh();
