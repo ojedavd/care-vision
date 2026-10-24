@@ -36,3 +36,21 @@ in Git. Source-snapshot-manifest.json in the delivery archive identifies the exa
 source commit and bytes; older source-provenance.json refers to an earlier baseline.
 The focused test set is documented in the current report; the full suite is not
 claimed green. The archive supports source review, not blank-host SDK provisioning.
+
+## Public source integration — 24 October 2026
+
+The implementation originally frozen in local commit `433a235` is integrated on
+public `main` baseline `1f40f60` in the source-reconciliation branch. This preserves
+the later Local Lab, explicit local-camera diagnostic and ivory/plum portal CSS.
+See the [integration record](obstacle-and-evidence-register.md#24-october--public-source-reconciliation-for-the-demonstrated-seated-closure)
+for measured source checks; the historical delivery archive remains unchanged.
+
+The implementation is in `cloud/controller.py` (`consider_seated_closure`),
+`cloud/server.py` (pose-result integration) and `cloud/__main__.py` (explicit
+`--experimental-seated-closure-seconds`). The judge launcher validates the profile
+and its image-free projection reports the experimental resolution. All paths are
+relative to `src/care_vision/`. The CI workflow runs closure, reopening-reference,
+profile, geometry and shutdown regression tests without private models or footage.
+
+These checks establish source integration and synthetic behavior. They do not
+repeat the physical-camera trial, run COOL locally or validate fall accuracy.

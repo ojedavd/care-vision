@@ -4,6 +4,14 @@ Adaptive Agentic Vision for Safer Independent Living
 Technical report | 23 October 2026 | OpenCV AI Competition 2026
 Victor Ojeda, Argentina | Individual project | AWS Compute Grant recipient
 
+> Source integration update, 24 October 2026: the source-reconciliation branch
+> includes the demonstrated experimental seated closure and its focused CI checks
+> on the later public-main baseline. See [profile](demo-profile-20261021.md) and
+> [integration record](obstacle-and-evidence-register.md#24-october--public-source-reconciliation-for-the-demonstrated-seated-closure).
+> Availability, publication and delivery statements below describe the frozen
+> 23 October package. Later endpoint checks are recorded separately in the evidence
+> register. This integration does not repeat or expand the measured CV trial.
+
 ## 1. Problem, users and implemented architecture
 
 Older adults living independently may need support after an unusual posture or suspected incident. Continuously transmitting maximum-quality video consumes bandwidth, cloud computation and privacy. CARE-Vision explores a narrower engineering question: can visual uncertainty change the evidence acquired next, while keeping the main vision workload on AWS Graviton?

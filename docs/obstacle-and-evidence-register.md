@@ -293,3 +293,45 @@ reviewed locally, and32 existing judge/HTTPS tests passed (3.46 s). These checks
 verify appearance, delivery and preserved access behavior, not a CV/COOL or
 incident-detection result. Deployment metadata, original/revised hashes, local
 layout previews and live screenshots remain in the owner's private evidence.
+
+## 24 October — Public source reconciliation for the demonstrated seated closure
+
+Inspection of public main `1f40f60` found no `consider_seated_closure` or closure
+policy option in the controller. The demonstrated implementation had been frozen
+in local commit `433a235` without publication. It is now integrated into branch
+`codex/publish-seated-closure` on that public baseline. The only cherry-pick conflict
+was this aggregate register; both historical entries were retained. The seven
+cloud/judge Python/JavaScript implementation files match the demonstrated commit.
+The portal HTML adds the profile status while preserving current main's CSS
+exactly. Local Lab and Edge sources have no diff against that baseline.
+
+The closure remains opt-in, with an uncalibrated five-second development profile.
+No primary CV workload moves off Graviton/OpenCV5/COOL. The documented physical
+trial remains dated evidence from one participant/view; no new physical camera,
+AWS workload, deployment or accuracy evaluation was performed for this integration.
+Private model weights, scene settings, recordings, credentials and COOL SDK remain
+external. The historical 23 October delivery archive is unchanged.
+
+Local verification:
+
+- The documented focused portal/HTTPS/closure/geometry/shutdown set: 116 passed.
+- Existing CI privacy/protocol/sampling, Local Lab/local-camera diagnostic and
+  synthetic closed-loop sets together: 145 passed in 86.95 seconds. These overlap
+  with the focused set; the counts must not be summed as unique tests.
+- The added CI closure/profile/reopening/geometry/shutdown step: 84 passed (a
+  subset of those 116, not additional independent checks).
+- Additional pose-actuation, pose-shadow, episode-continuity, incident-episode and
+  reference-guard checks: 62 passed, one failed because the historical private
+  `artifacts/reference-recovery-guard-20261014/baseline/` controller is absent.
+  This is not a new closure assertion failure; the full suite is not claimed green.
+  An earlier command named nonexistent pose/episode test files and collected no
+  tests; the subsequent command used the repository's actual filenames.
+- Ruff on all modified Python implementation/test files, JavaScript syntax,
+  `git diff --check`, tracked/history hygiene and Gitleaks: passed.
+
+The source workflow now runs the 84 closure-specific regression tests on pushes
+and pull requests alongside its existing privacy and synthetic-loop tests. These
+checks validate source behavior with synthetic inputs, not physical seat support,
+fall accuracy, a new live demo or local COOL execution. Publication is reviewed in
+the reconciliation PR; main still needs that PR merged to expose the implementation
+at the default-branch code URL.

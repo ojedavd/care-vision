@@ -1,4 +1,4 @@
-> Current delivery profile (23 October 2026): read the [technical report](docs/technical-report.md) and [demonstrated seated profile](docs/demo-profile-20261021.md). The integrated portal includes an explicit experimental pose-assisted closure. Historical WebP capped regression results below describe a different profile. Current endpoint availability and private judge access require separate verification.
+> Demonstrated seated profile: the source now includes the experimental pose-assisted closure shown in the 21 October demo. Read the [profile and configuration](docs/demo-profile-20261021.md), [technical report](docs/technical-report.md) and [integration checks](docs/obstacle-and-evidence-register.md#24-october--public-source-reconciliation-for-the-demonstrated-seated-closure). Closure is off by default; the five-second threshold is uncalibrated. Historical WebP capped regression results below describe a different profile.
 
 # CARE-Vision
 
