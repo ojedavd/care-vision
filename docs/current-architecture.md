@@ -37,3 +37,13 @@ sequenceDiagram
 
 ROI/buffer actions exist in other profiles; they are not exercised in this trial.
 Alerts are disabled. Refer to technical-report.md for measurements and limitations.
+
+## Independent evaluator Lab
+
+The [full-pipeline Lab](full-pipeline-lab.md) adds an explicit choice between a
+local functional reference and an evaluator-owned Graviton. The local reference
+uses standard OpenCV with real person/tracking/episode stages and passive pose;
+it does not establish COOL execution or calibrated scene-based posture actions.
+The Graviton option keeps primary inference and decisions in the evaluator's AWS
+instance and verifies the native COOL runtime before opening input. Neither option
+uses the project owner's instance or replaces the demonstrated portal profile.

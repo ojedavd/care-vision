@@ -335,3 +335,65 @@ checks validate source behavior with synthetic inputs, not physical seat support
 fall accuracy, a new live demo or local COOL execution. Publication is reviewed in
 the reconciliation PR; main still needs that PR merged to expose the implementation
 at the default-branch code URL.
+
+
+## 24 October — Evaluator choice: full local reference or own Graviton
+
+The English Lab now lets a clone choose a full local reference or an explicitly
+configured evaluator-owned Graviton, alongside the original motion diagnostic.
+Local full mode uses real YOLOX-S640, tracking, the existing deterministic episode
+controller and a separate passive RTMPose observer on standard OpenCV. Capture
+and the cloud-role process stay separate; it is a test/reference path, not a move
+of the competition's claimed CV workload out of Graviton. Local pose does not
+activate scene-specific ROI policy or experimental seating closure.
+
+An explicit setup command downloaded the two official upstream assets through
+verified HTTPS and accepted their pinned SHA-256 digests. Weights remain in an
+external cache. The local reference then ran the existing controlled development
+recording for 60 seconds: 1,500 captures, 140 sent/received/processed frames,
+139 observations with a person, 130 successful pose samples and 2 command/ACK/new
+live-perception cycles. Requested transmission changed 2→5→2 FPS and the final
+state was NORMAL. COOL remained false on standard OpenCV 4.14.0. No hardware
+camera opened and no new image/video file, alert or AWS connection was created.
+This is development replay evidence, not independent labels, fall accuracy or
+proof of the entire proposal/product. Session completion is not labeled an audit.
+
+Own-Graviton mode accepts only the private startup profile. Host/key checks,
+matching source/dependency hashes, EC2 ARM64/native COOL verification, model/scene
+hashes and blank-image model warm-up precede input. The owned worker listens on
+remote loopback; authenticated SSH carries frames and commands. EOF/signal cleanup
+and remote deadlines bound owned processes. Missing/failed COOL or tunnel setup
+cannot open input or select a local fallback. An unreviewed scene remains unknown;
+scene-specific pose actions require independently reviewed geometry. SDK install,
+new AWS resources, owner credentials and the owner's CloudFront are not supplied
+or used. The existing phase3 and COOL pose guards are unchanged. The only core
+server change adds the current agent state to an existing diagnostic log event;
+no protocol, thresholds or decision behavior changed.
+
+Regression: 179 tests passed (52.80 s), including model-backed generated-input,
+existing pose/worker/controller/privacy/portal checks. A later focused set of 37 tests passed (7.23 s), adding
+readiness-gate and API-boundary cases; these sets overlap.
+Browser review exercised real local replay, both selections, the disabled AWS
+start without a profile, and 360px layout (no horizontal overflow). The browser
+ad-block extension reported its own JSON parsing error; no app-script error was
+observed. Source preview was off; pose samples are explicitly separate from the
+current source image and stale/end-of-run state remains visible.
+
+No second Graviton was supplied and the owner's instance was deliberately not
+used. The new SSH launcher is therefore not yet accepted end-to-end on another
+Graviton; historical cloud pipeline results do not validate this new launcher,
+blank-host SDK provisioning or another camera's calibration. The deployed
+CloudFront service was not changed by this work.
+
+Private evidence: `artifacts/full-pipeline-modes-20261024/`.
+
+
+Post-integration verification: remote main advanced to the seated-closure source
+integration (`e1111cd`) during this task. That change was preserved; workflow and
+register conflicts retained both sets of checks/evidence. On the integrated code,
+274 focused regression tests passed (55.68 s), including the 84 existing
+closure/profile/reopening/geometry/shutdown cases. A second 60-second replay of
+the same development recording produced 1,500 captures, 140 sent/received/processed,
+139 person observations, 132 successful pose samples, 2 causal cycles and final
+NORMAL, with no recorded session/pose errors. The two trials remain separate.
+This repeat still uses standard OpenCV and does not validate another Graviton.

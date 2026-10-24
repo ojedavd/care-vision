@@ -1,5 +1,10 @@
 # Local Lab: visible Edge and agent behavior
 
+This guide describes **Local · quick motion demo**. For real person/pose inference
+on this computer or your own Graviton, use the
+[two-mode full pipeline guide](full-pipeline-lab.md). The default remains local;
+an AWS run requires an explicit private profile and selection.
+
 Run the data-free, English-language lab from a fresh clone:
 
 ```sh
@@ -40,7 +45,8 @@ competition CV workload remains on Graviton/OpenCV 5/COOL; this local diagnostic
 is not a replacement for that pipeline.
 
 A camera session is bounded to the selected 30, 45, 60 or 120 seconds (the internal
-worker supports 1..120 seconds). Its watchdog adds 20 seconds for start/drain.
+worker supports 1..120 seconds). Its watchdog allows bounded startup/drain and
+cloud checks; input capture remains limited to the selected duration.
 Preview is capped at approximately 2 FPS on a separate bounded thread/pipe, with
 old frames dropped without blocking camera acquisition. Images stay in memory,
 expire after three seconds, and are cleared when the run ends or stops. No
@@ -58,10 +64,10 @@ available through `care-edge`, but are not yet selectable in this lab UI.
 
 ## Does cloning connect to the owner's AWS instance?
 
-**No.** There are no AWS credentials, shared Graviton destination or automatic
-cloud connection in this lab. Its start API rejects remote/AWS source and URL
-options. The production/competition path needs an explicitly configured,
-authorized Edge-to-Graviton connection and the external COOL/model runtime.
+**No.** There are no shared AWS credentials or project-owner Graviton destination.
+The start API rejects arbitrary host, URL, profile and file-path fields. The
+optional **My AWS Graviton · COOL** mode uses only the private profile supplied
+when launching the Lab. It connects to the evaluator's own configured instance.
 
 **This does not replace the CloudFront page.** The existing authenticated,
 image-free judge portal is a separate deployment. Its code, origin, distribution

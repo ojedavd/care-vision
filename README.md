@@ -32,12 +32,27 @@ live measurements; no external notifications are sent.
 
 For a live local test, choose **Local webcam / USB camera** and press
 **Start camera**. Preview is optional and memory-only; no camera video is saved.
-The panel states **THIS COMPUTER · NOT connected to AWS Graviton**. Cloning does
+In this default motion mode the panel states
+**THIS COMPUTER · NOT connected to AWS Graviton**. Cloning does
 not connect to the owner's instance or replace the deployed CloudFront portal.
 
 No AWS account, camera, model weights or private recordings are needed for the
-generated demo. Both local modes use standard OpenCV, **not COOL**, and does not validate person/fall
-accuracy. [Local Lab guide and limitations](docs/local-lab.md).
+generated motion demo. [Quick diagnostic guide](docs/local-lab.md).
+
+### Choose a full-pipeline test
+
+| Browser option | Where vision and the agent run | Setup |
+| --- | --- | --- |
+| **Local · full pipeline** | Separate service on your computer, using standard OpenCV | Run `uv run --frozen care-lab --setup-models`, then choose your camera or local video |
+| **My AWS Graviton · COOL** | Your own authorized Graviton with native OpenCV5 + COOL | Prepare your SDK/models, then launch `care-lab --cloud-profile /PRIVATE/cloud-profile.json` |
+
+Both expose real person detection, tracking, temporal policy and pose evidence.
+The local mode is a functional reference with passive pose; scene-specific AWS
+pose actions require reviewed calibration. Model/runtime checks precede camera
+acquisition. There is no automatic connection to the owner's AWS account, no
+silent fallback and no validated fall-accuracy claim.
+
+[Full setup, model downloads, your own Graviton and verification limits](docs/full-pipeline-lab.md).
 
 ## Architecture
 

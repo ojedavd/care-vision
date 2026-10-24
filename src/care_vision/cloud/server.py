@@ -534,7 +534,7 @@ class Session:
                 queue_capacity=self.frames.maxsize,
             )
             await asyncio.wait_for(self.websocket.send(dumps(message)), timeout=2)
-            self.log.emit("cloud_status_sent", **message)
+            self.log.emit("cloud_status_sent", **message, agent_state=self.controller.state)
 
     async def report_health(self):
         while True:

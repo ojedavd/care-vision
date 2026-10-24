@@ -18,3 +18,8 @@ Selected upstream references:
 - OpenCV Zoo: https://github.com/opencv/opencv_zoo
 - MMPose: https://github.com/open-mmlab/mmpose
 - Gitleaks (separate development tool): https://github.com/gitleaks/gitleaks
+
+The optional explicit Lab model setup fetches YOLOX-S from the pinned OpenCV Zoo
+revision and RTMPose-t Body7 from the official OpenMMLab ONNX package, checking
+their SHA-256 digests. See [asset URLs and hashes](docs/full-pipeline-lab.md).
+These assets stay in an external cache and are not redistributed with this code.

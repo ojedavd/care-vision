@@ -3,7 +3,7 @@
 import time
 from collections import deque
 
-from care_vision.judge.state import Projection, number
+from care_vision.judge.state import STATES, Projection, number
 
 REASONS = {
     'recover_pre_event_evidence':
@@ -18,6 +18,23 @@ REASONS = {
     'motion_resumed_during_recovery': 'Motion resumed during recovery.',
     'observation_gap': 'An observation gap interrupted temporal evidence.',
     'invalid_observation': 'The observation was not valid for a temporal decision.',
+    'posture_change_requires_more_evidence':
+        'A tracked posture change requires more evidence; request 5 FPS.',
+    'unresolved_episode_requires_more_observation':
+        'The episode is unresolved; request another bounded observation window.',
+    's_only_posture_assessed_return_to_baseline':
+        'The observation window ended; reduce transmission while preserving episode status.',
+    'confirmed_person_missing_verify':
+        'A confirmed person is missing; request denser evidence.',
+    'unresolved_episode_requires_scene_context':
+        'Request the full scene for an unresolved episode.',
+    'roi_person_unconfirmed': 'The person is unconfirmed in the crop; request a full frame.',
+    'verify_scene_before_return_to_baseline': 'Verify the full scene before reducing observation.',
+    'pose_uncertainty_requests_roi': 'Pose uncertainty requires a more detailed person crop.',
+    'return_to_full_frame': 'Restore the full-scene view.',
+    'episode_resolved': 'Sustained recovery evidence resolved the experimental episode.',
+    'reference_posture_recovered': 'The tracked person sustained their reference posture.',
+    'recovery_observed': 'Sustained same-track reference posture supports experimental recovery.',
 }
 
 
@@ -28,6 +45,9 @@ class VisionTelemetry(Projection):
         self.evidence = {}
         self.details = {}
         self.transitions = deque(maxlen=30)
+        self.pipeline_checks = {}
+        self.pose = {}
+        self.last_pose = None
 
     def accept(self, row):
         super().accept(row)
@@ -35,9 +55,14 @@ class VisionTelemetry(Projection):
         if event == 'observation' and row.get('evidence_kind', 'live') == 'live':
             self.latest = {
                 key: number(row.get(key)) for key in
-                ('motion_score', 'processing_ms', 'capture_seq', 'target_transmit_fps')
+                ('motion_score', 'processing_ms', 'capture_seq', 'target_transmit_fps',
+                 'person_count', 'confirmed_person_count', 'primary_person_confidence',
+                 'person_detection_ms', 'width', 'height')
             }
             self.latest.update(valid=row.get('valid') is True)
+            self.latest['person_detection_status'] = (
+                row.get('person_detection_status') if row.get('person_detection_status')
+                in {'ok', 'error', 'invalid_image', 'not_configured'} else 'unknown')
             identity = row.get('observation_id')
             if isinstance(identity, str):
                 self.evidence[identity] = dict(self.latest)
@@ -70,6 +95,41 @@ class VisionTelemetry(Projection):
                 'state': self.agent_state,
                 'reason': REASONS.get(row.get('reason'), 'Experimental policy transition.'),
             })
+        elif event in {'reference_pipeline_ready', 'cloud_preflight_verified'}:
+            self.pipeline_checks = {
+                'person_model_verified': row.get('person_model_verified') is True,
+                'pose_model_verified': row.get('pose_model_verified') is True,
+                'source_verified': row.get('source_verified') is True,
+                'context_status': row.get('context_status') if row.get('context_status')
+                in {'current', 'unknown', 'changed'} else 'unknown',
+            }
+        elif event == 'pose_shadow':
+            self.last_pose = time.monotonic()
+            source = self.evidence.get(row.get('observation_id'), {})
+            self.pose = {
+                'capture_seq': number(row.get('capture_seq')),
+                'status': row.get('pose_status') if row.get('pose_status')
+                in {'ok', 'not_requested', 'inference_error'} else 'unknown',
+                'processing_ms': number(row.get('processing_ms')),
+                'torso_angle_degrees': number(row.get('torso_angle_degrees')),
+                'points': None, 'seat_support_verified': False,
+                'context_status': row.get('context_status') if row.get('context_status')
+                in {'current', 'unknown', 'changed'} else 'unknown',
+            }
+            width, height, points = source.get('width'), source.get('height'), row.get('points')
+            if (width and height and isinstance(points, list) and len(points) == 17
+                    and all(isinstance(p, list) and len(p) == 3
+                            and all(number(v) is not None for v in p) for p in points)):
+                self.pose['points'] = [[max(-.5, min(1.5, p[0] / width)),
+                                        max(-.5, min(1.5, p[1] / height)), p[2]] for p in points]
+            support = row.get('response_support') or {}
+            self.pose['torso_supported'] = support.get('torso_supported') is True
+            self.pose['legs_supported'] = support.get('legs_supported') is True
+        elif event == 'pose_shadow_error':
+            self.last_pose = time.monotonic()
+            self.pose = {'status': 'inference_error', 'points': None}
+        elif event == 'cloud_status_sent' and row.get('agent_state') in STATES:
+            self.agent_state = row['agent_state']
 
     def lab_snapshot(self):
         return {
@@ -86,6 +146,9 @@ class VisionTelemetry(Projection):
                 for identity, command in self.commands.items()
             ],
             'transitions': list(self.transitions),
+            'pipeline_checks': dict(self.pipeline_checks),
+            'pose': {**self.pose, 'age_seconds': None if self.last_pose is None
+                     else time.monotonic() - self.last_pose},
         }
 
 

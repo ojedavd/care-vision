@@ -168,6 +168,9 @@ def test_local_lab_owns_a_complete_run_and_can_restart(lab):
     {'source': 'aws'}, {'source': []}, {'url': 'wss://example.invalid'},
     {'aws_host': 'example.invalid'}, {'source': 'camera', 'camera_index': 17},
     {'source': 'camera', 'seconds': 121}, {'preview': 'true'},
+    {'source': 'camera', 'target': 'graviton', 'pipeline': 'full'},
+    {'cloud_profile': '/PRIVATE/untrusted.json'}, {'video': '/PRIVATE/untrusted.mp4'},
+    {'pipeline': []}, {'target': 'other-cloud'},
 ])
 def test_start_api_rejects_remote_targets_and_invalid_camera_options(lab, body):
     token = json.loads(call(lab, '/api/state')[2])['csrf']

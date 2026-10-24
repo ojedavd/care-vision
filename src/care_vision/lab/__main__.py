@@ -5,12 +5,16 @@ import json
 import os
 import secrets
 import signal
+import subprocess
 import tempfile
 import threading
 import webbrowser
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 
+from care_vision.lab.cloud_profile import load_profile
+from care_vision.lab.models import default_directory, prepare
+from care_vision.lab.remote import check_cloud
 from care_vision.lab.session import LabSessions
 
 ASSETS = Path(__file__).parent
@@ -124,7 +128,8 @@ class Handler(BaseHTTPRequestHandler):
             return self.reply(400, {'error': 'JSON object required.'})
         try:
             if self.path == '/api/start':
-                if set(body) - {'source', 'camera_index', 'seconds', 'preview'}:
+                allowed = {'source', 'camera_index', 'seconds', 'preview', 'target', 'pipeline'}
+                if set(body) - allowed:
                     return self.reply(400, {'error': 'Unsupported source or connection option.'})
                 self.server.sessions.start(**body)
             elif self.path == '/api/stop':
@@ -144,20 +149,58 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--port', type=int, default=8781)
     parser.add_argument('--no-browser', action='store_true')
+    parser.add_argument('--models', type=Path, default=default_directory())
+    parser.add_argument('--setup-models', action='store_true',
+                        help='Download and verify local reference models, then exit.')
+    parser.add_argument('--cloud-profile', type=Path,
+                        help='Private SSH/runtime profile for your own Graviton.')
+    parser.add_argument('--check-cloud', action='store_true',
+                        help='Verify your configured Graviton/models without starting input.')
+    parser.add_argument('--video', type=Path,
+                        help='Local file input; AWS mode sends selected frames to your Graviton.')
     args = parser.parse_args()
+    os.umask(0o077)
+    if args.setup_models:
+        try:
+            prepare(args.models)
+        except (OSError, ValueError, subprocess.SubprocessError) as error:
+            parser.exit(1, f'Model setup failed: {type(error).__name__}. '
+                          'Check connectivity/curl.\n')
+        return
+    if args.cloud_profile:
+        try:
+            load_profile(args.cloud_profile)
+        except (OSError, ValueError) as error:
+            parser.error(str(error))
+    if args.check_cloud:
+        if not args.cloud_profile:
+            parser.error('--check-cloud requires --cloud-profile.')
+        output = Path(tempfile.mkdtemp(prefix='care-cloud-check-')) / 'check'
+        try:
+            check_cloud(args.cloud_profile, output)
+        except (OSError, ValueError, RuntimeError, subprocess.SubprocessError):
+            parser.exit(1, f'Cloud check failed. Private diagnostics: {output}\n')
+        print('Your Graviton, native COOL runtime, source and person/pose models verified.')
+        print(f'Blank-image warm-up only; no camera/Edge session. Private diagnostics: {output}')
+        return
+    if args.video and not args.video.expanduser().is_file():
+        parser.error('--video must name an existing local file.')
     if os.name != 'posix':
         parser.error('The local lab requires macOS or Linux (POSIX process groups).')
     if not 0 <= args.port <= 65535:
         parser.error('port must be in 0..65535')
     root = Path(tempfile.mkdtemp(prefix='care-vision-lab-'))
-    sessions = LabSessions(root)
+    sessions = LabSessions(root, models=args.models.expanduser().absolute(),
+                           cloud_profile=args.cloud_profile.expanduser().absolute()
+                           if args.cloud_profile else None,
+                           video=args.video.expanduser().absolute() if args.video else None)
     try:
         server = LabServer(sessions, args.port)
     except OSError as error:
         parser.exit(1, f'Cannot open the local port: {error}\nTry --port 0.\n')
     print(f'CARE-Vision Local Lab: {server.origin}', flush=True)
     print(f'Generated run evidence: {root}', flush=True)
-    print('Local processing only. No automatic AWS connection or external notifications.',
+    print('Choose local processing or your explicitly configured Graviton. No notifications.',
           flush=True)
     if not args.no_browser:
         webbrowser.open(server.origin)
