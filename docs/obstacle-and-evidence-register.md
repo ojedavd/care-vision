@@ -495,3 +495,37 @@ from the operator-led live service and private original evidence. This change
 removes dependence on new recordings; it does not establish new CV accuracy or
 COOL acceleration. Private deployment/verification artifacts:
 `artifacts/public-pose-deployment-20261025/`.
+
+
+## 25 October — Caregiver review reuses public body-pose episodes
+
+The public Caregiver workspace now defaults to Recorded episodes, using the
+existing reviewed `/trials/data.js` export. Recovery, no recovery and seated
+closure each show a person-centered body skeleton, time controls and milestones,
+controller state, original recorded state, open/closed episode, test-alert status
+and external notification status. Sitting retains replay NORMAL alongside the
+recorded UNRESOLVED outcome. Pose provenance is visible; the first two episodes
+use later offline presentation pose and the third uses saved cloud pose.
+
+A separate Scenario walkthrough retains simulated human-review ownership. Its
+actions do not mutate historical data or assign a real caregiver. Workspace/mode
+changes and hidden tabs pause playback. Missing or over-one-second-old pose stays
+absent; there are no facial joints or camera media elements. Family and Operations
+remain explicitly scripted. This is a presentation change, not a new physical
+trial, inference run, controller validation or fall-accuracy result.
+
+Seven synthetic JavaScript tests passed for temporal selection, stale/missing
+pose, replay versus recorded state, response/bounds filtering, body-only schema
+and persistent alert status. Forty source/privacy and archive tests passed.
+Browser checks confirmed the three public outcomes, absent pose in the sitting
+ROI interval and isolation of demo ownership from saved results. HTTPS byte
+checks matched the published assets and unchanged public trial data; original
+videos, original data and ROI requests still returned 401, including range
+requests. The update replaced three static presentation assets with a backup;
+no service restart or new worker occurred (IDLE to IDLE). Credentials, routing
+wrapper and original trial assets were unchanged.
+
+The data-free public presentation source and deterministic builder are now in
+the repository. README and the review guide distinguish measured evidence from
+scripted scenarios. Private verification/deployment artifacts:
+`artifacts/caregiver-pose-review-20261025/`.

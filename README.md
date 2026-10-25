@@ -16,11 +16,15 @@ Individual project by Victor Ojeda, Argentina, for the OpenCV AI Competition
 
 | Entry | What you can inspect | Execution |
 | --- | --- | --- |
-| **How it works**, Caregiver, Family, Operations | Interactive examples of the sensing and human-review workflow | Browser-only scenarios with illustrative values |
+| **Caregiver → Recorded episodes** | The same three saved episodes in a focused review: body pose, controller outcome, episode status and test-alert delivery | Public data playback; recorded and replay decisions identified separately |
+| **How it works**, Family, Operations; Caregiver → Scenario walkthrough | Interactive examples of the sensing and human-review workflow | Browser-only scenarios with illustrative values |
 | **Episode evidence** | Three saved episodes: recovery, a test alert without recovery, and seated closure in replay; body pose, decisions and sensing changes | Public data playback; no key, camera images, video or audio |
 | **Technical telemetry** | Runtime, frame counts and command → applied ACK → new-perception chains | New measurements during an operator-led AWS session; read-only visitors need no key |
 
-The recorded evidence and replay decisions are identified on the trial page.
+[Open the Caregiver review](https://dqi6ba1tz68v1.cloudfront.net/#caregiver) to
+inspect outcomes without household imagery. Its separate **Scenario walkthrough**
+contains simulated human-review actions; those do not change saved episodes.
+The recorded evidence and replay decisions are identified in both review views.
 Opening the demo does not start a camera, cloud worker or external notification.
 A new end-to-end session uses a separately started Edge and an authorized cloud
 operator. [Explore the three episodes](https://dqi6ba1tz68v1.cloudfront.net/trials/) ·

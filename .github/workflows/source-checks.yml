@@ -25,6 +25,11 @@ jobs:
         run: |
           uv run --frozen python tools/prepare_judge_https.py --output "$RUNNER_TEMP/care-vision-https-plan"
           uv run --frozen --group https-check cfn-lint "$RUNNER_TEMP/care-vision-https-plan/cloudfront-vpc-origin.json"
+      - name: Public presentation and synthetic pose review
+        run: |
+          node --test tests/test_public_demo.js
+          uv run --frozen python tools/build_public_demo.py "$RUNNER_TEMP/care-vision-public-demo"
+          node --check "$RUNNER_TEMP/care-vision-public-demo/site/app.js"
       - name: Privacy, protocol and sampling tests
         run: uv run --frozen pytest -q tests/test_full_pipeline_lab.py tests/test_local_camera_lab.py tests/test_local_lab.py tests/test_judge_https.py tests/test_judge_portal.py tests/test_repository_hygiene.py tests/test_contracts.py tests/test_webp_wire.py tests/test_uniform_budget_sampling.py
       - name: Experimental seated closure and demonstrated portal profile
