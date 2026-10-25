@@ -17,14 +17,21 @@ Individual project by Victor Ojeda, Argentina, for the OpenCV AI Competition
 | Entry | What you can inspect | Execution |
 | --- | --- | --- |
 | **How it works**, Caregiver, Family, Operations | Interactive examples of the sensing and human-review workflow | Browser-only scenarios with illustrative values |
-| **Recorded trials** | Three saved episodes: recovery, a test alert without recovery, and seated closure in replay; video, decisions and sensing changes | Playback of saved evidence; the current recordings require a private viewer key |
+| **Episode evidence** | Three saved episodes: recovery, a test alert without recovery, and seated closure in replay; body pose, decisions and sensing changes | Public data playback; no key, camera images, video or audio |
 | **Technical telemetry** | Runtime, frame counts and command → applied ACK → new-perception chains | New measurements during an operator-led AWS session; read-only visitors need no key |
 
 The recorded evidence and replay decisions are identified on the trial page.
 Opening the demo does not start a camera, cloud worker or external notification.
 A new end-to-end session uses a separately started Edge and an authorized cloud
-operator. [Recorded trials](https://dqi6ba1tz68v1.cloudfront.net/judges/) ·
+operator. [Explore the three episodes](https://dqi6ba1tz68v1.cloudfront.net/trials/) ·
 [Technical telemetry](https://dqi6ba1tz68v1.cloudfront.net/live).
+
+The public episode view shows body joints on an empty background. Recovery and
+no-recovery poses were calculated offline from saved video for presentation;
+sitting reuses recorded cloud pose. Original decisions, transport measurements
+and cloud processing times are preserved. The view excludes facial landmarks
+and original camera pixels; it does not replace visual review of detector accuracy.
+[How to inspect the evidence and its scope](docs/public-episode-review.md).
 
 ## Run the Local Lab in five minutes
 
@@ -176,8 +183,10 @@ provides public, image-free, read-only metrics. It reports no fresh evidence whi
 idle. Operator authentication is required to start or stop its bounded AWS worker;
 the operator starts the separate Edge and selects the authorized input.
 
-The [recorded trial viewer](https://dqi6ba1tz68v1.cloudfront.net/judges/) is a
-separate saved-evidence presentation and currently requires a viewer key.
+The [public episode view](https://dqi6ba1tz68v1.cloudfront.net/trials/) is a
+separate saved-data presentation and requires no key. Original presentation
+videos and ROI images remain behind the existing private viewer gate; they are
+not needed to open the public episode view.
 [Portal implementation](docs/private-judge-portal.md) and
 [HTTPS deployment runbook](docs/judge-https-deployment.md) describe the underlying
 operator service. The original SSH portal remains available. A prior synthetic
@@ -190,8 +199,8 @@ WebP80 regression and from the seated camera trial.
 separate locked cloud environment and external COOL SDK. Keep standard OpenCV
 wheels out of that cloud environment. Models, SDK entitlement and scene calibration
 must be supplied separately. Services bind to loopback and use an authenticated
-SSH tunnel. CloudFront serves the public walkthrough and read-only telemetry, plus the
-protected recorded trial viewer. Vision WebSockets stay on loopback. This
+SSH tunnel. CloudFront serves the public walkthrough, episode data view and
+read-only telemetry, plus the protected original trial viewer. Vision WebSockets stay on loopback. This
 repository supplies no account credentials, model weights or private origin addresses.
 
 The experimental runner requires an explicit budget and an external frozen
@@ -229,6 +238,7 @@ The pre-commit hook scans staged content. The pre-push hook checks committed
 history as well, so deleting a private file in a later commit is insufficient.
 [Security and sharing procedure](SECURITY.md).
 
-This repository is public. Access to the authenticated judge portal and private
-evaluation inputs must still be supplied separately to authorized judges. No open-source license has been selected;
+This repository and the online episode data view are public. Original recordings,
+operator controls and private evaluation inputs remain access controlled;
+access to those inputs must be arranged separately. No open-source license has been selected;
 third-party dependencies/assets retain their own terms.
