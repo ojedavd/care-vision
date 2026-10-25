@@ -107,8 +107,9 @@ independently review the actual camera view and create a **new** config with
 Both regions use normalized full-frame coordinates in [0,1] and need positive
 size. Move the camera and the context must be reviewed again. The Lab expects
 edge identity `edge-1` and 1280×720. The helper never overwrites an earlier config.
-Scene-specific experimental seating closure and external test-alert thresholds
-remain disabled; the enabled pose policy requests evidence, not safe closure.
+Seated closure is off by default. Section 4 describes the explicit reviewed-scene
+opt-in; external test-alert thresholds remain disabled. The default pose policy
+requests evidence and does not close a seated episode.
 
 Record the printed scene SHA-256 for the private profile. Person SHA-256 is in
 the table above. All source files and the dependency lock are also compared to
@@ -153,6 +154,58 @@ opens input. Selected visual frames go to **your configured instance**; commands
 return over the same bidirectional protocol. Credentials, host paths and raw logs
 are not served to the browser. There is no use of the owner's CloudFront endpoint.
 
+## 4. Enable the seated-closure profile on your Graviton
+
+The local full reference keeps pose passive and does not offer seated closure.
+The own-Graviton profile can explicitly enable the existing cloud controller's
+seated criterion. This is a scene-specific evaluation option, not a declaration
+that sitting is safe or that physical seat support is verified.
+
+1. Independently review your actual camera view and create the scene configuration
+   with `--reviewed-scene`, `--seat-region` and `--hip-region` as described above.
+   Keep its new SHA-256 in your private cloud profile. A moved camera/chair needs
+   a new review; do not reuse the project's private calibration.
+2. Add this optional field to the existing private `cloud-profile.json`:
+
+   ```json
+   "seated_closure_seconds": 5
+   ```
+
+   This is one field in the full profile object, not a replacement profile.
+   Omitting it keeps closure disabled. Booleans, non-finite and non-positive
+   durations are rejected before SSH. Five seconds reproduces the demonstrated
+   setting; it is not a calibrated general threshold.
+3. Use the same source revision on both computers, then run:
+
+   ```sh
+   uv run --frozen care-lab --cloud-profile /PRIVATE/cloud-profile.json --check-cloud
+   uv run --frozen care-lab --cloud-profile /PRIVATE/cloud-profile.json --video /ABSOLUTE/PATH/your-video.mp4
+   ```
+
+4. Choose **My AWS Graviton · COOL**, **Configured local video**, and Start video.
+   Use a recording belonging to the independently reviewed view. A live camera
+   can be explicitly selected instead. The run requires verified native COOL,
+   matching models/source and current reviewed context before input opens.
+
+The selected profile enables `--experimental-seated-closure-seconds 5` and keeps
+pose-driven ROI actions off, matching the demonstrated full-frame closure
+profile. The default own-Graviton mode still enables pose observation without
+seated closure. The launcher verifies the worker's reported closure duration and
+pose mode before opening the tunnel/input; a mismatch fails without fallback.
+The Lab displays **Seated closure** and the actual worker profile.
+
+A valid observed posture-change episode, same-person temporal continuity and
+sustained eligible pose evidence are required. Horizontal evidence, an alert,
+missing/ambiguous observations or broken identity prevent this closure. A video
+ending in `UNRESOLVED` is not automatically a failure: inspect those gates and
+ensure an eligible episode actually opened. The runner does not force `NORMAL`.
+
+The controller gates can also be checked without video/models/AWS using
+`uv run --frozen pytest -q tests/test_seated_closure.py`. Those are synthetic
+controller tests, not a new vision experiment. The newly exposed launcher option
+has local configuration/readiness regression coverage; no new physical-camera
+trial or second-Graviton acceptance is claimed by adding this route.
+
 ## What the Lab shows and what Stop means
 
 The Edge chart measures capture, requested transmission and actual transmission
@@ -173,7 +226,9 @@ deadline as a backstop. A run lasts 30–120 seconds plus bounded startup/drain.
 Your EC2 instance remains running. This is a bounded evaluation tool, not a
 continuous multi-household service. Reconnection or stale data cannot establish
 fresh cloud vision or a person's wellbeing. A completed session is not an accuracy
-audit. The existing deployed CloudFront review portal remains separate.
+audit. The existing deployed CloudFront review portal remains separate. After a normal
+completion or Stop, the network row says **Session finished · stream closed**;
+retained last-sample network values are not presented as a current outage.
 
 ## Verification scope
 

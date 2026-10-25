@@ -63,6 +63,83 @@ def test_invalid_configuration_fails_before_ssh(tmp_path, field, value):
         load_profile(path)
 
 
+@pytest.mark.parametrize('duration', [True, False, 0, -1, '5', float('nan'), float('inf')])
+def test_seated_profile_rejects_invalid_duration_before_ssh(tmp_path, duration):
+    path, content = profile(tmp_path)
+    content['seated_closure_seconds'] = duration
+    path.write_text(json.dumps(content))
+    with pytest.raises(ValueError, match='finite positive'):
+        load_profile(path)
+
+
+def test_seated_opt_in_selects_cloud_closure_without_pose_roi(tmp_path):
+    path, content = profile(tmp_path)
+    content['seated_closure_seconds'] = 5
+    path.write_text(json.dumps(content))
+    loaded = load_profile(path)
+    argv = command(loaded | {'seconds': 60})
+    assert argv[argv.index('--experimental-seated-closure-seconds') + 1] == '5'
+    assert '--pose-shadow-config' in argv
+    assert '--experimental-pose-observation' not in argv
+    assert '--experimental-alert-after-seconds' not in argv
+    session = LabSessions(tmp_path/'sessions', cloud_profile=path)
+    state = session.snapshot()
+    assert state['capabilities']['graviton_seated_closure_seconds'] == 5
+    assert str(path) not in json.dumps(state)
+
+
+@pytest.mark.parametrize('context', ['unknown', 'changed'])
+def test_seated_profile_requires_reviewed_context_before_worker(context):
+    configuration = {'remote_root': '/', 'seconds': 1, 'person_model': '/person.onnx',
+                     'pose_config': '/pose.json', 'seated_closure_seconds': 5,
+                     'check_only': True}
+    def spawn(*args, **kwargs):
+        pytest.fail('Seated profile started without reviewed context')
+    with pytest.raises(ValueError, match='independently reviewed'):
+        supervise(configuration, verify_fn=lambda _: ({'cool': {'verified': True}}, context),
+                  spawn=spawn)
+
+
+def test_reviewed_seated_preflight_reports_profile_without_starting_worker(capsys):
+    configuration = {'remote_root': '/', 'seconds': 1, 'person_model': '/person.onnx',
+                     'pose_config': '/pose.json', 'seated_closure_seconds': 5,
+                     'check_only': True}
+    def spawn(*args, **kwargs):
+        pytest.fail('Check-only started inference')
+    assert supervise(configuration, verify_fn=lambda _: ({'cool': {'verified': True}},
+                                                         'current'), spawn=spawn) == 0
+    row = json.loads(capsys.readouterr().out)
+    assert row['seated_closure_seconds'] == 5 and row['context_status'] == 'current'
+
+
+@pytest.mark.parametrize(('reported', 'pose_mode'),
+                         [(None, False), (3, False), (5, True), (5, False)])
+def test_seated_worker_profile_must_match_before_tunnel(monkeypatch, tmp_path, reported, pose_mode):
+    path, content = profile(tmp_path)
+    content['seated_closure_seconds'] = 5
+    path.write_text(json.dumps(content))
+    output = tmp_path/'output'
+    output.mkdir()
+    def spawn(argv, **kw):
+        rows = [{'event': 'cloud_preflight_verified', 'cool_verified': True,
+                 'full_pipeline': True},
+                {'event': 'server_ready', 'phase': 3, 'cool_verified': True,
+                 'pose_shadow_enabled': True, 'pose_observation_enabled': pose_mode,
+                 'seated_closure_seconds': reported, 'experimental_s_only_5fps': True,
+                 'port': 18765}]
+        kw['stdout'].write(('\n'.join(json.dumps(row) for row in rows)+'\n').encode())
+        kw['stdout'].flush()
+        return SimpleNamespace(stdin=io.BytesIO(), poll=lambda: None, wait=lambda **_: 0)
+    monkeypatch.setattr('care_vision.lab.remote.subprocess.Popen', spawn)
+    monkeypatch.setattr(RemoteService, 'forward', lambda self, port: 'verified-tunnel')
+    with RemoteService(path, output, 1) as service:
+        if reported == 5 and not pose_mode:
+            assert service.start() == 'verified-tunnel'
+        else:
+            with pytest.raises(RuntimeError, match='full COOL pipeline'):
+                service.start()
+
+
 def test_modes_require_models_or_private_profile_without_starting_input(tmp_path):
     session = LabSessions(tmp_path / 'sessions', models=tmp_path / 'absent-models')
     for args in ({'source': 'camera', 'pipeline': 'full'},

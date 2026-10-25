@@ -28,6 +28,8 @@ class LabSessions(Sessions):
         self.preview_enabled = False
         self.models = models or default_directory()
         self.cloud_profile = cloud_profile
+        self.graviton_seated_seconds = (load_profile(cloud_profile).get('seated_closure_seconds')
+                                       if cloud_profile else None)
         self.video = video
         self.target, self.pipeline = 'local', 'motion'
         self.input_seconds = 45
@@ -45,7 +47,7 @@ class LabSessions(Sessions):
         if target == 'graviton':
             if not self.cloud_profile or pipeline != 'full':
                 raise ValueError('My AWS Graviton requires an explicit private cloud profile.')
-            load_profile(self.cloud_profile)
+            profile = load_profile(self.cloud_profile)
         elif pipeline == 'full':
             model_paths(self.models)
         if pipeline == 'full' and source == 'synthetic':
@@ -63,6 +65,8 @@ class LabSessions(Sessions):
             if self.output:
                 self.output.close()
             self.source_kind = source
+            if target == 'graviton':
+                self.graviton_seated_seconds = profile.get('seated_closure_seconds')
             self.target, self.pipeline = target, pipeline
             self.input_seconds = seconds
             self.camera_index = camera_index if source == 'camera' else None
@@ -146,6 +150,7 @@ class LabSessions(Sessions):
             result['capabilities'] = {
                 'local_models_present': available(self.models),
                 'graviton_profile_configured': self.cloud_profile is not None,
+                'graviton_seated_closure_seconds': self.graviton_seated_seconds,
                 'local_video_configured': self.video is not None,
             }
             if self.source_kind in {'camera', 'video'}:

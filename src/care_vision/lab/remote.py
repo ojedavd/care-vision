@@ -67,8 +67,11 @@ class RemoteService:
             if ready and checked:
                 if not (ready.get('phase') == 3 and ready.get('cool_verified') is True
                         and ready.get('pose_shadow_enabled') is True
-                        and ready.get('pose_observation_enabled') is True
+                        and ready.get('pose_observation_enabled') is
+                        (self.profile.get('seated_closure_seconds') is None)
                         and ready.get('experimental_s_only_5fps') is True
+                        and ready.get('seated_closure_seconds') ==
+                        self.profile.get('seated_closure_seconds')
                         and type(ready.get('port')) is int and 1 <= ready['port'] <= 65535):
                     raise RuntimeError('Remote service did not verify the full COOL pipeline.')
                 self.ready = ready

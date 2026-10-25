@@ -1,10 +1,8 @@
-> Demonstrated seated profile: the source now includes the experimental pose-assisted closure shown in the 21 October demo. Read the [profile and configuration](docs/demo-profile-20261021.md), [technical report](docs/technical-report.md) and [integration checks](docs/obstacle-and-evidence-register.md#24-october--public-source-reconciliation-for-the-demonstrated-seated-closure). Closure is off by default; the five-second threshold is uncalibrated. Historical WebP capped regression results below describe a different profile.
-
 # CARE-Vision
 
 **Adaptive Agentic Vision for Safer Independent Living**
 
-An experimental safety-support system for older adults living independently.
+A vision safety-support system for older adults living independently.
 OpenCV 5 + COOL runs the core vision workload on AWS Graviton. A deterministic
 controller selects subsequent visual evidence through FPS, ROI and buffer
 commands to a lightweight Edge Gateway.
@@ -12,20 +10,23 @@ commands to a lightweight Edge Gateway.
 Individual project by Victor Ojeda, Argentina, for the OpenCV AI Competition
 2026 (COOL and Agentic Vision paths), selected for an AWS Compute Grant.
 
-## Demo
+## See CARE-Vision in two minutes
 
-**[Open the CARE-Vision demo →](https://dqi6ba1tz68v1.cloudfront.net/)**
+**[Open the online demo →](https://dqi6ba1tz68v1.cloudfront.net/)**
 
-Explore **Lab & judges**, **Caregiver**, **Family** and **Operations** directly
-in your browser. The public walkthrough illustrates the workflow with scenario
-examples; opening it does not start a camera, AWS worker or notifications.
+| Entry | What you can inspect | Execution |
+| --- | --- | --- |
+| **How it works**, Caregiver, Family, Operations | Interactive examples of the sensing and human-review workflow | Browser-only scenarios with illustrative values |
+| **Recorded trials** | Three saved episodes: recovery, a test alert without recovery, and seated closure in replay; video, decisions and sensing changes | Playback of saved evidence; the current recordings require a private viewer key |
+| **Technical telemetry** | Runtime, frame counts and command → applied ACK → new-perception chains | New measurements during an operator-led AWS session; read-only visitors need no key |
 
-The **[Judge access](https://dqi6ba1tz68v1.cloudfront.net/judges/)** button opens
-the private three-episode evidence panel, including recovery, a test alert without
-recovery, and seated closure in replay. Authorized judges need the private viewer
-key, supplied separately. **Live telemetry** is also available from the demo.
+The recorded evidence and replay decisions are identified on the trial page.
+Opening the demo does not start a camera, cloud worker or external notification.
+A new end-to-end session uses a separately started Edge and an authorized cloud
+operator. [Recorded trials](https://dqi6ba1tz68v1.cloudfront.net/judges/) ·
+[Technical telemetry](https://dqi6ba1tz68v1.cloudfront.net/live).
 
-## Try the visual Local Lab
+## Run the Local Lab in five minutes
 
 On macOS or Linux, with Python 3.11 and `uv` installed:
 
@@ -60,16 +61,19 @@ generated motion demo. [Quick diagnostic guide](docs/local-lab.md).
 | **My AWS Graviton · COOL** | Your own authorized Graviton with native OpenCV5 + COOL | Prepare your SDK/models, then launch `care-lab --cloud-profile /PRIVATE/cloud-profile.json` |
 
 Both expose real person detection, tracking, temporal policy and pose evidence.
-The local mode is a functional reference with passive pose; scene-specific AWS
-pose actions require reviewed calibration. Model/runtime checks precede camera
+**The local reference does not enable pose-assisted seated closure.** An open
+seated episode can remain `UNRESOLVED`; ordinary sitting does not necessarily open
+an episode. The default own-Graviton Lab profile also leaves seated closure off.
+To run that policy on your Graviton, explicitly configure `seated_closure_seconds`
+and independently reviewed scene regions using the [seated-profile steps](docs/full-pipeline-lab.md#4-enable-the-seated-closure-profile-on-your-graviton).
+The browser shows whether closure is configured and whether the worker enabled it.
+Scene-specific pose actions require reviewed calibration. Model/runtime checks precede camera
 acquisition. There is no automatic connection to the owner's AWS account, no
 silent fallback and no validated fall-accuracy claim.
 
 [Full setup, model downloads, your own Graviton and verification limits](docs/full-pipeline-lab.md).
 
 ## Architecture
-
-### Illustrated experimental architecture
 
 ![CARE-Vision cloud vision pipeline and active perception feedback loop](docs/images/illustrated-architecture.png)
 
@@ -78,36 +82,45 @@ silent fallback and no validated fall-accuracy claim.
 This historical profile does not establish general fall-detection accuracy or a
 COOL speedup; see the [technical report](docs/technical-report.md) for measured scope.*
 
-### Approved proposal
-
-![CARE-Vision high-level architecture from the approved competition proposal](docs/images/proposal-architecture.jpg)
-
-*Original Figure 1 from the approved proposal (page 5). This depicts planned
-scope, including future services and integrations. The 80–95% reduction shown is
-an initial target, not a measured result; offline cloud vision is unavailable.
-The Edge remains responsible for acquisition and transport, with primary CV on
-Graviton. See the [proposal text](docs/approved-proposal.md) and measured scope below.*
-
-```mermaid
-flowchart LR
-    C[Camera / video] --> E[Edge: capture, ring buffer, sampling, encoding]
-    E --> V[AWS Graviton: OpenCV 5 + COOL]
-    V --> O[Structured visual observation]
-    O --> A[Deterministic Agentic Controller]
-    A -->|FPS / ROI / recent buffer| E
-```
+The [approved proposal](docs/approved-proposal.md) remains the architectural
+reference. Its original figure is available in the Devpost project gallery;
+planned integrations and bandwidth-reduction targets are separate from measured results.
 
 The Edge performs acquisition and transport. Detection, tracking, posture/temporal
 analysis and agent decisions execute in AWS. Capture FPS and effective transmitted
 FPS are separate quantities. The system preserves uncertainty when evidence or
 identity is insufficient; alerts are experimental and test-only.
 
-## Current source and measured scope
+## Demonstrated seated-closure profile
 
-This repository starts from the experimentally evaluated WebP80 / regular-sampling
-candidate, derived from the archived v4 code. The original core modules match that candidate;
-publication adds documentation, privacy checks, parameterized connection settings
-in five historical tools and a capture-time-based assertion in a historical test. It is a separate code-only workspace.
+The source includes the pose-assisted seated closure shown in the 21 October
+cloud demonstration. That controlled camera run captured 1,501 frames, sent,
+received and processed 140, verified two causal chains, and closed the episode
+at source time 24.863 s. It used JPEG full frames at requested 2/5 FPS, native
+OpenCV 5 + COOL on Graviton and a five-second, scene-specific seated criterion.
+These are results of that development trial, not a new run or an accuracy rate.
+
+[Profile, options and measured limits](docs/demo-profile-20261021.md) ·
+[Technical report](docs/technical-report.md) ·
+[Source integration checks](docs/obstacle-and-evidence-register.md#24-october--public-source-reconciliation-for-the-demonstrated-seated-closure).
+
+To check the controller's seated-closure behavior and rejection gates without
+models, footage or AWS:
+
+```sh
+uv run --frozen pytest -q tests/test_seated_closure.py
+```
+
+These tests feed synthetic structured observations to the real controller. They
+verify policy behavior; they do not execute person/pose inference. For a visual
+run, use the explicit own-Graviton profile above. The five-second setting is
+uncalibrated and physical seat support is not verified.
+
+## Historical constrained-network regression
+
+The earlier WebP80 / regular-sampling candidate is retained as a separate
+historical baseline. Its results below must not be combined with the JPEG
+seated-closure trial or interpreted as the default Lab configuration.
 
 The known-development regression used four recordings in five conditions on
 Graviton with OpenCV 5 + COOL / CLASSIC, eight threads:
@@ -156,19 +169,20 @@ entire test suite is not a supported data-free acceptance command. The sampler
 check can use real capture timestamps only when `CARE_VISION_ASSET_ROOT` is set to
 a separately authorized external input root; otherwise it uses a synthetic grid.
 
-## Private live review application
+## Operator-led cloud review
 
-A separate [judge portal](docs/private-judge-portal.md) can launch bounded cloud
-sessions and display allowlisted runtime metrics and the perception/action chain.
-A separate supervised [CloudFront/VPC-origin HTTPS entry](docs/judge-https-deployment.md)
-is deployed and externally verified. Viewer/operator access remains authenticated;
-judge credentials and repository access are supplied separately. The original SSH
-portal remains available. See the runbook for measured checks and retained limits.
-Start session launches only the AWS worker; the operator starts the local Edge
-and selects an authorized source separately. There is no automatic recording
-playback or camera start. It serves no images or recordings. The original
-evaluated core modules are unchanged. The new guided synthetic AWS probe executed COOL but failed the full
-20FPS rate audit (14FPS achieved); it is not the frozen WebP80 regression.
+The deployed [technical telemetry](https://dqi6ba1tz68v1.cloudfront.net/live)
+provides public, image-free, read-only metrics. It reports no fresh evidence while
+idle. Operator authentication is required to start or stop its bounded AWS worker;
+the operator starts the separate Edge and selects the authorized input.
+
+The [recorded trial viewer](https://dqi6ba1tz68v1.cloudfront.net/judges/) is a
+separate saved-evidence presentation and currently requires a viewer key.
+[Portal implementation](docs/private-judge-portal.md) and
+[HTTPS deployment runbook](docs/judge-https-deployment.md) describe the underlying
+operator service. The original SSH portal remains available. A prior synthetic
+AWS probe achieved 14 FPS against 20 requested; it is separate from the frozen
+WebP80 regression and from the seated camera trial.
 
 ## AWS deployment
 
@@ -176,9 +190,9 @@ evaluated core modules are unchanged. The new guided synthetic AWS probe execute
 separate locked cloud environment and external COOL SDK. Keep standard OpenCV
 wheels out of that cloud environment. Models, SDK entitlement and scene calibration
 must be supplied separately. Services bind to loopback and use an authenticated
-SSH tunnel. The HTTPS entry exposes only the authenticated, image-free review
-portal; vision WebSockets stay on loopback. This repository supplies no account
-credentials, model weights or personal deployment identifiers.
+SSH tunnel. CloudFront serves the public walkthrough and read-only telemetry, plus the
+protected recorded trial viewer. Vision WebSockets stay on loopback. This
+repository supplies no account credentials, model weights or private origin addresses.
 
 The experimental runner requires an explicit budget and an external frozen
 input/source profile. A prepare-only invocation contacts no AWS host:

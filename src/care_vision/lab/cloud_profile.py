@@ -2,6 +2,7 @@
 
 import hashlib
 import json
+import math
 import re
 from pathlib import Path
 
@@ -9,15 +10,25 @@ FIELDS = {'ssh_host', 'ssh_identity', 'remote_root', 'remote_python', 'person_mo
           'person_sha256', 'pose_config', 'pose_config_sha256'}
 
 
+def seated_duration(configuration):
+    value = configuration.get('seated_closure_seconds')
+    if value is not None and (type(value) not in (int, float)
+                              or not math.isfinite(value) or value <= 0):
+        raise ValueError('Seated closure seconds must be a finite positive number.')
+    return value
+
+
 def load_profile(path):
     path = Path(path).expanduser()
     if path.stat().st_mode & 0o077:
         raise ValueError('Cloud profile must have owner-only permissions (chmod 600).')
     value = json.loads(path.read_text())
-    if not isinstance(value, dict) or set(value) != FIELDS:
+    if (not isinstance(value, dict) or not FIELDS <= set(value)
+            or set(value) - FIELDS - {'seated_closure_seconds'}):
         raise ValueError('Cloud profile fields do not match the documented profile.')
-    if any(not isinstance(item, str) for item in value.values()):
+    if any(not isinstance(value[name], str) for name in FIELDS):
         raise ValueError('Cloud profile fields must be strings.')
+    seated_duration(value)
     if not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_.@-]{0,250}', value['ssh_host']):
         raise ValueError('Use a trusted SSH alias or user@host.')
     key = Path(value['ssh_identity']).expanduser()
