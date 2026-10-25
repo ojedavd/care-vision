@@ -4,9 +4,10 @@ Open [the three-episode data view](https://dqi6ba1tz68v1.cloudfront.net/trials/)
 directly, or select **Episode evidence** on the
 [CARE-Vision home page](https://dqi6ba1tz68v1.cloudfront.net/). No viewer key is
 required. [Caregiver → Recorded episodes](https://dqi6ba1tz68v1.cloudfront.net/#caregiver)
-uses the same public data in a focused outcome review. How it works, Family and
-Operations retain illustrative scenarios; operator-led technical telemetry is a
-secondary link in the footer.
+uses the same public data in a focused outcome review. Family opens Episode
+updates and Operations opens Saved run analysis. Each has a separate Scenario
+walkthrough. How it works retains the illustrated sensing loop; operator-led
+technical telemetry is a secondary link in the footer.
 
 ## What to inspect
 
@@ -49,6 +50,38 @@ ownership. Its buttons do not assign a real caregiver, deliver a message, modify
 the historical episode data or resolve the controller state. Switching workspaces,
 evidence modes or hiding the browser tab pauses playback. No fresh observations
 or inference are produced by this review.
+
+## Family and Operations
+
+[Family](https://dqi6ba1tz68v1.cloudfront.net/#family) opens **Episode updates**.
+Choose an episode, then select a journey milestone to inspect the outcome at that
+source time. The summary separates the controller decision, the absence of a
+recorded human review and the external notification status. **Show body pose at
+this moment** is optional and collapsed initially. It uses the same joint filter,
+missing-pose rules and provenance as Caregiver. There is no claim about current
+wellbeing, message delivery or a real caregiver assignment.
+
+[Operations](https://dqi6ba1tz68v1.cloudfront.net/#operations) opens **Saved run
+analysis**. Summary counts cover all three trials; the recorded/replay filter
+controls the comparison table. Select a row to inspect capture median, selected
+transmission settings, original cloud processing P50/P95, plots and controller
+state lanes. The time slider shows replay and original recorded state separately.
+Percentiles use nearest rank over saved finite processing samples; they exclude
+the later offline pose work. Missing measurements remain unavailable.
+
+Command buttons expose the request time, applied ACK and first saved capture
+strictly after that ACK. The two intervals are computed from those source-relative
+values. Capture ordering alone does not validate ROI content, requested resolution
+or end-to-end command compliance. The review does not infer live service health
+or a fleet from the three trials, and totals do not establish a fixed-versus-
+adaptive resource improvement. Technical telemetry remains a separate operator-led
+view.
+
+The selected episode is retained across workspace links and in shareable fragments
+such as `#family/no-recovery` or `#operations/sitting`. An explicit episode link
+opens the saved-data mode. Scenario actions remain separate from all saved data.
+
+## Build the public presentation
 
 The public presentation source is in `src/care_vision/public_demo/`. Build its
 three data-free assets into a new directory with:

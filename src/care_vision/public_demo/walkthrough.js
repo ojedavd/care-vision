@@ -9,8 +9,8 @@ let live = empty(), perspective = 'lab', mode = 'walkthrough', scenario = 'recov
 const titles = {
   lab:['SYSTEM EXPLORER','See the loop in action.','Follow a frame from capture to the next agent decision.'],
   caregiver:['CARE WORKSPACE','Review the evidence. See what happened.','Saved episodes, body pose and controller outcomes, without household camera imagery.'],
-  family:['FAMILY WORKSPACE','Stay informed, without the noise.','Relevant updates and who is taking care of them.'],
-  operations:['SERVICE OPERATIONS','Keep every connection visible.','Separate service health from events that need human review.'],
+  family:['FAMILY WORKSPACE','Understand what happened.','A clear episode update, a visible care handoff, and control over visual detail.'],
+  operations:['SERVICE OPERATIONS','See the signal. Trace the response.','Compare saved trials, inspect observation settings and follow each applied command.'],
 };
 function demoState() {
   const states = ['NORMAL','SUSPICIOUS','VERIFYING','VERIFYING','VERIFYING','RECOVERY'];
@@ -78,27 +78,31 @@ function illustration(s) {
   const body=low?'<circle cx="246" cy="202" r="15"/><path d="M265 207 L323 219 L369 216 M303 215 L322 240 L367 242 M278 211 L257 234"/>':'<circle cx="304" cy="84" r="16"/><path d="M304 107 L303 169 M303 126 L275 153 M304 127 L332 151 M303 169 L280 227 M303 169 L329 227"/>';
   return `<div><svg class="illustration" viewBox="0 0 540 280" role="img" aria-label="Illustrated scenario, not recorded camera footage"><rect class="room" x="30" y="18" width="480" height="240" rx="16"/><path d="M48 239H492" stroke="var(--line)" stroke-width="2"/><rect x="83" y="145" width="103" height="15" rx="4" fill="var(--line)"/><path d="M95 160V236 M175 160V236" stroke="var(--line)" stroke-width="7"/><g class="person" opacity="${offline?.25:1}">${body}</g>${step>=2&&!offline?'<rect class="roi" x="228" y="51" width="165" height="195" rx="8"/>':''}<text class="hint" x="48" y="46">${offline?'No fresh visual evidence':step===0?'Baseline observation':step===1?'A change requires verification':step===5?(scenario==='review'?'Human review remains open':'Return to baseline'):'Observe again before deciding'}</text></svg></div>`;
 }
-let autoplay=null, caregiverMode='recorded';
-const episodeReview=CareEpisodeReview.create(el('workspace'),window.CARE_DATA,announce);
+let autoplay=null;
+const workspaceModes={caregiver:'recorded',family:'recorded',operations:'recorded'};
+function rememberEpisode(view,key){window.history.replaceState(null,'','#'+view+'/'+key);}
+const episodeReview=CareEpisodeReview.create(el('workspace'),window.CARE_DATA,announce,key=>rememberEpisode('caregiver',key));
+const savedWorkspaces=PublicWorkspaces.create(el('workspace'),window.CARE_DATA,announce,rememberEpisode);
 function pauseScenario(){if(autoplay!==null)clearInterval(autoplay);autoplay=null;el('play-scenario').textContent='Play scenario';}
 function render() {
-  const s=data(),title=titles[perspective], recorded=perspective==='caregiver'&&caregiverMode==='recorded';
+  const s=data(),title=titles[perspective], recorded=perspective!=='lab'&&workspaceModes[perspective]==='recorded';
   episodeReview.pause();
-  el('caregiver-mode').hidden=perspective!=='caregiver';
-  root.querySelectorAll('[data-care-mode]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.careMode===caregiverMode)));
+  el('workspace-mode').hidden=perspective==='lab';
+  root.querySelectorAll('[data-view-mode]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.viewMode===workspaceModes[perspective])));
+  root.querySelector('[data-view-mode=recorded]').textContent=perspective==='family'?'Episode updates':perspective==='operations'?'Saved run analysis':'Recorded episodes';
   root.querySelector('.run-actions').hidden=recorded;
   root.querySelector('.walkthrough-controls').hidden=recorded;
   root.querySelector('.judge-callout').hidden=perspective!=='lab';
   root.querySelector('.system-intro').hidden=perspective!=='lab';
-  el('context-badge').textContent=recorded?'SAVED EPISODE REVIEW':'SCENARIO WALKTHROUGH';
+  el('context-badge').textContent=recorded?(perspective==='operations'?'SAVED RUN ANALYSIS':'SAVED EPISODE REVIEW'):'SCENARIO WALKTHROUGH';
   el('source-status').textContent=recorded?'Historical data · no live monitoring or notifications':'Illustrative scenario · no camera is active';
   el('workspace-label').textContent=title[0];el('page-title').textContent=title[1];el('page-description').textContent=title[2];
-  if(perspective==='caregiver'&&!recorded){el('page-title').textContent='Know what needs your attention.';el('page-description').textContent='An illustrated human-review workflow. Actions affect this scenario only.';}
+  if(perspective!=='lab'&&!recorded){el('page-title').textContent=perspective==='caregiver'?'Know what needs your attention.':perspective==='family'?'Follow the care handoff.':'Inspect the illustrated service.';el('page-description').textContent='An illustrated human-review workflow. Actions affect this scenario only.';}
   root.querySelectorAll('[data-role]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.role===perspective)));
   el('step-label').textContent=`Event ${step+1} of 6`;
   el('previous-step').disabled=step===0;el('next-step').disabled=step===5;
   const focus=document.activeElement?.dataset?.command;
-  if(recorded) {episodeReview.mount();return;}
+  if(recorded) {if(perspective==='caregiver')episodeReview.mount();else savedWorkspaces.mount(perspective);return;}
   el('workspace').innerHTML=({lab:publicLab,caregiver,family,operations}[perspective])(s);
   if(focus)root.querySelector('[data-command="'+focus+'"]')?.focus({preventScroll:true});
   const chart=el('rate-chart');if(chart)chart.innerHTML='<text x="50%" y="80" text-anchor="middle">Scenario values are illustrative.</text><text x="50%" y="105" text-anchor="middle">Measured results are in the judge review.</text>';
@@ -106,8 +110,8 @@ function render() {
 function announce(message){el('announcement').textContent=message;}
 root.addEventListener('click',event=>{
   const button=event.target.closest('button');if(!button)return;
-  if(button.dataset.role){window.location.hash=button.dataset.role==='lab'?'how-it-works':button.dataset.role;}
-  if(button.dataset.careMode){pauseScenario();episodeReview.pause();caregiverMode=button.dataset.careMode;render();announce(caregiverMode==='recorded'?'Saved episode review.':'Scripted human-review walkthrough.');}
+  if(button.dataset.role){const key=perspective==='caregiver'?episodeReview.selectedKey():savedWorkspaces.selectedKey();window.location.hash=button.dataset.role==='lab'?'how-it-works':button.dataset.role+(key?'/'+key:'');}
+  if(button.dataset.viewMode){pauseScenario();episodeReview.pause();workspaceModes[perspective]=button.dataset.viewMode;render();announce(button.dataset.viewMode==='recorded'?'Saved episode evidence.':'Scripted human-review walkthrough.');}
   if(button.dataset.command){selectedCommand=Number(button.dataset.command);render();}
   if(button.dataset.case){attention=button.dataset.case;render();announce('Example human review updated. No notification was sent.');}
 });
@@ -119,8 +123,9 @@ el('play-scenario').onclick=()=>{if(autoplay!==null){pauseScenario();return;}if(
 document.addEventListener('visibilitychange',()=>{if(document.hidden){pauseScenario();episodeReview.pause();}});
 function navigateWorkspace(){
   pauseScenario();episodeReview.pause();
-  const key=window.location.hash.slice(1);
-  perspective=['caregiver','family','operations'].includes(key)?key:'lab';
+  const [role,key]=window.location.hash.slice(1).split('/');
+  perspective=['caregiver','family','operations'].includes(role)?role:'lab';
+  if(key){episodeReview.select(key);savedWorkspaces.select(key);if(perspective!=='lab')workspaceModes[perspective]='recorded';}
   render();announce(titles[perspective][1]);
 }
 window.addEventListener('hashchange',navigateWorkspace);

@@ -51,3 +51,51 @@ test('the saved alert remains present through the end of the episode',()=> {
   assert.equal(snapshot(data,t,4).alert,true);
   assert.equal(snapshot(data,t,10).state,'ASSISTANCE_REQUIRED');
 });
+
+const boards=require('../src/care_vision/public_demo/workspaces.js');
+const run={...trial,captured:100,sent:3,alerts:0,frames:[
+  {...frame,t:1,processing:10,bytes:100},
+  {...frame,t:1.4,processing:20,bytes:200},
+  {...frame,t:1.5,processing:30,bytes:300}],
+  events:[{t:1,kind:'episode',label:'Episode opens'},
+    {t:1.1,kind:'command',label:'Agent requests 5 FPS',applied:1.4}]};
+test('command trace selects a capture strictly after the applied ACK',()=> {
+  const [c]=boards.commandTrace(run);
+  assert.equal(c.applied,1.4);assert.equal(c.nextCapture.t,1.5);
+});
+test('missing ACK or later observation stays unavailable',()=> {
+  const commands=boards.commandTrace({...run,events:[
+    {t:1,kind:'command',label:'No ACK'},
+    {t:2,kind:'command',label:'ACK after the capture ended',applied:3}]});
+  assert.equal(commands[0].nextCapture,undefined);assert.equal(commands[1].nextCapture,undefined);
+  assert.equal(boards.summary({...run,events:commands}).acks,1);
+});
+test('aggregate keeps captured, sent, observed and acknowledged counts distinct',()=> {
+  const s=boards.aggregate([run,{...run,captured:80,sent:5,frames:[frame],events:[]}]);
+  assert.deepEqual(s,{captured:180,sent:8,observations:4,commands:1,acks:1,alerts:0});
+});
+test('processing percentiles use nearest rank without mixing offline pose estimates',()=> {
+  const s=boards.summary({...run,frames:Array.from({length:20},(_,i)=>({...frame,processing:i+1}))});
+  assert.equal(s.p50,10);assert.equal(s.p95,19);
+  assert.equal(boards.summary({...run,frames:[]}).p95,null);
+  assert.equal(boards.summary({...run,frames:[{...frame,processing:0}]}).p50,0);
+});
+test('summary preserves original unresolved state and reports replay closure separately',()=> {
+  const original=JSON.stringify(run),s=boards.summary(run);
+  assert.equal(s.state,'NORMAL');assert.equal(s.original,'UNRESOLVED');
+  assert.equal(s.outcome,3);assert.equal(s.episodeSpan,2);assert.equal(s.bytes,300);
+  assert.equal(JSON.stringify(run),original);
+});
+test('an alert does not count as recovery or a closed episode',()=> {
+  const t={...run,episodes:[{t:1,open:true,alert:false},{t:4,open:true,alert:true}],
+    states:[{t:0,state:'VERIFYING'},{t:4,state:'ASSISTANCE_REQUIRED'}],replay:false};
+  const sum=boards.summary(t);assert.equal(sum.alert,true);assert.equal(sum.episodeSpan,null);
+  assert.equal(sum.outcome,4);assert.equal(boards.aggregate([t]).alerts,1);
+  assert.equal(boards.familyStatus(t,snapshot(data,t,3)).label,'VERIFICATION OPEN');
+  assert.equal(boards.familyStatus(t,snapshot(data,t,4)).label,'REVIEW REQUESTED');
+});
+test('family closure language does not treat a replay as a recorded recovery',()=> {
+  const status=boards.familyStatus(run,snapshot(data,run,3));
+  assert.equal(status.label,'CLOSED IN REPLAY');
+  assert.match(status.copy,/original recorded episode stayed unresolved/);
+});

@@ -17,13 +17,18 @@ Individual project by Victor Ojeda, Argentina, for the OpenCV AI Competition
 | Entry | What you can inspect | Execution |
 | --- | --- | --- |
 | **Caregiver → Recorded episodes** | The same three saved episodes in a focused review: body pose, controller outcome, episode status and test-alert delivery | Public data playback; recorded and replay decisions identified separately |
-| **How it works**, Family, Operations; Caregiver → Scenario walkthrough | Interactive examples of the sensing and human-review workflow | Browser-only scenarios with illustrative values |
+| **Family → Episode updates** | Outcome summary, selectable event journey, communication status and optional body pose | The same saved episodes; no live wellbeing claim |
+| **Operations → Saved run analysis** | Trial comparison, capture/transmission counts, processing percentiles, state lanes and request → ACK → later-capture traces | Historical observations and applied command times; no live fleet or benchmark claim |
+| **How it works**; Scenario walkthrough in each workspace | Interactive examples of sensing and human review | Browser-only scenarios with illustrative values |
 | **Episode evidence** | Three saved episodes: recovery, a test alert without recovery, and seated closure in replay; body pose, decisions and sensing changes | Public data playback; no key, camera images, video or audio |
 | **Technical telemetry** | Runtime, frame counts and command → applied ACK → new-perception chains | New measurements during an operator-led AWS session; read-only visitors need no key |
 
 [Open the Caregiver review](https://dqi6ba1tz68v1.cloudfront.net/#caregiver) to
 inspect outcomes without household imagery. Its separate **Scenario walkthrough**
 contains simulated human-review actions; those do not change saved episodes.
+[Family](https://dqi6ba1tz68v1.cloudfront.net/#family) presents a plain-language
+update; [Operations](https://dqi6ba1tz68v1.cloudfront.net/#operations) exposes the
+saved run details. Selecting an episode carries it across these perspectives.
 The recorded evidence and replay decisions are identified in both review views.
 Opening the demo does not start a camera, cloud worker or external notification.
 A new end-to-end session uses a separately started Edge and an authorized cloud

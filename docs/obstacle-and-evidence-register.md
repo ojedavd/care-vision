@@ -529,3 +529,40 @@ The data-free public presentation source and deterministic builder are now in
 the repository. README and the review guide distinguish measured evidence from
 scripted scenarios. Private verification/deployment artifacts:
 `artifacts/caregiver-pose-review-20261025/`.
+
+
+## 25 October — Family updates and Operations saved-run analysis
+
+Family now opens Episode updates for the same three public trials: a selected-time
+outcome summary, selectable event journey, system decision versus human-review
+record and external-message status. Body pose is optional and initially collapsed;
+no source imagery or facial landmarks are added. Operations now opens Saved run
+analysis with a recorded/replay filter, selectable trial comparison, capture and
+transmission counts, original processing percentiles/plots, state lanes, a source-
+time slider and request/ACK/later-capture traces. The explicit Scenario walkthrough
+remains available separately in each workspace.
+
+Totals derived from the existing export are 4,482 captured frames, 420 transmitted
+frames, 420 saved observations, 8 applied ACKs for 8 commands and one test alert.
+These are historical trial counts, not a fleet, current service-health report or
+fixed-versus-adaptive benchmark. P50/P95 use nearest rank on the saved finite
+processing samples; later offline presentation pose is excluded. The later-capture
+checkpoint is strictly the first saved capture after an ACK, and does not by itself
+validate ROI content or resolution compliance. Replay sitting preserves original
+UNRESOLVED alongside replay NORMAL. Unrecorded caregiver activity is not invented.
+
+Fourteen synthetic JavaScript tests passed, including separate count aggregation,
+ACK ordering/missing values, processing percentiles, alert versus closure and
+replay versus original outcomes. Forty source/privacy/archive tests passed. Local
+browser checks covered temporal controls, filters, absent pose, cross-workspace
+links retaining the selected episode and layout without page overflow at the
+normal viewport. Public browser checks confirmed the three Family outcomes,
+optional 12-joint sitting pose, the replay filter, ROI trace and recorded test
+alert. Both views contain zero camera media elements.
+
+HTTPS matched all reviewed platform assets and unchanged public trial data. Direct
+original data/video/ROI range requests remain 401. The static update has a backup;
+there was no service restart, new worker, inference or camera trial (IDLE to IDLE).
+Credentials, route wrapper and private inputs were unchanged. README and the
+review guide describe the new defaults. Verification/deployment artifacts:
+`artifacts/family-operations-dashboard-20261025/`.
