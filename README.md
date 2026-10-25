@@ -12,6 +12,19 @@ commands to a lightweight Edge Gateway.
 Individual project by Victor Ojeda, Argentina, for the OpenCV AI Competition
 2026 (COOL and Agentic Vision paths), selected for an AWS Compute Grant.
 
+## Demo
+
+**[Open the CARE-Vision demo →](https://dqi6ba1tz68v1.cloudfront.net/)**
+
+Explore **Lab & judges**, **Caregiver**, **Family** and **Operations** directly
+in your browser. The public walkthrough illustrates the workflow with scenario
+examples; opening it does not start a camera, AWS worker or notifications.
+
+The **[Judge access](https://dqi6ba1tz68v1.cloudfront.net/judges/)** button opens
+the private three-episode evidence panel, including recovery, a test alert without
+recovery, and seated closure in replay. Authorized judges need the private viewer
+key, supplied separately. **Live telemetry** is also available from the demo.
+
 ## Try the visual Local Lab
 
 On macOS or Linux, with Python 3.11 and `uv` installed:
