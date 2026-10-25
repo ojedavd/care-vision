@@ -451,3 +451,47 @@ rate-limited request can select two of three stored captures while all three
 survive reopening. Production sampling/storage code is unchanged. The focused
 spool/sampler set passes 12 tests; this correction preserves strict persistence
 checks instead of relaxing the count assertion.
+
+
+## 25 October — Public episode data and pose view
+
+The owner accepted the pose-based presentation of the three existing episodes and
+cancelled the planned replacement recordings. The public home page now links to
+`/trials/` as Episode evidence. This view needs no key and contains only four
+reviewed text assets: HTML, CSS, application JavaScript and allowlisted episode
+data. Camera images, video, audio, absolute capture timestamps, private source
+paths and track/episode/command identifiers are excluded. Only the 12 COCO body
+joints are exported; facial landmarks are excluded. No claim of complete
+anonymisation is made.
+
+Recovery/no-recovery retain the recorded decisions, transport and timing values;
+their 137/137 poses were calculated later from the archived AVI for presentation,
+using standard local OpenCV and the existing RTMPose adapter/model. They were not
+the historical agent input or original AWS JPEG outputs. Sitting reuses 101 saved
+cloud pose samples, preserves its 40 not-requested samples and shows replay NORMAL
+alongside recorded UNRESOLVED. No new physical trial, controller change or cloud
+vision run accompanies this deployment. Pose source and limits remain visible.
+
+The static wrapper adds an exact four-file, hash-checked public route set. The
+original videos, original viewer data and ROI images keep their authentication
+gate, including direct range requests. Operator API permissions, credentials,
+cloud options, core modules and Edge/cloud responsibilities are unchanged. The
+presentation service was restarted from IDLE to IDLE; no vision worker started.
+A separate immutable release and backup of the previous unit/wrapper provide
+rollback without modifying original recordings.
+
+Twelve focused routing/access tests passed (2.15 s), including hash tampering,
+symlink/extra-file rejection, host/range handling, protected originals and denied
+anonymous/viewer worker actions. External HTTPS verified byte equality for all
+seven public platform/trial assets and 401 for the original data, three videos
+and ROI sample. Browser checks on the deployed page confirmed recovery NORMAL
+with 12 pose joints, the test alert ASSISTANCE_REQUIRED with 11 supported joints,
+and sitting replay NORMAL with 12 joints alongside original UNRESOLVED. No camera
+media elements occur in the public episode view. The public route serves a CSP
+that blocks image/media loads and connections.
+
+README and judge instructions identify the no-key public data review separately
+from the operator-led live service and private original evidence. This change
+removes dependence on new recordings; it does not establish new CV accuracy or
+COOL acceleration. Private deployment/verification artifacts:
+`artifacts/public-pose-deployment-20261025/`.
