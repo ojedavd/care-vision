@@ -11,10 +11,13 @@ def build(destination: Path) -> dict:
     destination.mkdir(parents=True, exist_ok=False)
     site = destination / "site"
     site.mkdir()
-    for name in ("index.html", "style.css"):
-        (site / name).write_bytes((SOURCE / name).read_bytes())
+    (site / "index.html").write_bytes((SOURCE / "index.html").read_bytes())
+    (site / "style.css").write_text(
+        (SOURCE / "style.css").read_text() + "\n" + (SOURCE / "workspaces.css").read_text()
+    )
     (site / "app.js").write_text(
-        (SOURCE / "caregiver.js").read_text() + "\n" + (SOURCE / "walkthrough.js").read_text()
+        "\n".join((SOURCE / name).read_text()
+                  for name in ("caregiver.js", "workspaces.js", "walkthrough.js"))
     )
     manifest = {"files": {p.name: {"sha256": hashlib.sha256(p.read_bytes()).hexdigest(),
                                    "bytes": p.stat().st_size} for p in sorted(site.iterdir())}}

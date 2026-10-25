@@ -61,7 +61,7 @@
     if(s.state==='UNRESOLVED') return ['The episode remains open.','The saved evidence is insufficient for closure at this point.'];
     return ['Baseline observation.','No episode has opened at this point in the saved trial.'];
   }
-  function create(container,data,announce=()=>{}) {
+  function create(container,data,announce=()=>{},onSelect=()=>{}) {
     let index=0, time=data?.trials?.[0]?.focus ?? 0, playing=false, tickId=null, previous=null, box=false;
     const $=id=>container.querySelector('#care-'+id);
     const trial=()=>data.trials[index];
@@ -113,7 +113,7 @@
         </div>
         <section class="panel panel-body section-space care-provenance"><h2>Where this evidence comes from</h2><p>${t.poseSource==='recorded_cloud'?'Sitting uses the saved cloud pose. Its closure is a controller replay; the original observations and UNRESOLVED state remain visible.':'The body pose was calculated offline from the archived recording for presentation. It was not used by the recorded agent. Controller decisions and transmission settings come from the original trial.'}</p><p>Only body joints are shown. No camera images, video, audio or facial landmarks are included. Missing pose stays missing; estimated joints may be wrong under occlusion. This view cannot establish physical seat support or validate fall-detection accuracy.</p></section>`;
       container.querySelectorAll('[data-care-trial]').forEach(b=>b.onclick=()=> {
-        pause(); index=Number(b.dataset.careTrial); time=trial().focus; mount();
+        pause(); index=Number(b.dataset.careTrial); time=trial().focus; mount();onSelect(trial().key);
         container.querySelector(`[data-care-trial="${index}"]`).focus({preventScroll:true});
         announce(`${trial().title} saved episode selected.`);
       });
@@ -136,7 +136,12 @@
       previous=now; update();
       if(time>=trial().duration) pause(); else tickId=requestAnimationFrame(tick);
     }
-    return {mount,pause};
+    function select(key) {
+      const i=data?.trials?.findIndex(t=>t.key===key);
+      if(i>=0){pause();index=i;time=trial().focus;return true;}
+      return false;
+    }
+    return {mount,pause,select,selectedKey:()=>data?.trials?.[index]?.key};
   }
   const api={snapshot,poseSVG,create};
   if(typeof module!=='undefined' && module.exports) module.exports=api;
