@@ -440,3 +440,14 @@ owner's replacement recordings. Static entry assets were updated with backup,
 without service restart or a new AWS worker. The private-media gate remains active.
 Devpost remains a draft; no competition submission or terms acceptance was made.
 Private verification artifacts: `artifacts/judge-review-clarity-20261025/`.
+
+Initial GitHub validation passed on the branch but failed on the pull-request run
+in `test_video_source_retains_offline_samples_across_restart` (4 selected vs 5
+stored captures). The durability assertion had used a new 30 FPS selection grid;
+two 2 FPS-retained captures can straddle a grid boundary less than 1/30 s apart.
+The test now reads exact capture-time windows before/after reopening and requires
+identical decrypted captures. A deterministic boundary case proves that a
+rate-limited request can select two of three stored captures while all three
+survive reopening. Production sampling/storage code is unchanged. The focused
+spool/sampler set passes 12 tests; this correction preserves strict persistence
+checks instead of relaxing the count assertion.
