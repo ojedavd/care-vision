@@ -3,8 +3,10 @@
 Open [the three-episode data view](https://dqi6ba1tz68v1.cloudfront.net/trials/)
 directly, or select **Episode evidence** on the
 [CARE-Vision home page](https://dqi6ba1tz68v1.cloudfront.net/). No viewer key is
-required. The four-perspective browser walkthrough remains on the home page;
-operator-led technical telemetry is a secondary link in its footer.
+required. [Caregiver → Recorded episodes](https://dqi6ba1tz68v1.cloudfront.net/#caregiver)
+uses the same public data in a focused outcome review. How it works, Family and
+Operations retain illustrative scenarios; operator-led technical telemetry is a
+secondary link in the footer.
 
 ## What to inspect
 
@@ -31,6 +33,37 @@ local pose estimates are not original transmitted JPEG results, were not part of
 the historical agent input and are not a Graviton/COOL benchmark. The displayed
 cloud processing times exclude that later presentation work. Sitting reuses the
 original cloud pose; its episode closure remains explicitly a controller replay.
+
+## Caregiver review
+
+Caregiver opens **Recorded episodes** by default. Select an episode to inspect
+its outcome, then use **From start**, **Play from here**, speed, the time slider
+and milestone buttons. The body pose is centered on the saved person coordinates
+on a neutral background; **Detection box** is optional. The right panel separates
+the selected controller state, original recorded state, open/closed episode, test
+alert and external notification status. Sitting preserves replay versus original
+state at every selected time.
+
+**Scenario walkthrough** is a separate illustrative mode with simulated review
+ownership. Its buttons do not assign a real caregiver, deliver a message, modify
+the historical episode data or resolve the controller state. Switching workspaces,
+evidence modes or hiding the browser tab pauses playback. No fresh observations
+or inference are produced by this review.
+
+The public presentation source is in `src/care_vision/public_demo/`. Build its
+three data-free assets into a new directory with:
+
+```sh
+python3 tools/build_public_demo.py /tmp/care-vision-public-demo
+node --test tests/test_public_demo.js
+node --check /tmp/care-vision-public-demo/site/app.js
+```
+
+The build emits HTML, CSS, bundled JavaScript and a hash manifest. It does not
+read recordings or include personal episode exports in the repository. On the
+host, `/trials/data.js` is supplied separately as the existing reviewed public
+export. If it is unavailable, Caregiver shows an explicit unavailable state.
+The build does not deploy, open a camera or contact AWS.
 
 ## Public and private material
 
