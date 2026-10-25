@@ -397,3 +397,57 @@ the same development recording produced 1,500 captures, 140 sent/received/proces
 139 person observations, 132 successful pose samples, 2 causal cycles and final
 NORMAL, with no recorded session/pose errors. The two trials remain separate.
 This repeat still uses standard OpenCV and does not validate another Graviton.
+
+## 25 October — Judge review paths and explicit seated-profile reproduction
+
+The README now starts with the online demonstration and local quick start,
+distinguishes illustrative scenarios, saved trial playback and operator-led live
+telemetry, and separates the demonstrated JPEG seated profile from the historical
+WebP regression. It retains one illustrated architecture figure. The approved
+proposal figure was added to the Devpost gallery with a caption identifying its
+integrations and 80–95% reduction as targets, not measured results; the original
+video and five gallery entries remain. The figure files themselves are unchanged.
+
+The own-Graviton Lab startup profile now accepts an optional positive finite
+`seated_closure_seconds`. It defaults off. Enabling it selects the existing cloud
+controller option and disables pose-driven ROI actions, matching the demonstrated
+full-frame closure profile. Native COOL, model/source checks and current reviewed
+scene context precede input; worker readiness must report the requested duration
+and pose mode before a tunnel is opened. The local passive-pose reference keeps
+closure off and the UI explains the difference. No controller threshold, decision
+gate, transport protocol or Edge/AWS responsibility was changed.
+
+Focused profile/closure/reopening/geometry/shutdown tests: 120 passed. A separate
+broader invocation passed 44 cases and failed one historical reference-posture
+test because its private archived baseline is absent from this public checkout;
+that failure is not hidden or reported as a green full suite. Ruff and JS syntax
+checks pass. New launcher tests use simulated remote verification/readiness;
+no new Graviton or physical-camera acceptance is claimed.
+
+Browser verification of a generated local run: 1,020 captures, 304 live plus 93
+historical frames, 397 sent/received/processed observations, two causal cycles,
+buffer verified and final NORMAL. This is synthetic motion evidence on standard
+OpenCV, not person/fall or COOL validation. Normal completion now displays
+`Session finished · stream closed`, retaining historical samples without calling
+them a current network outage. The primary-button hover rule was found to replace
+the mint background while keeping dark text; explicit primary hover colors fix
+that contrast problem. The ready button is visible again after completion.
+
+The public CloudFront entry now highlights recorded evidence first, uses
+`How it works` for the illustrated workspace and moves technical telemetry to
+the footer. The existing trial recordings remain authenticated pending the
+owner's replacement recordings. Static entry assets were updated with backup,
+without service restart or a new AWS worker. The private-media gate remains active.
+Devpost remains a draft; no competition submission or terms acceptance was made.
+Private verification artifacts: `artifacts/judge-review-clarity-20261025/`.
+
+Initial GitHub validation passed on the branch but failed on the pull-request run
+in `test_video_source_retains_offline_samples_across_restart` (4 selected vs 5
+stored captures). The durability assertion had used a new 30 FPS selection grid;
+two 2 FPS-retained captures can straddle a grid boundary less than 1/30 s apart.
+The test now reads exact capture-time windows before/after reopening and requires
+identical decrypted captures. A deterministic boundary case proves that a
+rate-limited request can select two of three stored captures while all three
+survive reopening. Production sampling/storage code is unchanged. The focused
+spool/sampler set passes 12 tests; this correction preserves strict persistence
+checks instead of relaxing the count assertion.

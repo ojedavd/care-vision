@@ -35,6 +35,7 @@ REASONS = {
     'episode_resolved': 'Sustained recovery evidence resolved the experimental episode.',
     'reference_posture_recovered': 'The tracked person sustained their reference posture.',
     'recovery_observed': 'Sustained same-track reference posture supports experimental recovery.',
+    'experimental_seated_closure': 'Sustained seated pose resolved the posture-change episode.',
 }
 
 
@@ -102,6 +103,7 @@ class VisionTelemetry(Projection):
                 'source_verified': row.get('source_verified') is True,
                 'context_status': row.get('context_status') if row.get('context_status')
                 in {'current', 'unknown', 'changed'} else 'unknown',
+                'seated_closure_seconds': number(row.get('seated_closure_seconds')),
             }
         elif event == 'pose_shadow':
             self.last_pose = time.monotonic()

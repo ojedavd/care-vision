@@ -73,20 +73,57 @@ def test_video_source_retains_offline_samples_across_restart(tmp_path):
     assert len(frames) == source.count
     capture_seconds = (frames[-1].mono_ns - frames[0].mono_ns) / 1e9
     assert 3 <= before["spool_frames"] <= math.ceil(2 * capture_seconds) + 2
+    # select() resamples on a fresh FPS grid. Two retained captures can straddle
+    # the 2 FPS grid boundary less than 1/30 s apart, so a 30 FPS range request
+    # need not return every stored capture. Exact windows check persistence.
+    persisted = tuple(
+        item for frame in frames
+        for item in source.spool.select(frame.mono_ns, frame.mono_ns + 1, 30)
+    )
+    assert len(persisted) == before["spool_frames"]
     boot_id = source.boot_id
     source.close()
 
     resumed = VideoSource(str(video), spool=EncryptedSpool(path, key))
     assert resumed.boot_id == boot_id and resumed.count == 60
-    retained = resumed.spool.select(
-        before["spool_oldest_mono_ns"], before["spool_newest_mono_ns"] + 1, 30
+    retained = tuple(
+        item for frame in persisted
+        for item in resumed.spool.select(frame.mono_ns, frame.mono_ns + 1, 30)
     )
-    assert len(retained) == before["spool_frames"]
+    assert retained == persisted
     resumed.start()
     resumed.thread.join(timeout=5)
     assert resumed.done and resumed.error is None and resumed.count == 120
     assert resumed.buffer_status()["spool_frames"] > before["spool_frames"]
     resumed.close()
+
+
+def test_grid_boundary_samples_survive_reopen_independently_of_resampling(tmp_path):
+    path, key = tmp_path / "private", bytes(range(32))
+    start = (time.monotonic_ns() // 1_000_000_000 - 2) * 1_000_000_000
+    captures = tuple(
+        Capture(seq, start + offset, "2026-09-23T00:00:00Z", b"synthetic-jpeg")
+        for seq, offset in enumerate((499_000_000, 501_000_000, 1_001_000_000), 1)
+    )
+    spool = EncryptedSpool(path, key)
+    try:
+        for capture in captures:
+            assert spool.append(capture, retain=True)
+        assert spool.status()["spool_frames"] == 3
+        selected = spool.select(captures[0].mono_ns, captures[-1].mono_ns + 1, 30)
+        assert [item.seq for item in selected] == [1, 3]
+    finally:
+        spool.close()
+    reopened = EncryptedSpool(path, key)
+    try:
+        restored = tuple(
+            item for frame in captures
+            for item in reopened.select(frame.mono_ns, frame.mono_ns + 1, 30)
+        )
+        assert restored == captures
+        assert reopened.status()["spool_frames"] == 3
+    finally:
+        reopened.close()
 
 
 def test_spool_enforces_byte_and_age_budgets(tmp_path):
