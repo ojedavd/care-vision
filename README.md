@@ -213,7 +213,8 @@ repository, using an absolute output path in a private workspace. No recordings,
 personal images, audio, observations, logs, snapshots, model weights, SDK binaries, keys or
 personal deployment files are distributed here.
 
-The two reviewed architecture diagrams above are the only media exceptions.
+The two reviewed architecture assets in `docs/images/` are the only media exceptions;
+only the illustrated diagram is displayed in this README.
 `.gitignore` excludes private media; source-only checks reject unsupported files,
 media signatures and obvious credentials even if a file is force-added or renamed.
 Install local protection before development:
