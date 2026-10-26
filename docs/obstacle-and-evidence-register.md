@@ -566,3 +566,23 @@ there was no service restart, new worker, inference or camera trial (IDLE to IDL
 Credentials, route wrapper and private inputs were unchanged. README and the
 review guide describe the new defaults. Verification/deployment artifacts:
 `artifacts/family-operations-dashboard-20261025/`.
+
+## 25 October preparation for 26 October - paired study and explicit reconnect review
+
+The paired fixed5/adaptive2-5 study completed 18 replays; 8/9 paired comparisons
+met all gates. Median JPEG/direct CPU reductions are 53.54/53.12% (recovery),
+53.47/53.07% (no recovery) and 47.17/46.61% (sitting). All attempts remain in
+the summaries. One reconnecting adaptive replay missed its test alert and had
+171 locally completed sends vs 160 received/processed; no full equivalence is
+established. Sitting remained UNRESOLVED in both arms. See the
+[report](paired-sensing-20261025.md), [method](paired-sensing-method-20261025.md)
+and [minimized scalar evidence](evidence/paired-sensing-20261025.json).
+
+The new candidate explicitly preserves human-review status after restoration
+without bypassing identity gates. Its separate Graviton controlled-close probe
+compares original 173 received / 172 processed / 1 explicit shutdown drop against
+candidate 170 / 169 / 1. Both retain unlinked identity and no test alerts. Candidate
+review is emitted before fresh evidence, persisted and safely projected. Forty-eight
+focused tests pass; no full-suite, WAN-loss or restored incident-sensitivity claim.
+The production core remains unchanged. The public landing page now shows the
+benchmark and retained failure. See [scope and probe](reconnect-review-20261026.md).

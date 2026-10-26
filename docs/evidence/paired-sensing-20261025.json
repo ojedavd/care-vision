@@ -1,0 +1,3117 @@
+{
+  "study_date_local": "2026-10-25",
+  "source_commit": "f1f55d7a1cc7837001dd5ec9c07c4671e3079f7b",
+  "source_archive_uncompressed_sha256": "52f5c4a84c0cd22df3ed802c83a7a0976f02882b40fd6e34609405a4737da091",
+  "source_sha256": [
+    {
+      "path": "src/care_vision/__init__.py",
+      "sha256": "d2d271db23243dd262153fe8c2d5db87c81629a7400a7c1d3de7fd111024968b"
+    },
+    {
+      "path": "src/care_vision/adaptive_evaluation.py",
+      "sha256": "7b7a323d3bf581d01d2c86eab102fa67f5045cd8ebd9a1c11fa959f854c14753"
+    },
+    {
+      "path": "src/care_vision/aws_demo.py",
+      "sha256": "e195b332efac8847813d497c5f70885cad788cb89d3117d44b44f1617249a6bb"
+    },
+    {
+      "path": "src/care_vision/check_history_delivery.py",
+      "sha256": "26eba7e45a37bf1332bffbe4268fdd568f29522919762080932e76223e791645"
+    },
+    {
+      "path": "src/care_vision/check_loop.py",
+      "sha256": "f191c42d47361c0a6f01f69d10824ba1b5b0b1c796206083f1c3d7be7a99f361"
+    },
+    {
+      "path": "src/care_vision/check_resolution.py",
+      "sha256": "fe2780d5868eaa277779ab9ced7bc7827e636643702ef8a4fa2148996550f9a3"
+    },
+    {
+      "path": "src/care_vision/check_roi.py",
+      "sha256": "0968b7f7d21600b19872899ea11f8a121aa7feba91eb2cad3d0029d60f42e612"
+    },
+    {
+      "path": "src/care_vision/check_states.py",
+      "sha256": "b8bca76634338f8abb639447239edf5e670429ac362f68130cf30ebec4ebc6cc"
+    },
+    {
+      "path": "src/care_vision/check_trajectory.py",
+      "sha256": "1ba2d9ff708abbea589392e89906df0987fa87e204d052382c1ffa32671ed569"
+    },
+    {
+      "path": "src/care_vision/checkin.py",
+      "sha256": "ac5d795d67eb40071864c8acc704e8b1f3f9b7e4fc9a2b7c8628addf1e340343"
+    },
+    {
+      "path": "src/care_vision/cloud/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "src/care_vision/cloud/__main__.py",
+      "sha256": "b5bba9ad13aaedcb71c12840e041c67745a37c536c092e0722e1451b19220365"
+    },
+    {
+      "path": "src/care_vision/cloud/accumulated_descent.py",
+      "sha256": "1303d83f69adedba784f55575fd0ee14831c8e2f0e29aa615410d6fa115007a1"
+    },
+    {
+      "path": "src/care_vision/cloud/context_association.py",
+      "sha256": "9e7619760f80bf02ebdc3ed95b9c77d623b105cc2a8101bbc538d1dd79647f0c"
+    },
+    {
+      "path": "src/care_vision/cloud/controller.py",
+      "sha256": "dc4629ac8096492687889ad46bf3f8b8681c7554aa0b67b5dc425fb92fb81e88"
+    },
+    {
+      "path": "src/care_vision/cloud/episode_store.py",
+      "sha256": "c0b05a22813d2b20d1c1d5a9a859d2072abe28f47704812cf70d31d5e26c776a"
+    },
+    {
+      "path": "src/care_vision/cloud/event_context.py",
+      "sha256": "2c29bff0022ac043c89116220794bdc20a8eda2326c67bbb128930d3164dbc24"
+    },
+    {
+      "path": "src/care_vision/cloud/history.py",
+      "sha256": "8acca75e93e9ebe5175770a00a2f231320049047debd7313057898ab829235b5"
+    },
+    {
+      "path": "src/care_vision/cloud/incident_evidence.py",
+      "sha256": "477e70a540adece7db963bc0e6cda862a8da67115b999ec23c0ce9f76ebe0f84"
+    },
+    {
+      "path": "src/care_vision/cloud/loss_probe.py",
+      "sha256": "e62d3ec1f92d52fb34e2b733fe3a1e1f7678d772f9245c175ae4d88f8d53556e"
+    },
+    {
+      "path": "src/care_vision/cloud/mediapipe_person.py",
+      "sha256": "328ee764971ff573d3d44b002e9961807c3f82cfc5dd55478435ac9d937be29a"
+    },
+    {
+      "path": "src/care_vision/cloud/nanodet.py",
+      "sha256": "5d2e9e08c075ba11f8b80e574430c89d638bdf8528981da129f48b5a7adee6dc"
+    },
+    {
+      "path": "src/care_vision/cloud/occlusion_evidence.py",
+      "sha256": "b2c7f31393d2302c241cdd929d613475158df62346f930a9beb0bc351f0aa896"
+    },
+    {
+      "path": "src/care_vision/cloud/occlusion_fragments.py",
+      "sha256": "2093bce8f014ee49e0ef4b52226edbf345e51a699b959c8de6a3e7acc763f6c8"
+    },
+    {
+      "path": "src/care_vision/cloud/occlusion_roi.py",
+      "sha256": "472511a4bedf058f317d54d8a0a577b286a6cacbffcee5275dca30433bc05f0c"
+    },
+    {
+      "path": "src/care_vision/cloud/person.py",
+      "sha256": "1ff0150f639ef74d27e496a314c7414787bb84e7c174dc0f3ba294f155c2880d"
+    },
+    {
+      "path": "src/care_vision/cloud/pose_actuation.py",
+      "sha256": "a8736a9a2233abe1983b362327675744861024b48959d58e8bed5d869698ad5f"
+    },
+    {
+      "path": "src/care_vision/cloud/pose_evidence.py",
+      "sha256": "714bcefa8a784ece98f46823bc0025510d4a07f4e243e9fffadf7c6835d25f21"
+    },
+    {
+      "path": "src/care_vision/cloud/pose_observation_plan.py",
+      "sha256": "f46c05e8a2b56623eec174c2bf981826d5afafa898ba1d5cf1b01d842974dd56"
+    },
+    {
+      "path": "src/care_vision/cloud/pose_shadow.py",
+      "sha256": "076a828fe5cbc0cf29a76427197387fb13698385124d44724e17a759788acbbf"
+    },
+    {
+      "path": "src/care_vision/cloud/pose_signals.py",
+      "sha256": "adaa3784f760becd25dec531b2209aeaf8600fee16f34f9f9ff0469a020c29bc"
+    },
+    {
+      "path": "src/care_vision/cloud/posture_evidence.py",
+      "sha256": "7e2b25c7906c39ca101bed84e3d1792ead33d23a88ed5da9d382bac58b601729"
+    },
+    {
+      "path": "src/care_vision/cloud/reference_posture.py",
+      "sha256": "967556b592f1e8f17de2d1e3474325446ded06e7a24caee239ae4470d53c7a39"
+    },
+    {
+      "path": "src/care_vision/cloud/rtmpose.py",
+      "sha256": "531461c6101dc551dec683b387a6b0fc394c6fdd5848a55ad79e17e3ebd49ad8"
+    },
+    {
+      "path": "src/care_vision/cloud/seated_candidate.py",
+      "sha256": "e741924aca5dfe746c25c87c4ca9f6eb9fbefc10157e9480efcce4e0e0939fa1"
+    },
+    {
+      "path": "src/care_vision/cloud/seated_pose_candidate.py",
+      "sha256": "e00cafd6025e2733d054ffdbc593b98e3178e943a73ac03f36499b6e82c5e6c7"
+    },
+    {
+      "path": "src/care_vision/cloud/server.py",
+      "sha256": "0224e179a01054437ab3badda8c77116e528b532ee0407abe54432ec9ed56edb"
+    },
+    {
+      "path": "src/care_vision/cloud/source_tracking.py",
+      "sha256": "dca8f638098f293b85a759505bccced15dd0c1b30646025fb12da6abad1d1093"
+    },
+    {
+      "path": "src/care_vision/cloud/temporal_candidate.py",
+      "sha256": "92eb9146c2bdcf09a532497cba0a8067eb40470948cbcfcf9bd2b05bf52a87bb"
+    },
+    {
+      "path": "src/care_vision/cloud/tracking.py",
+      "sha256": "eb387ce4f9be915d0028eb7b30281ade87ed3315a8b7fc2aacfc02684cbfacae"
+    },
+    {
+      "path": "src/care_vision/cloud/trajectory.py",
+      "sha256": "e40586a925574c9bf2b2982108705b26dd8f6382ac8a40853299a1a7b8d83159"
+    },
+    {
+      "path": "src/care_vision/cloud/visibility_probe.py",
+      "sha256": "fd90789aa249cd2cfeaab990365e803982f69b94c41ba1f107751e02235e0012"
+    },
+    {
+      "path": "src/care_vision/cloud/vision.py",
+      "sha256": "1bbfef471a94f584d79fadf899a933e4aefc14e7c316db893b21c669e4b7f618"
+    },
+    {
+      "path": "src/care_vision/cloud/yolox.py",
+      "sha256": "f36c6f046ac954220a4353ab6f775cf4b62a0882dde00ebbaa17fed2f4b0f7e9"
+    },
+    {
+      "path": "src/care_vision/common/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "src/care_vision/common/contracts.py",
+      "sha256": "c6a65c753371c1725fcacfa68a303d251803764227831657be1d836549c33743"
+    },
+    {
+      "path": "src/care_vision/common/cool.py",
+      "sha256": "65abaa54cf610c8ac859d67aa4a977fd8ef25701b46c6c4a11a2e5ded290c066"
+    },
+    {
+      "path": "src/care_vision/common/environment.py",
+      "sha256": "6291fa0c3c48cf7df7c65509e2d0948b2e09dce9181883e43b8eadf22456bee9"
+    },
+    {
+      "path": "src/care_vision/common/history_budget.py",
+      "sha256": "b1c335e06c3d5a23fefea5efc8427bf51de3ba07393c5daad26d3ab46875516b"
+    },
+    {
+      "path": "src/care_vision/common/image_geometry.py",
+      "sha256": "7b8c1b495f4ea7e0d45f773d28766f30f83d3f26b5368c5a1dab74b5ea9147a3"
+    },
+    {
+      "path": "src/care_vision/common/metrics.py",
+      "sha256": "bd4625df8362b7fb6c59232be6b9fd2fa387b1e96d79b69d056d3d7fcbf72a94"
+    },
+    {
+      "path": "src/care_vision/common/resources.py",
+      "sha256": "a113de7a478b26b21b3d198273d1ef461b2504862c903d0194f6c7408c2e9c6d"
+    },
+    {
+      "path": "src/care_vision/common/transport.py",
+      "sha256": "055ecc94a61a69614f6416256e576dbeb109a343f22dfee404a07d27b3c42115"
+    },
+    {
+      "path": "src/care_vision/demo.py",
+      "sha256": "645f218148133b5182bb29a6d1daa2972d92e077c02c2a28dd13fc5641baf58c"
+    },
+    {
+      "path": "src/care_vision/dense_identity_evaluation.py",
+      "sha256": "663ae56568d0a6a591b8e00bf6cd5ccf33ff950dbfb6809243c2dc5081b3f645"
+    },
+    {
+      "path": "src/care_vision/edge/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "src/care_vision/edge/__main__.py",
+      "sha256": "5d272934be68931a5385a7ef0937ec5ce9b765a1f064e0b118d38cc224ea9425"
+    },
+    {
+      "path": "src/care_vision/edge/buffer.py",
+      "sha256": "aa3a8cf20c00d7c3b57d486347892ce0bfb3c462ef18f1f9203ef96a5a669606"
+    },
+    {
+      "path": "src/care_vision/edge/cloud_feedback.py",
+      "sha256": "cf820056c51c339c1cdafb19d26466135af57903777dd320177d7d7eefe312cf"
+    },
+    {
+      "path": "src/care_vision/edge/commands.py",
+      "sha256": "4bf01323b594c7c19511284c4786fbc39e0732ac62586c9712665ffeb8bdb47d"
+    },
+    {
+      "path": "src/care_vision/edge/network.py",
+      "sha256": "db8e2657ef9419095a14dca26721b10855b0f04747105469fe986df7f0f2adaf"
+    },
+    {
+      "path": "src/care_vision/edge/recorded_source.py",
+      "sha256": "4c1e11045202cb0a9488c148030ba678cc316202523aa05e832ff3ab11069534"
+    },
+    {
+      "path": "src/care_vision/edge/representation.py",
+      "sha256": "cf97ada6283ee7ee7ea4ceba4472f8787fc77113d68f388b03f36cd670a6102f"
+    },
+    {
+      "path": "src/care_vision/edge/runtime.py",
+      "sha256": "74d99c6cafc71ddd7107187999717db99f7b75f773d2c0ae52c5216ff8539e96"
+    },
+    {
+      "path": "src/care_vision/edge/sampler.py",
+      "sha256": "b93dc12ec238a19cfdd58aa4bf200a20ef0edaa3b5d6f07a53286de2695df0a0"
+    },
+    {
+      "path": "src/care_vision/edge/source.py",
+      "sha256": "4c78e95310d89c7477db7a077c2e1ffc887641a915680d90662e7b5cf64a88c1"
+    },
+    {
+      "path": "src/care_vision/edge/spool.py",
+      "sha256": "637111e44f74641d441d0d1cad17400daecbff2722d9df7fa4330dd184fa9a8d"
+    },
+    {
+      "path": "src/care_vision/evaluation.py",
+      "sha256": "e87ce2cb78750e80a23ad02ea242b15a4782cb7d2b0364088f6e18df327b94e3"
+    },
+    {
+      "path": "src/care_vision/event_context_evaluation.py",
+      "sha256": "e842a651a12b3db213cab7a0a41f931e5b5f6ba682ee373a76cc52711f161820"
+    },
+    {
+      "path": "src/care_vision/fixture.py",
+      "sha256": "c29444c43dd3f3df9ec5dbb8d56a2945d5a39b7e93918029c1be58d0d21f97ae"
+    },
+    {
+      "path": "src/care_vision/judge/__init__.py",
+      "sha256": "ac894a90d123191afeb8c978adb16a95397d7e17f05993920d11b53cd21980cf"
+    },
+    {
+      "path": "src/care_vision/judge/__main__.py",
+      "sha256": "90541630100b5c13e3024e05c20a6428acaefd9c752248823ba0b916321660ac"
+    },
+    {
+      "path": "src/care_vision/judge/session.py",
+      "sha256": "b3cb60fdd0f2f865342d0c9c6333ae2d5707bef5e258fb9ef6dc5b1ba9e76bd2"
+    },
+    {
+      "path": "src/care_vision/judge/state.py",
+      "sha256": "efb66def1cd8585c1e8c7628b767051086b1a0b8a3dfd76cb887ca349b1ef79b"
+    },
+    {
+      "path": "src/care_vision/lab/__init__.py",
+      "sha256": "e037775ab42e02c2244b1faedb50e1fbd7b1469f07314da23be89fe95c05ca9b"
+    },
+    {
+      "path": "src/care_vision/lab/__main__.py",
+      "sha256": "03eb7d29fec70bed6732b218a3f1ccea7956c0a7b7e9712fb7c3cfa77f345f9b"
+    },
+    {
+      "path": "src/care_vision/lab/cloud_profile.py",
+      "sha256": "ff9a704cd9e09785dcc00dd601fcfbfa6895f4d40ba80004057db069a478612a"
+    },
+    {
+      "path": "src/care_vision/lab/live.py",
+      "sha256": "2a5a8831f7db4febd425404cf3411fa27e04bcaebc22066799ddd16c9decd770"
+    },
+    {
+      "path": "src/care_vision/lab/models.py",
+      "sha256": "a805f6d50c78aee9104c5e0e112a1443eda90fe48d368102b07a12a863a194d7"
+    },
+    {
+      "path": "src/care_vision/lab/pose_config.py",
+      "sha256": "47d5042706b4077042166dbf0fd310029cd3052c7268be13d5ffb36ac39bc75b"
+    },
+    {
+      "path": "src/care_vision/lab/preview.py",
+      "sha256": "f7022f80e3b5b1b9146ecdfb3c74afa4118fba7b559aa8b07f55a763db72258e"
+    },
+    {
+      "path": "src/care_vision/lab/reference.py",
+      "sha256": "8e93de531c6f8cf0ecf24c35d6418cb9455fb6c7c1bcb5aa6f28825729af261e"
+    },
+    {
+      "path": "src/care_vision/lab/remote.py",
+      "sha256": "04d4e337dade1f34dc6086569ab6cd738966eed39caec1764435aae11a89a589"
+    },
+    {
+      "path": "src/care_vision/lab/remote_worker.py",
+      "sha256": "3f43fee83e7ebd11744e77d2bb0901903bb115e5f8c7dfc9abc155bed44b472d"
+    },
+    {
+      "path": "src/care_vision/lab/session.py",
+      "sha256": "f6ab4d77ab4bbf8e0a51e856c89e91f98778400c8397d9732166c8272b4f0689"
+    },
+    {
+      "path": "src/care_vision/lab/telemetry.py",
+      "sha256": "0a3acf55ba03e0f75e058cb30534ccb3301f85113dfb636251a29ff5bb43bf8d"
+    },
+    {
+      "path": "src/care_vision/netem_probe.py",
+      "sha256": "198cb087dd37cea50bd4544b7732ff7f6770892c8a16ea1a338022f85db3db38"
+    },
+    {
+      "path": "src/care_vision/seated_evaluation.py",
+      "sha256": "3f6fa261cda1370cd7d6eb4894bec3701cd42641e020d2904146d3b402411f64"
+    },
+    {
+      "path": "src/care_vision/seated_pose_evaluation.py",
+      "sha256": "0cd5c07a1f5cb4d6d0fcdec7514b8b909652b6852cd79d0443b4736be36524f8"
+    },
+    {
+      "path": "src/care_vision/sequence_evaluation.py",
+      "sha256": "9714688ac315a75fe61f6ea288575a439b738b99dcfff79d97e86ba3f49cc363"
+    },
+    {
+      "path": "src/care_vision/tcp_telemetry.py",
+      "sha256": "3c708f38ed8f226ef33a0ee686cc552711c11be2ae6e2d9777d9d822fd977f53"
+    },
+    {
+      "path": "src/care_vision/temporal_evaluation.py",
+      "sha256": "888a4503c75766f984ba3d84ba38d06c836be502e498ddd5a07e49566770e372"
+    },
+    {
+      "path": "src/care_vision/transport_probe.py",
+      "sha256": "d389a542ed3cfc612097ca6a48cfcf55585d5b3c493f9046e0c3258e2f821770"
+    }
+  ],
+  "execution_harness_sha256": {
+    "paired_cloud.py": "a5e555c0a992c95cd4b33e66e3300b9bfe4e0b7e8af9c702fb13437ef2a1952d",
+    "paired_edge.py": "e27dce5f806a5138f55f227ff56f5a5933e30b19ee4df5a2dc8ef1274b37d230",
+    "run_paired.py": "1f47a346f644982ae9f82d7e897ddbaa826219fc0f07eb673c18cdb5efd745f0",
+    "test_paired_adapter.py": "337c585d1bb39bb038201c0cf9c483583b34124b680310246add4167059ebd62"
+  },
+  "preregistered_plan_sha256": "d3b8934881ee68fc2cfa9e51bbbe2830d52fae8203adafcb578921192c99cf3c",
+  "profile": {
+    "phase": 3,
+    "person_model": "YOLOX-S640",
+    "engine": "CLASSIC",
+    "cv_threads": 8,
+    "strong_confidence": 0.35,
+    "association_confidence": 0.2,
+    "nms": 0.3,
+    "transmitted_resolution": [
+      1280,
+      720
+    ],
+    "encoding": "JPEG80",
+    "fixed_physical_fps": 5,
+    "adaptive_requested_fps": [
+      2,
+      5
+    ],
+    "episode_continuity": true,
+    "test_alert_after_seconds": 20,
+    "pose": false,
+    "roi": false,
+    "seated_closure": false,
+    "sampling_phase_ms": 0,
+    "new_camera": false
+  },
+  "fixed_intervention": "Raw metadata truthfully stays fixed5. A recorded-evaluation adapter projects only the controller's requested-mode FPS label to its logical 2/5 state, clears non-executed pending sensing proposals and logs suppression. It preserves incident/recovery rules, real observations and actual applied IDs. It manufactures no ACK and is not the unmodified deployment transport protocol.",
+  "paired_acceptance": {
+    "same_final_state_and_alert_presence": true,
+    "episode_must_be_exercised": true,
+    "maximum_adaptive_event_delay_seconds": 2.0,
+    "delay_scope": "Provisional engineering comparison against fixed5 for matched recovery/test-alert events, not a calibrated safety requirement or annotated fall latency"
+  },
+  "limits": [
+    "three repeated pairs per each of three known development recordings",
+    "order alternates within pairs; 9 pairs cannot balance first position perfectly",
+    "repetitions assess runtime variation, not independent incidents",
+    "no dense independent ground truth or clinical/fall accuracy claim",
+    "sitting UNRESOLVED is a known limitation of person-only profile, not correct benign classification",
+    "fixed5 uses explicit non-actuating logical-mode evaluation adapter",
+    "no scene/model/threshold tuning after results; retain all attempts",
+    "all cloud work remains on existing Graviton + native COOL; no new AWS resources"
+  ],
+  "expected_behavior": {
+    "recovery": {
+      "state": "NORMAL",
+      "test_alerts": 0,
+      "closure": true
+    },
+    "no-recovery": {
+      "state": "ASSISTANCE_REQUIRED",
+      "test_alerts": 1,
+      "closure": false
+    },
+    "sitting": {
+      "state": "UNRESOLVED",
+      "test_alerts": 0,
+      "closure": false
+    }
+  },
+  "inputs": {
+    "recovery": {
+      "video_sha256": "716aff7333e692309eaef5814cfaf10ce47980a60e4d2ddb1efc348f9d0a4b4f",
+      "captures_sha256": "db63bf44f443a338812b150715bc3b48b9ef89bd2fdcd209f6b5bbf9019a43c7",
+      "capture_count": 1500,
+      "duration_seconds": 59.981275125
+    },
+    "no-recovery": {
+      "video_sha256": "5d647cea0eb24a6604f8424ec04f6e8503898c318aed9e4587d3027c4b7863c4",
+      "captures_sha256": "a3fe0c9deb478b2353cf1af40360fa579d286e0448c4a41654cc04b8161000d8",
+      "capture_count": 1501,
+      "duration_seconds": 59.985127
+    },
+    "sitting": {
+      "video_sha256": "8132f844cb2f60605cdbfc6d6ee09192f8e28ea04cd67e938220617e84f30761",
+      "captures_sha256": "6a7e1e5c0a8c2584435015ed1d7f60d4eb115e2461aae410c9f20e55819cc2df",
+      "capture_count": 1481,
+      "duration_seconds": 59.973765292
+    }
+  },
+  "model_sha256": "c5c2d13e59ae883e6af3b45daea64af4833a4951c92d116ec270d9ddbe998063",
+  "runtime": {
+    "system": "Linux",
+    "machine": "aarch64",
+    "opencv_version": "5.1.0-dev",
+    "python_version": "3.11.14",
+    "numpy": "2.4.6",
+    "websockets": "15.0.1",
+    "instance_type": "m8g.4xlarge",
+    "region": "us-east-1",
+    "cool_native_sha256": "cd6d9cfeefbbb352c4d814c3b52035f27bda6930f241df8bf4dac35b37c60518",
+    "cool_build_sha256": "12740978f31483f2352d9e8b367f4f6053c3bfb58618e2ff42d53443da2a8ec4"
+  },
+  "assessment": {
+    "scope": "Known-development-video rate-policy comparison; not fall accuracy or 30 FPS savings",
+    "complete": true,
+    "runs": [
+      {
+        "case": "recovery",
+        "repetition": 1,
+        "mode": "fixed5",
+        "label": "r1-recovery-fixed5",
+        "checks": {
+          "ledger_identity_reconciled": true,
+          "unique_frame_records": true,
+          "original_metadata_preserved": true,
+          "sent_received_order": true,
+          "capture_order_increases": true,
+          "packed_byte_counters_reconciled": true,
+          "all_frames_processed_without_drops": true,
+          "one_cloud_session": true,
+          "one_controller_final": true,
+          "duplicate_acks_match_original_applied": true,
+          "recording_fully_replayed": true,
+          "source_intervals_preserved": true,
+          "graviton_native_cool_8threads": true,
+          "same_instance_and_native_runtime": true,
+          "shared_incident_profile": true,
+          "classic_requested": true,
+          "no_pose_or_roi": true,
+          "same_full_frame_geometry": true,
+          "no_network_frame_limiting": true,
+          "no_stale_or_session_error": true,
+          "drain_confirmed": true,
+          "worker_stopped": true,
+          "only_test_alerts_no_notification": true,
+          "episode_exercised": true,
+          "actual_rate_labels_preserved": true,
+          "fixed_target_is_5": true,
+          "no_sensing_executed_or_acknowledged": true,
+          "proposals_explicitly_suppressed": true,
+          "actual_applied_ids_unchanged": true
+        },
+        "transport_runtime_passed": true,
+        "expected_behavior": {
+          "expected_final_state": true,
+          "expected_test_alert_count": true,
+          "expected_recovery_closure": true,
+          "horizontal_episode_exercised": true
+        },
+        "known_input_behavior_passed": true,
+        "sent": 300,
+        "received": 300,
+        "processed": 300,
+        "dropped": 0,
+        "live_sent": 300,
+        "historical_sent": 0,
+        "cloud_sessions": 1,
+        "controller_final_records": 1,
+        "connection_errors": 0,
+        "command_retries": 0,
+        "duplicate_ack_records": 0,
+        "jpeg_bytes": 34058133,
+        "packed_application_bytes": 34278789,
+        "achieved_fps_over_source_duration": 5.001560893375555,
+        "target_fps": [
+          5
+        ],
+        "processing_ms": {
+          "median": 75.588764,
+          "min": 74.882763,
+          "max": 148.283025,
+          "p95": 80.828372
+        },
+        "queue_wait_ms": {
+          "median": 0.04649550828617066,
+          "min": 0.03505399217829108,
+          "max": 9.508022994850762,
+          "p95": 0.06230300641618669
+        },
+        "queue_wait_scope": "live observations with measured queue wait; historical rows are excluded",
+        "capture_lateness_ms": {
+          "median": 4.440708,
+          "min": 0.051083,
+          "max": 13.030375,
+          "p95": 5.043666
+        },
+        "final_state": "NORMAL",
+        "episode_open": false,
+        "test_alerts": 0,
+        "event_source_seconds": {
+          "episode_opened": [
+            18.031169417
+          ],
+          "horizontal": [
+            20.031197792
+          ],
+          "recovery": [
+            32.627294
+          ],
+          "test_alert": []
+        },
+        "resources": {
+          "cpu_seconds": 152.058878,
+          "cpu_counter_start_seconds": 0.314052,
+          "cpu_counter_end_seconds": 152.37293,
+          "window_seconds": 59.613176085,
+          "mean_cpu_percent_one_core": 255.07595465671116,
+          "sampled_rss_bytes": {
+            "median": 346611712,
+            "min": 125599744,
+            "max": 346628096,
+            "p95": 346628096
+          },
+          "process_peak_rss_bytes": 345886720,
+          "method": "direct cumulative process CPU counters, first received frame through drain; no billing estimate"
+        },
+        "causal_cycles": [],
+        "suppressed_sensing_proposals": 2,
+        "raw_sha256": {
+          "cloud.jsonl": "3280422246eee8111cd2c179c3ca57231aafaae7481cb61d75c679a57d15cbe6",
+          "edge.jsonl": "9689b7ad9559add8e9640502ae8ba6e0f2a496d5ccfffd2800fcc2cb9db0fa57",
+          "replay-captures.jsonl": "f99817e67b6d83f67af9c5e64ff9aa3dae449ae1b2d97450ed0557250be183b4",
+          "runtime.json": "4123d4ce80baebfc052e76a009743ce4110c8977be979fe340d8a7297addea2e"
+        }
+      },
+      {
+        "case": "recovery",
+        "repetition": 1,
+        "mode": "adaptive",
+        "label": "r1-recovery-adaptive",
+        "checks": {
+          "ledger_identity_reconciled": true,
+          "unique_frame_records": true,
+          "original_metadata_preserved": true,
+          "sent_received_order": true,
+          "capture_order_increases": true,
+          "packed_byte_counters_reconciled": true,
+          "all_frames_processed_without_drops": true,
+          "one_cloud_session": true,
+          "one_controller_final": true,
+          "duplicate_acks_match_original_applied": true,
+          "recording_fully_replayed": true,
+          "source_intervals_preserved": true,
+          "graviton_native_cool_8threads": true,
+          "same_instance_and_native_runtime": true,
+          "shared_incident_profile": true,
+          "classic_requested": true,
+          "no_pose_or_roi": true,
+          "same_full_frame_geometry": true,
+          "no_network_frame_limiting": true,
+          "no_stale_or_session_error": true,
+          "drain_confirmed": true,
+          "worker_stopped": true,
+          "only_test_alerts_no_notification": true,
+          "episode_exercised": true,
+          "actual_rate_labels_preserved": true,
+          "adaptive_2_and_5_exercised": true,
+          "actual_causal_cycles": true,
+          "no_suppression": true
+        },
+        "transport_runtime_passed": true,
+        "expected_behavior": {
+          "expected_final_state": true,
+          "expected_test_alert_count": true,
+          "expected_recovery_closure": true,
+          "horizontal_episode_exercised": true
+        },
+        "known_input_behavior_passed": true,
+        "sent": 140,
+        "received": 140,
+        "processed": 140,
+        "dropped": 0,
+        "live_sent": 140,
+        "historical_sent": 0,
+        "cloud_sessions": 1,
+        "controller_final_records": 1,
+        "connection_errors": 0,
+        "command_retries": 0,
+        "duplicate_ack_records": 0,
+        "jpeg_bytes": 15823557,
+        "packed_application_bytes": 15930021,
+        "achieved_fps_over_source_duration": 2.334061750241926,
+        "target_fps": [
+          2,
+          5
+        ],
+        "processing_ms": {
+          "median": 75.5110905,
+          "min": 75.161731,
+          "max": 136.884406,
+          "p95": 80.879646
+        },
+        "queue_wait_ms": {
+          "median": 0.050677001127041876,
+          "min": 0.034320022678002715,
+          "max": 0.1620620023459196,
+          "p95": 0.06753197521902621
+        },
+        "queue_wait_scope": "live observations with measured queue wait; historical rows are excluded",
+        "capture_lateness_ms": {
+          "median": 4.2607075000000005,
+          "min": 0.036583,
+          "max": 9.051125,
+          "p95": 5.043749
+        },
+        "final_state": "NORMAL",
+        "episode_open": false,
+        "test_alerts": 0,
+        "event_source_seconds": {
+          "episode_opened": [
+            18.031169417
+          ],
+          "horizontal": [
+            20.115136833
+          ],
+          "recovery": [
+            32.911152542
+          ],
+          "test_alert": []
+        },
+        "resources": {
+          "cpu_seconds": 71.11794800000001,
+          "cpu_counter_start_seconds": 0.294367,
+          "cpu_counter_end_seconds": 71.412315,
+          "window_seconds": 59.626001999,
+          "mean_cpu_percent_one_core": 119.27338009547033,
+          "sampled_rss_bytes": {
+            "median": 355213312,
+            "min": 134213632,
+            "max": 355225600,
+            "p95": 355225600
+          },
+          "process_peak_rss_bytes": 354537472,
+          "method": "direct cumulative process CPU counters, first received frame through drain; no billing estimate"
+        },
+        "causal_cycles": [
+          {
+            "type": "SET_TRANSMIT_FPS",
+            "requested_fps": 5,
+            "causal_capture_seq": 452,
+            "effective_from_capture_seq": 459,
+            "later_valid_capture_seq": 464,
+            "passed": true
+          },
+          {
+            "type": "SET_TRANSMIT_FPS",
+            "requested_fps": 2,
+            "causal_capture_seq": 604,
+            "effective_from_capture_seq": 611,
+            "later_valid_capture_seq": 612,
+            "passed": true
+          }
+        ],
+        "suppressed_sensing_proposals": 0,
+        "raw_sha256": {
+          "cloud.jsonl": "704a53db205ecd7ec2fe99f6a121e68ea0b14eb2be61bbb572a11ba105e358c9",
+          "edge.jsonl": "0a18f153d6002e2a448b61842311e478a34e4b21492c670ba4abde9451e603f5",
+          "replay-captures.jsonl": "4101bb0d33e9e40f4a5f6be2d4e85e72004a8b9ee546f82d684dc00c52f05eb4",
+          "runtime.json": "7492952f7056ac0e35f8ca94b4fafb479a8ae07713d96a2c252f151ab635f335"
+        }
+      },
+      {
+        "case": "no-recovery",
+        "repetition": 1,
+        "mode": "adaptive",
+        "label": "r1-no-recovery-adaptive",
+        "checks": {
+          "ledger_identity_reconciled": true,
+          "unique_frame_records": true,
+          "original_metadata_preserved": true,
+          "sent_received_order": true,
+          "capture_order_increases": true,
+          "packed_byte_counters_reconciled": true,
+          "all_frames_processed_without_drops": true,
+          "one_cloud_session": true,
+          "one_controller_final": true,
+          "duplicate_acks_match_original_applied": true,
+          "recording_fully_replayed": true,
+          "source_intervals_preserved": true,
+          "graviton_native_cool_8threads": true,
+          "same_instance_and_native_runtime": true,
+          "shared_incident_profile": true,
+          "classic_requested": true,
+          "no_pose_or_roi": true,
+          "same_full_frame_geometry": true,
+          "no_network_frame_limiting": true,
+          "no_stale_or_session_error": true,
+          "drain_confirmed": true,
+          "worker_stopped": true,
+          "only_test_alerts_no_notification": true,
+          "episode_exercised": true,
+          "actual_rate_labels_preserved": true,
+          "adaptive_2_and_5_exercised": true,
+          "actual_causal_cycles": true,
+          "no_suppression": true
+        },
+        "transport_runtime_passed": true,
+        "expected_behavior": {
+          "expected_final_state": true,
+          "expected_test_alert_count": true,
+          "expected_recovery_closure": true,
+          "horizontal_episode_exercised": true
+        },
+        "known_input_behavior_passed": true,
+        "sent": 140,
+        "received": 140,
+        "processed": 140,
+        "dropped": 0,
+        "live_sent": 140,
+        "historical_sent": 0,
+        "cloud_sessions": 1,
+        "controller_final_records": 1,
+        "connection_errors": 0,
+        "command_retries": 0,
+        "duplicate_ack_records": 0,
+        "jpeg_bytes": 15598441,
+        "packed_application_bytes": 15705007,
+        "achieved_fps_over_source_duration": 2.3339118711876696,
+        "target_fps": [
+          2,
+          5
+        ],
+        "processing_ms": {
+          "median": 75.5144445,
+          "min": 75.103786,
+          "max": 136.211781,
+          "p95": 80.680164
+        },
+        "queue_wait_ms": {
+          "median": 0.05464699643198401,
+          "min": 0.039709004340693355,
+          "max": 0.1901789801195264,
+          "p95": 0.07814998389221728
+        },
+        "queue_wait_scope": "live observations with measured queue wait; historical rows are excluded",
+        "capture_lateness_ms": {
+          "median": 4.397875,
+          "min": 0.038833,
+          "max": 6.581792,
+          "p95": 5.045667
+        },
+        "final_state": "ASSISTANCE_REQUIRED",
+        "episode_open": true,
+        "test_alerts": 1,
+        "event_source_seconds": {
+          "episode_opened": [
+            16.505127125
+          ],
+          "horizontal": [
+            18.38510725
+          ],
+          "recovery": [],
+          "test_alert": [
+            39.86503325
+          ]
+        },
+        "resources": {
+          "cpu_seconds": 71.209246,
+          "cpu_counter_start_seconds": 0.29557999999999995,
+          "cpu_counter_end_seconds": 71.504826,
+          "window_seconds": 59.620718192,
+          "mean_cpu_percent_one_core": 119.43708187258127,
+          "sampled_rss_bytes": {
+            "median": 355160064,
+            "min": 134225920,
+            "max": 355241984,
+            "p95": 355241984
+          },
+          "process_peak_rss_bytes": 354668544,
+          "method": "direct cumulative process CPU counters, first received frame through drain; no billing estimate"
+        },
+        "causal_cycles": [
+          {
+            "type": "SET_TRANSMIT_FPS",
+            "requested_fps": 5,
+            "causal_capture_seq": 414,
+            "effective_from_capture_seq": 422,
+            "later_valid_capture_seq": 422,
+            "passed": true
+          },
+          {
+            "type": "SET_TRANSMIT_FPS",
+            "requested_fps": 2,
+            "causal_capture_seq": 566,
+            "effective_from_capture_seq": 574,
+            "later_valid_capture_seq": 574,
+            "passed": true
+          }
+        ],
+        "suppressed_sensing_proposals": 0,
+        "raw_sha256": {
+          "cloud.jsonl": "f5d97228f7e357efe932c3734dcc59509fe6869c8e28948b155ea48da47aebea",
+          "edge.jsonl": "ae5436928b6990d354d1586e9fb03a215b69634a97aaf39effd62c64052d134b",
+          "replay-captures.jsonl": "9d8f64034e8f5f4c708e1e197847e47f0efdf7995dd766330b744500379c41fe",
+          "runtime.json": "7a2e73d252534156e207934cde6d7ecfcfa7cf7e0e80e402aa62820db74eb932"
+        }
+      },
+      {
+        "case": "no-recovery",
+        "repetition": 1,
+        "mode": "fixed5",
+        "label": "r1-no-recovery-fixed5",
+        "checks": {
+          "ledger_identity_reconciled": true,
+          "unique_frame_records": true,
+          "original_metadata_preserved": true,
+          "sent_received_order": true,
+          "capture_order_increases": true,
+          "packed_byte_counters_reconciled": true,
+          "all_frames_processed_without_drops": true,
+          "one_cloud_session": true,
+          "one_controller_final": true,
+          "duplicate_acks_match_original_applied": true,
+          "recording_fully_replayed": true,
+          "source_intervals_preserved": true,
+          "graviton_native_cool_8threads": true,
+          "same_instance_and_native_runtime": true,
+          "shared_incident_profile": true,
+          "classic_requested": true,
+          "no_pose_or_roi": true,
+          "same_full_frame_geometry": true,
+          "no_network_frame_limiting": true,
+          "no_stale_or_session_error": true,
+          "drain_confirmed": true,
+          "worker_stopped": true,
+          "only_test_alerts_no_notification": true,
+          "episode_exercised": true,
+          "actual_rate_labels_preserved": true,
+          "fixed_target_is_5": true,
+          "no_sensing_executed_or_acknowledged": true,
+          "proposals_explicitly_suppressed": true,
+          "actual_applied_ids_unchanged": true
+        },
+        "transport_runtime_passed": true,
+        "expected_behavior": {
+          "expected_final_state": true,
+          "expected_test_alert_count": true,
+          "expected_recovery_closure": true,
+          "horizontal_episode_exercised": true
+        },
+        "known_input_behavior_passed": true,
+        "sent": 300,
+        "received": 300,
+        "processed": 300,
+        "dropped": 0,
+        "live_sent": 300,
+        "historical_sent": 0,
+        "cloud_sessions": 1,
+        "controller_final_records": 1,
+        "connection_errors": 0,
+        "command_retries": 0,
+        "duplicate_ack_records": 0,
+        "jpeg_bytes": 33527195,
+        "packed_application_bytes": 33747851,
+        "achieved_fps_over_source_duration": 5.001239723973578,
+        "target_fps": [
+          5
+        ],
+        "processing_ms": {
+          "median": 75.369244,
+          "min": 74.947677,
+          "max": 135.328702,
+          "p95": 80.548229
+        },
+        "queue_wait_ms": {
+          "median": 0.04270300269126892,
+          "min": 0.03577800816856325,
+          "max": 66.98505699750967,
+          "p95": 0.055719021474942565
+        },
+        "queue_wait_scope": "live observations with measured queue wait; historical rows are excluded",
+        "capture_lateness_ms": {
+          "median": 4.553833,
+          "min": 0.054125,
+          "max": 5.219125,
+          "p95": 5.045209
+        },
+        "final_state": "ASSISTANCE_REQUIRED",
+        "episode_open": true,
+        "test_alerts": 1,
+        "event_source_seconds": {
+          "episode_opened": [
+            16.021701542
+          ],
+          "horizontal": [
+            18.425190917
+          ],
+          "recovery": [],
+          "test_alert": [
+            40.025132875
+          ]
+        },
+        "resources": {
+          "cpu_seconds": 151.72160999999997,
+          "cpu_counter_start_seconds": 0.29386399999999996,
+          "cpu_counter_end_seconds": 152.01547399999998,
+          "window_seconds": 59.623608863,
+          "mean_cpu_percent_one_core": 254.46566032025655,
+          "sampled_rss_bytes": {
+            "median": 356143104,
+            "min": 134213632,
+            "max": 356143104,
+            "p95": 356143104
+          },
+          "process_peak_rss_bytes": 355459072,
+          "method": "direct cumulative process CPU counters, first received frame through drain; no billing estimate"
+        },
+        "causal_cycles": [],
+        "suppressed_sensing_proposals": 2,
+        "raw_sha256": {
+          "cloud.jsonl": "030b847fa7d4228231d9096d18f7154f8412ddef36f69127d068dde68b7bf352",
+          "edge.jsonl": "85462a12871458a344b3495178e3f26ecc6b70d8fce95b60e7aa06fea0789aa1",
+          "replay-captures.jsonl": "0c224e76a20c14b5fd5f5b571f23404c6a97f2264eacf591a3224dada0b402e6",
+          "runtime.json": "7caa6e88f6806af16225a9a4c2f65071a3dff6e6d8805a226dd10b4ba9df6a62"
+        }
+      },
+      {
+        "case": "sitting",
+        "repetition": 1,
+        "mode": "fixed5",
+        "label": "r1-sitting-fixed5",
+        "checks": {
+          "ledger_identity_reconciled": true,
+          "unique_frame_records": true,
+          "original_metadata_preserved": true,
+          "sent_received_order": true,
+          "capture_order_increases": true,
+          "packed_byte_counters_reconciled": true,
+          "all_frames_processed_without_drops": true,
+          "one_cloud_session": true,
+          "one_controller_final": true,
+          "duplicate_acks_match_original_applied": true,
+          "recording_fully_replayed": true,
+          "source_intervals_preserved": true,
+          "graviton_native_cool_8threads": true,
+          "same_instance_and_native_runtime": true,
+          "shared_incident_profile": true,
+          "classic_requested": true,
+          "no_pose_or_roi": true,
+          "same_full_frame_geometry": true,
+          "no_network_frame_limiting": true,
+          "no_stale_or_session_error": true,
+          "drain_confirmed": true,
+          "worker_stopped": true,
+          "only_test_alerts_no_notification": true,
+          "episode_exercised": true,
+          "actual_rate_labels_preserved": true,
+          "fixed_target_is_5": true,
+          "no_sensing_executed_or_acknowledged": true,
+          "proposals_explicitly_suppressed": true,
+          "actual_applied_ids_unchanged": true
+        },
+        "transport_runtime_passed": true,
+        "expected_behavior": {
+          "expected_final_state": true,
+          "expected_test_alert_count": true,
+          "expected_recovery_closure": true
+        },
+        "known_input_behavior_passed": true,
+        "sent": 300,
+        "received": 300,
+        "processed": 300,
+        "dropped": 0,
+        "live_sent": 300,
+        "historical_sent": 0,
+        "cloud_sessions": 1,
+        "controller_final_records": 1,
+        "connection_errors": 0,
+        "command_retries": 0,
+        "duplicate_ack_records": 0,
+        "jpeg_bytes": 31530622,
+        "packed_application_bytes": 31751277,
+        "achieved_fps_over_source_duration": 5.002187182001352,
+        "target_fps": [
+          5
+        ],
+        "processing_ms": {
+          "median": 75.1597455,
+          "min": 74.800262,
+          "max": 135.07064,
+          "p95": 80.280169
+        },
+        "queue_wait_ms": {
+          "median": 0.04407700907904655,
+          "min": 0.033814983908087015,
+          "max": 24.682255985680968,
+          "p95": 0.061367027228698134
+        },
+        "queue_wait_scope": "live observations with measured queue wait; historical rows are excluded",
+        "capture_lateness_ms": {
+          "median": 4.11975,
+          "min": 0.041708,
+          "max": 6.048166,
+          "p95": 5.042875
+        },
+        "final_state": "UNRESOLVED",
+        "episode_open": true,
+        "test_alerts": 0,
+        "event_source_seconds": {
+          "episode_opened": [
+            15.026491834
+          ],
+          "horizontal": [],
+          "recovery": [],
+          "test_alert": []
+        },
+        "resources": {
+          "cpu_seconds": 151.416017,
+          "cpu_counter_start_seconds": 0.29029499999999997,
+          "cpu_counter_end_seconds": 151.706312,
+          "window_seconds": 59.599541623,
+          "mean_cpu_percent_one_core": 254.0556737127106,
+          "sampled_rss_bytes": {
+            "median": 356110336,
+            "min": 134201344,
+            "max": 356110336,
+            "p95": 356110336
+          },
+          "process_peak_rss_bytes": 355307520,
+          "method": "direct cumulative process CPU counters, first received frame through drain; no billing estimate"
+        },
+        "causal_cycles": [],
+        "suppressed_sensing_proposals": 4,
+        "raw_sha256": {
+          "cloud.jsonl": "a509308088146d7916276f46be1c34170199ec96a1cfa3993a0edb953f8e0f42",
+          "edge.jsonl": "a8dd5d24dfe279a87f153d7a481abe8d9770de62387ffaa59723413163497ac8",
+          "replay-captures.jsonl": "c926f025771f2b0ec1759f4a660e95f9b8033bd20f126160cc3b0a178f59b760",
+          "runtime.json": "9ef81cf8ab85f990c01a23db141699980b77089f32ddc403bb2cba2b12f11e52"
+        }
+      },
+      {
+        "case": "sitting",
+        "repetition": 1,
+        "mode": "adaptive",
+        "label": "r1-sitting-adaptive",
+        "checks": {
+          "ledger_identity_reconciled": true,
+          "unique_frame_records": true,
+          "original_metadata_preserved": true,
+          "sent_received_order": true,
+          "capture_order_increases": true,
+          "packed_byte_counters_reconciled": true,
+          "all_frames_processed_without_drops": true,
+          "one_cloud_session": true,
+          "one_controller_final": true,
+          "duplicate_acks_match_original_applied": true,
+          "recording_fully_replayed": true,
+          "source_intervals_preserved": true,
+          "graviton_native_cool_8threads": true,
+          "same_instance_and_native_runtime": true,
+          "shared_incident_profile": true,
+          "classic_requested": true,
+          "no_pose_or_roi": true,
+          "same_full_frame_geometry": true,
+          "no_network_frame_limiting": true,
+          "no_stale_or_session_error": true,
+          "drain_confirmed": true,
+          "worker_stopped": true,
+          "only_test_alerts_no_notification": true,
+          "episode_exercised": true,
+          "actual_rate_labels_preserved": true,
+          "adaptive_2_and_5_exercised": true,
+          "actual_causal_cycles": true,
+          "no_suppression": true
+        },
+        "transport_runtime_passed": true,
+        "expected_behavior": {
+          "expected_final_state": true,
+          "expected_test_alert_count": true,
+          "expected_recovery_closure": true
+        },
+        "known_input_behavior_passed": true,
+        "sent": 159,
+        "received": 159,
+        "processed": 159,
+        "dropped": 0,
+        "live_sent": 159,
+        "historical_sent": 0,
+        "cloud_sessions": 1,
+        "controller_final_records": 1,
+        "connection_errors": 0,
+        "command_retries": 0,
+        "duplicate_ack_records": 0,
+        "jpeg_bytes": 16656799,
+        "packed_application_bytes": 16778081,
+        "achieved_fps_over_source_duration": 2.651159206460717,
+        "target_fps": [
+          2,
+          5
+        ],
+        "processing_ms": {
+          "median": 75.458449,
+          "min": 75.02605,
+          "max": 137.46241,
+          "p95": 80.726859
+        },
+        "queue_wait_ms": {
+          "median": 0.04544999683275819,
+          "min": 0.03333002678118646,
+          "max": 9.467746975133196,
+          "p95": 0.06514598499052227
+        },
+        "queue_wait_scope": "live observations with measured queue wait; historical rows are excluded",
+        "capture_lateness_ms": {
+          "median": 4.373375,
+          "min": 0.029208,
+          "max": 10.44625,
+          "p95": 5.04575
+        },
+        "final_state": "UNRESOLVED",
+        "episode_open": true,
+        "test_alerts": 0,
+        "event_source_seconds": {
+          "episode_opened": [
+            15.50651725
+          ],
+          "horizontal": [],
+          "recovery": [],
+          "test_alert": []
+        },
+        "resources": {
+          "cpu_seconds": 80.847048,
+          "cpu_counter_start_seconds": 0.293374,
+          "cpu_counter_end_seconds": 81.140422,
+          "window_seconds": 59.605449111,
+          "mean_cpu_percent_one_core": 135.63700837056513,
+          "sampled_rss_bytes": {
+            "median": 354996224,
+            "min": 134017024,
+            "max": 355028992,
+            "p95": 355028992
+          },
+          "process_peak_rss_bytes": 354254848,
+          "method": "direct cumulative process CPU counters, first received frame through drain; no billing estimate"
+        },
+        "causal_cycles": [
+          {
+            "type": "SET_TRANSMIT_FPS",
+            "requested_fps": 5,
+            "causal_capture_seq": 389,
+            "effective_from_capture_seq": 396,
+            "later_valid_capture_seq": 396,
+            "passed": true
+          },
+          {
+            "type": "SET_TRANSMIT_FPS",
+            "requested_fps": 2,
+            "causal_capture_seq": 541,
+            "effective_from_capture_seq": 549,
+            "later_valid_capture_seq": 549,
+            "passed": true
+          },
+          {
+            "type": "SET_TRANSMIT_FPS",
+            "requested_fps": 5,
+            "causal_capture_seq": 1144,
+            "effective_from_capture_seq": 1151,
+            "later_valid_capture_seq": 1157,
+            "passed": true
+          },
+          {
+            "type": "SET_TRANSMIT_FPS",
+            "requested_fps": 2,
+            "causal_capture_seq": 1282,
+            "effective_from_capture_seq": 1289,
+            "later_valid_capture_seq": 1289,
+            "passed": true
+          }
+        ],
+        "suppressed_sensing_proposals": 0,
+        "raw_sha256": {
+          "cloud.jsonl": "6f6e00c88a95a3e7baa4b1825258252443313a9f11247e743e86b1b1bd30daed",
+          "edge.jsonl": "6a7e29c737b2d1369bd83e5fa4a80378d76bff7b7f7f6c1ad100fea7723ca43a",
+          "replay-captures.jsonl": "737c78a0a0611133d731513aa086b800bf8405096638be394aa83bae12823eff",
+          "runtime.json": "999c161b2e804ad38eeba7cfe0c3f90fc40b685125721761afcb9c3f4e01901f"
+        }
+      },
+      {
+        "case": "recovery",
+        "repetition": 2,
+        "mode": "adaptive",
+        "label": "r2-recovery-adaptive",
+        "checks": {
+          "ledger_identity_reconciled": true,
+          "unique_frame_records": true,
+          "original_metadata_preserved": true,
+          "sent_received_order": true,
+          "capture_order_increases": true,
+          "packed_byte_counters_reconciled": true,
+          "all_frames_processed_without_drops": true,
+          "one_cloud_session": true,
+          "one_controller_final": true,
+          "duplicate_acks_match_original_applied": true,
+          "recording_fully_replayed": true,
+          "source_intervals_preserved": true,
+          "graviton_native_cool_8threads": true,
+          "same_instance_and_native_runtime": true,
+          "shared_incident_profile": true,
+          "classic_requested": true,
+          "no_pose_or_roi": true,
+          "same_full_frame_geometry": true,
+          "no_network_frame_limiting": true,
+          "no_stale_or_session_error": true,
+          "drain_confirmed": true,
+          "worker_stopped": true,
+          "only_test_alerts_no_notification": true,
+          "episode_exercised": true,
+          "actual_rate_labels_preserved": true,
+          "adaptive_2_and_5_exercised": true,
+          "actual_causal_cycles": true,
+          "no_suppression": true
+        },
+        "transport_runtime_passed": true,
+        "expected_behavior": {
+          "expected_final_state": true,
+          "expected_test_alert_count": true,
+          "expected_recovery_closure": true,
+          "horizontal_episode_exercised": true
+        },
+        "known_input_behavior_passed": true,
+        "sent": 140,
+        "received": 140,
+        "processed": 140,
+        "dropped": 0,
+        "live_sent": 140,
+        "historical_sent": 0,
+        "cloud_sessions": 1,
+        "controller_final_records": 1,
+        "connection_errors": 0,
+        "command_retries": 0,
+        "duplicate_ack_records": 0,
+        "jpeg_bytes": 15823591,
+        "packed_application_bytes": 15930055,
+        "achieved_fps_over_source_duration": 2.334061750241926,
+        "target_fps": [
+          2,
+          5
+        ],
+        "processing_ms": {
+          "median": 75.9348075,
+          "min": 75.564694,
+          "max": 135.964664,
+          "p95": 81.090181
+        },
+        "queue_wait_ms": {
+          "median": 0.050502989324741066,
+          "min": 0.035617995308712125,
+          "max": 0.14172302326187491,
+          "p95": 0.06618400220759213
+        },
+        "queue_wait_scope": "live observations with measured queue wait; historical rows are excluded",
+        "capture_lateness_ms": {
+          "median": 4.267896,
+          "min": 0.054792,
+          "max": 31.060583,
+          "p95": 5.047
+        },
+        "final_state": "NORMAL",
+        "episode_open": false,
+        "test_alerts": 0,
+        "event_source_seconds": {
+          "episode_opened": [
+            18.031169417
+          ],
+          "horizontal": [
+            20.115136833
+          ],
+          "recovery": [
+            32.911152542
+          ],
+          "test_alert": []
+        },
+        "resources": {
+          "cpu_seconds": 71.609661,
+          "cpu_counter_start_seconds": 0.289128,
+          "cpu_counter_end_seconds": 71.89878900000001,
+          "window_seconds": 59.616891349,
+          "mean_cpu_percent_one_core": 120.11639550407583,
+          "sampled_rss_bytes": {
+            "median": 355188736,
+            "min": 134201344,
+            "max": 355213312,
+            "p95": 355213312
+          },
+          "process_peak_rss_bytes": 354385920,
+          "method": "direct cumulative process CPU counters, first received frame through drain; no billing estimate"
+        },
+        "causal_cycles": [
+          {
+            "type": "SET_TRANSMIT_FPS",
+            "requested_fps": 5,
+            "causal_capture_seq": 452,
+            "effective_from_capture_seq": 459,
+            "later_valid_capture_seq": 464,
+            "passed": true
+          },
+          {
+            "type": "SET_TRANSMIT_FPS",
+            "requested_fps": 2,
+            "causal_capture_seq": 604,
+            "effective_from_capture_seq": 611,
+            "later_valid_capture_seq": 612,
+            "passed": true
+          }
+        ],
+        "suppressed_sensing_proposals": 0,
+        "raw_sha256": {
+          "cloud.jsonl": "d50d7447b02fda2f1c24b6aa16cb54502bfcf1154e103c28dea6897e07789000",
+          "edge.jsonl": "451d7d7c6a763d4841634c3c7b37e3093efc5e4dff6bb5d568a15a1df54953d6",
+          "replay-captures.jsonl": "6a8c457a7e008dbb4cc95f4630107e3553a11be98480d9cf6d355c2aa3b554bc",
+          "runtime.json": "0368a74d4654bd266344401f4146b364e724ec4ac61d075414def1cf31896626"
+        }
+      },
+      {
+        "case": "recovery",
+        "repetition": 2,
+        "mode": "fixed5",
+        "label": "r2-recovery-fixed5",
+        "checks": {
+          "ledger_identity_reconciled": true,
+          "unique_frame_records": true,
+          "original_metadata_preserved": true,
+          "sent_received_order": true,
+          "capture_order_increases": true,
+          "packed_byte_counters_reconciled": true,
+          "all_frames_processed_without_drops": true,
+          "one_cloud_session": true,
+          "one_controller_final": true,
+          "duplicate_acks_match_original_applied": true,
+          "recording_fully_replayed": true,
+          "source_intervals_preserved": true,
+          "graviton_native_cool_8threads": true,
+          "same_instance_and_native_runtime": true,
+          "shared_incident_profile": true,
+          "classic_requested": true,
+          "no_pose_or_roi": true,
+          "same_full_frame_geometry": true,
+          "no_network_frame_limiting": true,
+          "no_stale_or_session_error": true,
+          "drain_confirmed": true,
+          "worker_stopped": true,
+          "only_test_alerts_no_notification": true,
+          "episode_exercised": true,
+          "actual_rate_labels_preserved": true,
+          "fixed_target_is_5": true,
+          "no_sensing_executed_or_acknowledged": true,
+          "proposals_explicitly_suppressed": true,
+          "actual_applied_ids_unchanged": true
+        },
+        "transport_runtime_passed": true,
+        "expected_behavior": {
+          "expected_final_state": true,
+          "expected_test_alert_count": true,
+          "expected_recovery_closure": true,
+          "horizontal_episode_exercised": true
+        },
+        "known_input_behavior_passed": true,
+        "sent": 300,
+        "received": 300,
+        "processed": 300,
+        "dropped": 0,
+        "live_sent": 300,
+        "historical_sent": 0,
+        "cloud_sessions": 1,
+        "controller_final_records": 1,
+        "connection_errors": 0,
+        "command_retries": 0,
+        "duplicate_ack_records": 0,
+        "jpeg_bytes": 34058133,
+        "packed_application_bytes": 34278789,
+        "achieved_fps_over_source_duration": 5.001560893375555,
+        "target_fps": [
+          5
+        ],
+        "processing_ms": {
+          "median": 75.70707200000001,
+          "min": 75.163333,
+          "max": 137.569542,
+          "p95": 80.91615
+        },
+        "queue_wait_ms": {
+          "median": 0.04948700370732695,
+          "min": 0.03502401523292065,
+          "max": 69.84986198949628,
+          "p95": 0.06868501077406108
+        },
+        "queue_wait_scope": "live observations with measured queue wait; historical rows are excluded",
+        "capture_lateness_ms": {
+          "median": 4.3625415,
+          "min": 0.058166,
+          "max": 6.091667,
+          "p95": 5.043791
+        },
+        "final_state": "NORMAL",
+        "episode_open": false,
+        "test_alerts": 0,
+        "event_source_seconds": {
+          "episode_opened": [
+            18.031169417
+          ],
+          "horizontal": [
+            20.031197792
+          ],
+          "recovery": [
+            32.627294
+          ],
+          "test_alert": []
+        },
+        "resources": {
+          "cpu_seconds": 152.265306,
+          "cpu_counter_start_seconds": 0.29301699999999997,
+          "cpu_counter_end_seconds": 152.558323,
+          "window_seconds": 61.886390929,
+          "mean_cpu_percent_one_core": 246.0400480853512,
+          "sampled_rss_bytes": {
+            "median": 355233792.0,
+            "min": 134217728,
+            "max": 355250176,
+            "p95": 355250176
+          },
+          "process_peak_rss_bytes": 354402304,
+          "method": "direct cumulative process CPU counters, first received frame through drain; no billing estimate"
+        },
+        "causal_cycles": [],
+        "suppressed_sensing_proposals": 2,
+        "raw_sha256": {
+          "cloud.jsonl": "e7eac275560753625db4e7f30f3e4b8eeb63fdf5122ccd78ddc2bcdaeabca885",
+          "edge.jsonl": "d6c5f6dbc25f35c02fd4b912e741b8fc6bc88fb7a807f48c859378198f6f0342",
+          "replay-captures.jsonl": "741d592560cb20cc8f4805af6519c7bc5f27f668742926d5f9c96225f434e075",
+          "runtime.json": "3e67d23382bc73d65918e999b8bf9ce21a4c9b89a80ac9e0c07b579d01455070"
+        }
+      },
+      {
+        "case": "no-recovery",
+        "repetition": 2,
+        "mode": "fixed5",
+        "label": "r2-no-recovery-fixed5",
+        "checks": {
+          "ledger_identity_reconciled": true,
+          "unique_frame_records": true,
+          "original_metadata_preserved": true,
+          "sent_received_order": true,
+          "capture_order_increases": true,
+          "packed_byte_counters_reconciled": true,
+          "all_frames_processed_without_drops": true,
+          "one_cloud_session": true,
+          "one_controller_final": true,
+          "duplicate_acks_match_original_applied": true,
+          "recording_fully_replayed": true,
+          "source_intervals_preserved": true,
+          "graviton_native_cool_8threads": true,
+          "same_instance_and_native_runtime": true,
+          "shared_incident_profile": true,
+          "classic_requested": true,
+          "no_pose_or_roi": true,
+          "same_full_frame_geometry": true,
+          "no_network_frame_limiting": true,
+          "no_stale_or_session_error": true,
+          "drain_confirmed": true,
+          "worker_stopped": true,
+          "only_test_alerts_no_notification": true,
+          "episode_exercised": true,
+          "actual_rate_labels_preserved": true,
+          "fixed_target_is_5": true,
+          "no_sensing_executed_or_acknowledged": true,
+          "proposals_explicitly_suppressed": true,
+          "actual_applied_ids_unchanged": true
+        },
+        "transport_runtime_passed": true,
+        "expected_behavior": {
+          "expected_final_state": true,
+          "expected_test_alert_count": true,
+          "expected_recovery_closure": true,
+          "horizontal_episode_exercised": true
+        },
+        "known_input_behavior_passed": true,
+        "sent": 300,
+        "received": 300,
+        "processed": 300,
+        "dropped": 0,
+        "live_sent": 300,
+        "historical_sent": 0,
+        "cloud_sessions": 1,
+        "controller_final_records": 1,
+        "connection_errors": 0,
+        "command_retries": 0,
+        "duplicate_ack_records": 0,
+        "jpeg_bytes": 33527195,
+        "packed_application_bytes": 33747851,
+        "achieved_fps_over_source_duration": 5.001239723973578,
+        "target_fps": [
+          5
+        ],
+        "processing_ms": {
+          "median": 75.4777225,
+          "min": 75.151,
+          "max": 135.703787,
+          "p95": 80.630483
+        },
+        "queue_wait_ms": {
+          "median": 0.04483149677980691,
+          "min": 0.03457599086686969,
+          "max": 0.15119899762794375,
+          "p95": 0.05728300311602652
+        },
+        "queue_wait_scope": "live observations with measured queue wait; historical rows are excluded",
+        "capture_lateness_ms": {
+          "median": 4.166709,
+          "min": 0.051125,
+          "max": 5.505917,
+          "p95": 5.0455
+        },
+        "final_state": "ASSISTANCE_REQUIRED",
+        "episode_open": true,
+        "test_alerts": 1,
+        "event_source_seconds": {
+          "episode_opened": [
+            16.021701542
+          ],
+          "horizontal": [
+            18.425190917
+          ],
+          "recovery": [],
+          "test_alert": [
+            40.025132875
+          ]
+        },
+        "resources": {
+          "cpu_seconds": 151.97833400000002,
+          "cpu_counter_start_seconds": 0.290833,
+          "cpu_counter_end_seconds": 152.269167,
+          "window_seconds": 59.611683537,
+          "mean_cpu_percent_one_core": 254.9472267557576,
+          "sampled_rss_bytes": {
+            "median": 355217408,
+            "min": 134209536,
+            "max": 355254272,
+            "p95": 355237888
+          },
+          "process_peak_rss_bytes": 354574336,
+          "method": "direct cumulative process CPU counters, first received frame through drain; no billing estimate"
+        },
+        "causal_cycles": [],
+        "suppressed_sensing_proposals": 2,
+        "raw_sha256": {
+          "cloud.jsonl": "48e42d74371a27234e04630fe454e5fce1dbca93c1d8943966e939b0051d91f3",
+          "edge.jsonl": "26bdd4dd92195fc200b47f32bdbe7a97afcbf34e5d3959b068ad93b383718ef6",
+          "replay-captures.jsonl": "36fcfa4655b69b21d7a8365388b47f6db22f4bf4b22ea996e341d78736e96fb3",
+          "runtime.json": "7bf1716ae85eb076770d3c3f94f172db0acec2aca604f1d443c31f6a09b15595"
+        }
+      },
+      {
+        "case": "no-recovery",
+        "repetition": 2,
+        "mode": "adaptive",
+        "label": "r2-no-recovery-adaptive",
+        "checks": {
+          "ledger_identity_reconciled": false,
+          "unique_frame_records": true,
+          "original_metadata_preserved": true,
+          "sent_received_order": false,
+          "capture_order_increases": true,
+          "packed_byte_counters_reconciled": true,
+          "all_frames_processed_without_drops": false,
+          "one_cloud_session": false,
+          "one_controller_final": false,
+          "duplicate_acks_match_original_applied": true,
+          "recording_fully_replayed": true,
+          "source_intervals_preserved": true,
+          "graviton_native_cool_8threads": true,
+          "same_instance_and_native_runtime": true,
+          "shared_incident_profile": true,
+          "classic_requested": true,
+          "no_pose_or_roi": true,
+          "same_full_frame_geometry": true,
+          "no_network_frame_limiting": true,
+          "no_stale_or_session_error": false,
+          "drain_confirmed": true,
+          "worker_stopped": true,
+          "only_test_alerts_no_notification": true,
+          "episode_exercised": true,
+          "actual_rate_labels_preserved": true,
+          "adaptive_2_and_5_exercised": true,
+          "actual_causal_cycles": false,
+          "no_suppression": true
+        },
+        "transport_runtime_passed": false,
+        "expected_behavior": {
+          "expected_final_state": false,
+          "expected_test_alert_count": false,
+          "expected_recovery_closure": true,
+          "horizontal_episode_exercised": true
+        },
+        "known_input_behavior_passed": false,
+        "sent": 171,
+        "received": 160,
+        "processed": 160,
+        "dropped": 0,
+        "live_sent": 152,
+        "historical_sent": 19,
+        "cloud_sessions": 2,
+        "controller_final_records": 2,
+        "connection_errors": 2,
+        "command_retries": 0,
+        "duplicate_ack_records": 0,
+        "jpeg_bytes": 19052383,
+        "packed_application_bytes": 19180514,
+        "achieved_fps_over_source_duration": 2.8507066426649392,
+        "target_fps": [
+          2,
+          5
+        ],
+        "processing_ms": {
+          "median": 75.3722135,
+          "min": 74.35548,
+          "max": 141.894892,
+          "p95": 111.246856
+        },
+        "queue_wait_ms": {
+          "median": 0.054208998335525393,
+          "min": 0.036622019251808524,
+          "max": 116.25573900528252,
+          "p95": 0.08747601532377303
+        },
+        "queue_wait_scope": "live observations with measured queue wait; historical rows are excluded",
+        "capture_lateness_ms": {
+          "median": 4.260959,
+          "min": 0.042625,
+          "max": 5.307292,
+          "p95": 5.048376
+        },
+        "final_state": "VERIFYING",
+        "episode_open": true,
+        "test_alerts": 0,
+        "event_source_seconds": {
+          "episode_opened": [
+            16.505127125
+          ],
+          "horizontal": [
+            18.345185375
+          ],
+          "recovery": [],
+          "test_alert": []
+        },
+        "resources": {
+          "cpu_seconds": 82.058319,
+          "cpu_counter_start_seconds": 0.29461,
+          "cpu_counter_end_seconds": 82.352929,
+          "window_seconds": 59.758978494,
+          "mean_cpu_percent_one_core": 137.3154646681903,
+          "sampled_rss_bytes": {
+            "median": 698056704.0,
+            "min": 134025216,
+            "max": 782000128,
+            "p95": 781996032
+          },
+          "process_peak_rss_bytes": 813928448,
+          "method": "direct cumulative process CPU counters, first received frame through drain; no billing estimate"
+        },
+        "causal_cycles": [
+          {
+            "type": "SET_TRANSMIT_FPS",
+            "requested_fps": 5,
+            "causal_capture_seq": 414,
+            "effective_from_capture_seq": 430,
+            "later_valid_capture_seq": 430,
+            "passed": true
+          },
+          {
+            "type": "SET_TRANSMIT_FPS",
+            "requested_fps": 5,
+            "causal_capture_seq": 739,
+            "effective_from_capture_seq": 751,
+            "later_valid_capture_seq": 751,
+            "passed": true
+          },
+          {
+            "type": "REQUEST_RECENT_BUFFER",
+            "requested_fps": null,
+            "causal_capture_seq": 739,
+            "effective_from_capture_seq": 752,
+            "later_valid_capture_seq": null,
+            "passed": false
+          },
+          {
+            "type": "SET_TRANSMIT_FPS",
+            "requested_fps": 2,
+            "causal_capture_seq": 891,
+            "effective_from_capture_seq": 909,
+            "later_valid_capture_seq": 909,
+            "passed": true
+          },
+          {
+            "type": "SET_TRANSMIT_FPS",
+            "requested_fps": 5,
+            "causal_capture_seq": 1497,
+            "effective_from_capture_seq": 1502,
+            "later_valid_capture_seq": null,
+            "passed": false
+          }
+        ],
+        "suppressed_sensing_proposals": 0,
+        "raw_sha256": {
+          "cloud.jsonl": "3da5e5b70210ae3ab747845acf92cc4bf04ae5cf3cdb3aa55d4e1360ee08170d",
+          "edge.jsonl": "8ef5da2393bdcaa9a2b4c14ebc3ca6d053ec5bc6862d3709fa49df3707295b31",
+          "replay-captures.jsonl": "5d537df96eb6df294a0c6bbf359794d18efce24487738626fa4f0d98af7e924b",
+          "runtime.json": "687c6dfc5292779b8e0be8a32d96e026dc3b447c10817e5d85d741dca0f381b4"
+        }
+      },
+      {
+        "case": "sitting",
+        "repetition": 2,
+        "mode": "adaptive",
+        "label": "r2-sitting-adaptive",
+        "checks": {
+          "ledger_identity_reconciled": true,
+          "unique_frame_records": true,
+          "original_metadata_preserved": true,
+          "sent_received_order": true,
+          "capture_order_increases": true,
+          "packed_byte_counters_reconciled": true,
+          "all_frames_processed_without_drops": true,
+          "one_cloud_session": true,
+          "one_controller_final": true,
+          "duplicate_acks_match_original_applied": true,
+          "recording_fully_replayed": true,
+          "source_intervals_preserved": true,
+          "graviton_native_cool_8threads": true,
+          "same_instance_and_native_runtime": true,
+          "shared_incident_profile": true,
+          "classic_requested": true,
+          "no_pose_or_roi": true,
+          "same_full_frame_geometry": true,
+          "no_network_frame_limiting": true,
+          "no_stale_or_session_error": true,
+          "drain_confirmed": true,
+          "worker_stopped": true,
+          "only_test_alerts_no_notification": true,
+          "episode_exercised": true,
+          "actual_rate_labels_preserved": true,
+          "adaptive_2_and_5_exercised": true,
+          "actual_causal_cycles": true,
+          "no_suppression": true
+        },
+        "transport_runtime_passed": true,
+        "expected_behavior": {
+          "expected_final_state": true,
+          "expected_test_alert_count": true,
+          "expected_recovery_closure": true
+        },
+        "known_input_behavior_passed": true,
+        "sent": 166,
+        "received": 166,
+        "processed": 166,
+        "dropped": 0,
+        "live_sent": 166,
+        "historical_sent": 0,
+        "cloud_sessions": 1,
+        "controller_final_records": 1,
+        "connection_errors": 0,
+        "command_retries": 2,
+        "duplicate_ack_records": 2,
+        "jpeg_bytes": 17396127,
+        "packed_application_bytes": 17522776,
+        "achieved_fps_over_source_duration": 2.7678769073740814,
+        "target_fps": [
+          2,
+          5
+        ],
+        "processing_ms": {
+          "median": 75.5292745,
+          "min": 75.19687,
+          "max": 135.652272,
+          "p95": 80.719064
+        },
+        "queue_wait_ms": {
+          "median": 0.054392992751672864,
+          "min": 0.03288299194537103,
+          "max": 9.064965008292347,
+          "p95": 0.07869998808018863
+        },
+        "queue_wait_scope": "live observations with measured queue wait; historical rows are excluded",
+        "capture_lateness_ms": {
+          "median": 5.034749,
+          "min": 0.037499,
+          "max": 10.130749,
+          "p95": 10.031332
+        },
+        "final_state": "UNRESOLVED",
+        "episode_open": true,
+        "test_alerts": 0,
+        "event_source_seconds": {
+          "episode_opened": [
+            15.50651725
+          ],
+          "horizontal": [],
+          "recovery": [],
+          "test_alert": []
+        },
+        "resources": {
+          "cpu_seconds": 84.36462999999999,
+          "cpu_counter_start_seconds": 0.294004,
+          "cpu_counter_end_seconds": 84.65863399999999,
+          "window_seconds": 59.592721358,
+          "mean_cpu_percent_one_core": 141.56868167369655,
+          "sampled_rss_bytes": {
+            "median": 355135488,
+            "min": 134205440,
+            "max": 355221504,
+            "p95": 355221504
+          },
+          "process_peak_rss_bytes": 354369536,
+          "method": "direct cumulative process CPU counters, first received frame through drain; no billing estimate"
+        },
+        "causal_cycles": [
+          {
+            "type": "SET_TRANSMIT_FPS",
+            "requested_fps": 5,
+            "causal_capture_seq": 389,
+            "effective_from_capture_seq": 412,
+            "later_valid_capture_seq": 412,
+            "passed": true
+          },
+          {
+            "type": "SET_TRANSMIT_FPS",
+            "requested_fps": 2,
+            "causal_capture_seq": 542,
+            "effective_from_capture_seq": 555,
+            "later_valid_capture_seq": 555,
+            "passed": true
+          },
+          {
+            "type": "SET_TRANSMIT_FPS",
+            "requested_fps": 5,
+            "causal_capture_seq": 1138,
+            "effective_from_capture_seq": 1146,
+            "later_valid_capture_seq": 1151,
+            "passed": true
+          },
+          {
+            "type": "SET_TRANSMIT_FPS",
+            "requested_fps": 2,
+            "causal_capture_seq": 1276,
+            "effective_from_capture_seq": 1353,
+            "later_valid_capture_seq": 1354,
+            "passed": true
+          }
+        ],
+        "suppressed_sensing_proposals": 0,
+        "raw_sha256": {
+          "cloud.jsonl": "833c3d2bc56009d64a734c24b4d2bdb89074e8b7a10bee2b838e7eb923c35fcb",
+          "edge.jsonl": "b18724994eafeb48857ac717e66248efcd2a91420268abfcd574a46e7b68758e",
+          "replay-captures.jsonl": "b6b882d18f987b1d3fe7b785ec45bb8db524fbbba8511687074511eab4e10791",
+          "runtime.json": "213bb9959050a5cc19a6aa3209607613881cc4e113d7b097d13cc55fb877e4d0"
+        }
+      },
+      {
+        "case": "sitting",
+        "repetition": 2,
+        "mode": "fixed5",
+        "label": "r2-sitting-fixed5",
+        "checks": {
+          "ledger_identity_reconciled": true,
+          "unique_frame_records": true,
+          "original_metadata_preserved": true,
+          "sent_received_order": true,
+          "capture_order_increases": true,
+          "packed_byte_counters_reconciled": true,
+          "all_frames_processed_without_drops": true,
+          "one_cloud_session": true,
+          "one_controller_final": true,
+          "duplicate_acks_match_original_applied": true,
+          "recording_fully_replayed": true,
+          "source_intervals_preserved": true,
+          "graviton_native_cool_8threads": true,
+          "same_instance_and_native_runtime": true,
+          "shared_incident_profile": true,
+          "classic_requested": true,
+          "no_pose_or_roi": true,
+          "same_full_frame_geometry": true,
+          "no_network_frame_limiting": true,
+          "no_stale_or_session_error": true,
+          "drain_confirmed": true,
+          "worker_stopped": true,
+          "only_test_alerts_no_notification": true,
+          "episode_exercised": true,
+          "actual_rate_labels_preserved": true,
+          "fixed_target_is_5": true,
+          "no_sensing_executed_or_acknowledged": true,
+          "proposals_explicitly_suppressed": true,
+          "actual_applied_ids_unchanged": true
+        },
+        "transport_runtime_passed": true,
+        "expected_behavior": {
+          "expected_final_state": true,
+          "expected_test_alert_count": true,
+          "expected_recovery_closure": true
+        },
+        "known_input_behavior_passed": true,
+        "sent": 300,
+        "received": 300,
+        "processed": 300,
+        "dropped": 0,
+        "live_sent": 300,
+        "historical_sent": 0,
+        "cloud_sessions": 1,
+        "controller_final_records": 1,
+        "connection_errors": 0,
+        "command_retries": 0,
+        "duplicate_ack_records": 0,
+        "jpeg_bytes": 31530622,
+        "packed_application_bytes": 31751277,
+        "achieved_fps_over_source_duration": 5.002187182001352,
+        "target_fps": [
+          5
+        ],
+        "processing_ms": {
+          "median": 75.50635600000001,
+          "min": 75.189288,
+          "max": 135.888963,
+          "p95": 80.735169
+        },
+        "queue_wait_ms": {
+          "median": 0.04931949661113322,
+          "min": 0.03661098890006542,
+          "max": 8.612074016127735,
+          "p95": 0.060963997384533286
+        },
+        "queue_wait_scope": "live observations with measured queue wait; historical rows are excluded",
+        "capture_lateness_ms": {
+          "median": 7.476166,
+          "min": 0.034917,
+          "max": 45.433249,
+          "p95": 10.033
+        },
+        "final_state": "UNRESOLVED",
+        "episode_open": true,
+        "test_alerts": 0,
+        "event_source_seconds": {
+          "episode_opened": [
+            15.026491834
+          ],
+          "horizontal": [],
+          "recovery": [],
+          "test_alert": []
+        },
+        "resources": {
+          "cpu_seconds": 152.08246699999998,
+          "cpu_counter_start_seconds": 0.29314799999999996,
+          "cpu_counter_end_seconds": 152.37561499999998,
+          "window_seconds": 59.596555879,
+          "mean_cpu_percent_one_core": 255.1866710364536,
+          "sampled_rss_bytes": {
+            "median": 355938304.0,
+            "min": 134021120,
+            "max": 355938304,
+            "p95": 355938304
+          },
+          "process_peak_rss_bytes": 355299328,
+          "method": "direct cumulative process CPU counters, first received frame through drain; no billing estimate"
+        },
+        "causal_cycles": [],
+        "suppressed_sensing_proposals": 4,
+        "raw_sha256": {
+          "cloud.jsonl": "633bfada311fe28c8755049414a25eceac2933bfb12bd8231c8a3d4d3f3d0417",
+          "edge.jsonl": "1cdcc4afe76a8e830c12d48c18ad99b3d6b800ab72fc95c0df47e51a78374594",
+          "replay-captures.jsonl": "8e0e1213adc2eb76c5a1b134a7c3a8e24a46ea2fa698ba52eb132b89ada576b7",
+          "runtime.json": "6b182aa42b6fff2c93d7c7977d7a447f4ef16969d6e2432f7b8c16312c25585a"
+        }
+      },
+      {
+        "case": "recovery",
+        "repetition": 3,
+        "mode": "fixed5",
+        "label": "r3-recovery-fixed5",
+        "checks": {
+          "ledger_identity_reconciled": true,
+          "unique_frame_records": true,
+          "original_metadata_preserved": true,
+          "sent_received_order": true,
+          "capture_order_increases": true,
+          "packed_byte_counters_reconciled": true,
+          "all_frames_processed_without_drops": true,
+          "one_cloud_session": true,
+          "one_controller_final": true,
+          "duplicate_acks_match_original_applied": true,
+          "recording_fully_replayed": true,
+          "source_intervals_preserved": true,
+          "graviton_native_cool_8threads": true,
+          "same_instance_and_native_runtime": true,
+          "shared_incident_profile": true,
+          "classic_requested": true,
+          "no_pose_or_roi": true,
+          "same_full_frame_geometry": true,
+          "no_network_frame_limiting": true,
+          "no_stale_or_session_error": true,
+          "drain_confirmed": true,
+          "worker_stopped": true,
+          "only_test_alerts_no_notification": true,
+          "episode_exercised": true,
+          "actual_rate_labels_preserved": true,
+          "fixed_target_is_5": true,
+          "no_sensing_executed_or_acknowledged": true,
+          "proposals_explicitly_suppressed": true,
+          "actual_applied_ids_unchanged": true
+        },
+        "transport_runtime_passed": true,
+        "expected_behavior": {
+          "expected_final_state": true,
+          "expected_test_alert_count": true,
+          "expected_recovery_closure": true,
+          "horizontal_episode_exercised": true
+        },
+        "known_input_behavior_passed": true,
+        "sent": 300,
+        "received": 300,
+        "processed": 300,
+        "dropped": 0,
+        "live_sent": 300,
+        "historical_sent": 0,
+        "cloud_sessions": 1,
+        "controller_final_records": 1,
+        "connection_errors": 0,
+        "command_retries": 0,
+        "duplicate_ack_records": 0,
+        "jpeg_bytes": 34058133,
+        "packed_application_bytes": 34278789,
+        "achieved_fps_over_source_duration": 5.001560893375555,
+        "target_fps": [
+          5
+        ],
+        "processing_ms": {
+          "median": 75.52280400000001,
+          "min": 75.144767,
+          "max": 137.243097,
+          "p95": 80.67788
+        },
+        "queue_wait_ms": {
+          "median": 0.0457620044471696,
+          "min": 0.03321599797345698,
+          "max": 20.222655002726242,
+          "p95": 0.060735008446499705
+        },
+        "queue_wait_scope": "live observations with measured queue wait; historical rows are excluded",
+        "capture_lateness_ms": {
+          "median": 7.721145999999999,
+          "min": 0.04975,
+          "max": 10.070042,
+          "p95": 10.031625
+        },
+        "final_state": "NORMAL",
+        "episode_open": false,
+        "test_alerts": 0,
+        "event_source_seconds": {
+          "episode_opened": [
+            18.031169417
+          ],
+          "horizontal": [
+            20.031197792
+          ],
+          "recovery": [
+            32.627294
+          ],
+          "test_alert": []
+        },
+        "resources": {
+          "cpu_seconds": 152.04522799999998,
+          "cpu_counter_start_seconds": 0.293776,
+          "cpu_counter_end_seconds": 152.339004,
+          "window_seconds": 59.606922856,
+          "mean_cpu_percent_one_core": 255.07981408017812,
+          "sampled_rss_bytes": {
+            "median": 355237888,
+            "min": 134221824,
+            "max": 355254272,
+            "p95": 355254272
+          },
+          "process_peak_rss_bytes": 354648064,
+          "method": "direct cumulative process CPU counters, first received frame through drain; no billing estimate"
+        },
+        "causal_cycles": [],
+        "suppressed_sensing_proposals": 2,
+        "raw_sha256": {
+          "cloud.jsonl": "da15f030560774dd990c66c08a739548aef0f2368c84205cd99f77f80d3dab87",
+          "edge.jsonl": "62f05d3949c3777a19281030c7798f21ac6e5a7970c3749e93705d937e9a3235",
+          "replay-captures.jsonl": "07399f2c0cd1f4d3b48834264294090f76c4499c0c6c073a1c5788bde0ed194f",
+          "runtime.json": "18f5dd688db3118a48533ca1a99da9654bdc64afadef4f7944c4b195d33b1694"
+        }
+      },
+      {
+        "case": "recovery",
+        "repetition": 3,
+        "mode": "adaptive",
+        "label": "r3-recovery-adaptive",
+        "checks": {
+          "ledger_identity_reconciled": true,
+          "unique_frame_records": true,
+          "original_metadata_preserved": true,
+          "sent_received_order": true,
+          "capture_order_increases": true,
+          "packed_byte_counters_reconciled": true,
+          "all_frames_processed_without_drops": true,
+          "one_cloud_session": true,
+          "one_controller_final": true,
+          "duplicate_acks_match_original_applied": true,
+          "recording_fully_replayed": true,
+          "source_intervals_preserved": true,
+          "graviton_native_cool_8threads": true,
+          "same_instance_and_native_runtime": true,
+          "shared_incident_profile": true,
+          "classic_requested": true,
+          "no_pose_or_roi": true,
+          "same_full_frame_geometry": true,
+          "no_network_frame_limiting": true,
+          "no_stale_or_session_error": true,
+          "drain_confirmed": true,
+          "worker_stopped": true,
+          "only_test_alerts_no_notification": true,
+          "episode_exercised": true,
+          "actual_rate_labels_preserved": true,
+          "adaptive_2_and_5_exercised": true,
+          "actual_causal_cycles": true,
+          "no_suppression": true
+        },
+        "transport_runtime_passed": true,
+        "expected_behavior": {
+          "expected_final_state": true,
+          "expected_test_alert_count": true,
+          "expected_recovery_closure": true,
+          "horizontal_episode_exercised": true
+        },
+        "known_input_behavior_passed": true,
+        "sent": 140,
+        "received": 140,
+        "processed": 140,
+        "dropped": 0,
+        "live_sent": 140,
+        "historical_sent": 0,
+        "cloud_sessions": 1,
+        "controller_final_records": 1,
+        "connection_errors": 0,
+        "command_retries": 0,
+        "duplicate_ack_records": 0,
+        "jpeg_bytes": 15821637,
+        "packed_application_bytes": 15928101,
+        "achieved_fps_over_source_duration": 2.334061750241926,
+        "target_fps": [
+          2,
+          5
+        ],
+        "processing_ms": {
+          "median": 75.5916555,
+          "min": 75.16745,
+          "max": 135.411695,
+          "p95": 80.813071
+        },
+        "queue_wait_ms": {
+          "median": 0.051648501539602876,
+          "min": 0.03591601853258908,
+          "max": 0.19577599596232176,
+          "p95": 0.06631299038417637
+        },
+        "queue_wait_scope": "live observations with measured queue wait; historical rows are excluded",
+        "capture_lateness_ms": {
+          "median": 7.5295000000000005,
+          "min": 0.025209,
+          "max": 10.058042,
+          "p95": 10.031792
+        },
+        "final_state": "NORMAL",
+        "episode_open": false,
+        "test_alerts": 0,
+        "event_source_seconds": {
+          "episode_opened": [
+            18.031169417
+          ],
+          "horizontal": [
+            19.947383792
+          ],
+          "recovery": [
+            33.151157833
+          ],
+          "test_alert": []
+        },
+        "resources": {
+          "cpu_seconds": 71.2752,
+          "cpu_counter_start_seconds": 0.290381,
+          "cpu_counter_end_seconds": 71.565581,
+          "window_seconds": 59.626753267,
+          "mean_cpu_percent_one_core": 119.53560456468246,
+          "sampled_rss_bytes": {
+            "median": 355213312.0,
+            "min": 134213632,
+            "max": 355225600,
+            "p95": 355225600
+          },
+          "process_peak_rss_bytes": 354603008,
+          "method": "direct cumulative process CPU counters, first received frame through drain; no billing estimate"
+        },
+        "causal_cycles": [
+          {
+            "type": "SET_TRANSMIT_FPS",
+            "requested_fps": 5,
+            "causal_capture_seq": 452,
+            "effective_from_capture_seq": 460,
+            "later_valid_capture_seq": 465,
+            "passed": true
+          },
+          {
+            "type": "SET_TRANSMIT_FPS",
+            "requested_fps": 2,
+            "causal_capture_seq": 605,
+            "effective_from_capture_seq": 617,
+            "later_valid_capture_seq": 617,
+            "passed": true
+          }
+        ],
+        "suppressed_sensing_proposals": 0,
+        "raw_sha256": {
+          "cloud.jsonl": "e47717d290ef6fb564f72116073071d9c2cc6720fecdf76cb80d730fb4936fcb",
+          "edge.jsonl": "e4c3e13f61ceb99491d385be0ffdb1520c0f1c62b5c6f9ba02bb7e7831312d82",
+          "replay-captures.jsonl": "13df049aaf55a33148f068b654ce0689c84dbc3788a59e620e42f587a30cfb3e",
+          "runtime.json": "39477b12e5042bc453ab8fc51b8253cef092246b30025d4977468a6edaaac636"
+        }
+      },
+      {
+        "case": "no-recovery",
+        "repetition": 3,
+        "mode": "adaptive",
+        "label": "r3-no-recovery-adaptive",
+        "checks": {
+          "ledger_identity_reconciled": true,
+          "unique_frame_records": true,
+          "original_metadata_preserved": true,
+          "sent_received_order": true,
+          "capture_order_increases": true,
+          "packed_byte_counters_reconciled": true,
+          "all_frames_processed_without_drops": true,
+          "one_cloud_session": true,
+          "one_controller_final": true,
+          "duplicate_acks_match_original_applied": true,
+          "recording_fully_replayed": true,
+          "source_intervals_preserved": true,
+          "graviton_native_cool_8threads": true,
+          "same_instance_and_native_runtime": true,
+          "shared_incident_profile": true,
+          "classic_requested": true,
+          "no_pose_or_roi": true,
+          "same_full_frame_geometry": true,
+          "no_network_frame_limiting": true,
+          "no_stale_or_session_error": true,
+          "drain_confirmed": true,
+          "worker_stopped": true,
+          "only_test_alerts_no_notification": true,
+          "episode_exercised": true,
+          "actual_rate_labels_preserved": true,
+          "adaptive_2_and_5_exercised": true,
+          "actual_causal_cycles": true,
+          "no_suppression": true
+        },
+        "transport_runtime_passed": true,
+        "expected_behavior": {
+          "expected_final_state": true,
+          "expected_test_alert_count": true,
+          "expected_recovery_closure": true,
+          "horizontal_episode_exercised": true
+        },
+        "known_input_behavior_passed": true,
+        "sent": 140,
+        "received": 140,
+        "processed": 140,
+        "dropped": 0,
+        "live_sent": 140,
+        "historical_sent": 0,
+        "cloud_sessions": 1,
+        "controller_final_records": 1,
+        "connection_errors": 0,
+        "command_retries": 0,
+        "duplicate_ack_records": 0,
+        "jpeg_bytes": 15600010,
+        "packed_application_bytes": 15706578,
+        "achieved_fps_over_source_duration": 2.3339118711876696,
+        "target_fps": [
+          2,
+          5
+        ],
+        "processing_ms": {
+          "median": 75.42835149999999,
+          "min": 75.08407,
+          "max": 136.157828,
+          "p95": 80.529082
+        },
+        "queue_wait_ms": {
+          "median": 0.046844506869092584,
+          "min": 0.03618199843913317,
+          "max": 0.1334389962721616,
+          "p95": 0.06192698492668569
+        },
+        "queue_wait_scope": "live observations with measured queue wait; historical rows are excluded",
+        "capture_lateness_ms": {
+          "median": 7.492958,
+          "min": 0.055,
+          "max": 11.608708,
+          "p95": 10.032375
+        },
+        "final_state": "ASSISTANCE_REQUIRED",
+        "episode_open": true,
+        "test_alerts": 1,
+        "event_source_seconds": {
+          "episode_opened": [
+            16.505127125
+          ],
+          "horizontal": [
+            18.425190917
+          ],
+          "recovery": [],
+          "test_alert": [
+            40.425017542
+          ]
+        },
+        "resources": {
+          "cpu_seconds": 71.134197,
+          "cpu_counter_start_seconds": 0.29001499999999997,
+          "cpu_counter_end_seconds": 71.424212,
+          "window_seconds": 59.680617195,
+          "mean_cpu_percent_one_core": 119.19145669619444,
+          "sampled_rss_bytes": {
+            "median": 355135488,
+            "min": 134152192,
+            "max": 355168256,
+            "p95": 355168256
+          },
+          "process_peak_rss_bytes": 354447360,
+          "method": "direct cumulative process CPU counters, first received frame through drain; no billing estimate"
+        },
+        "causal_cycles": [
+          {
+            "type": "SET_TRANSMIT_FPS",
+            "requested_fps": 5,
+            "causal_capture_seq": 414,
+            "effective_from_capture_seq": 421,
+            "later_valid_capture_seq": 422,
+            "passed": true
+          },
+          {
+            "type": "SET_TRANSMIT_FPS",
+            "requested_fps": 2,
+            "causal_capture_seq": 567,
+            "effective_from_capture_seq": 575,
+            "later_valid_capture_seq": 575,
+            "passed": true
+          }
+        ],
+        "suppressed_sensing_proposals": 0,
+        "raw_sha256": {
+          "cloud.jsonl": "e69419c288c1b75b9e20144ab9f1e1e0cd4c5009540ee3392a13618f827ad316",
+          "edge.jsonl": "c39d9d47b2fc5418c95dba883cdaf0092cd2550ccf0a8088dd0254bcf3bffc42",
+          "replay-captures.jsonl": "e2f56268bade2a5b850a378e90e07221ec193da47d362023360aa95a30395085",
+          "runtime.json": "dcbbb282850a9e73d3b056ad194a7cf68aa543995dcff0209f8eaa698e6418df"
+        }
+      },
+      {
+        "case": "no-recovery",
+        "repetition": 3,
+        "mode": "fixed5",
+        "label": "r3-no-recovery-fixed5",
+        "checks": {
+          "ledger_identity_reconciled": true,
+          "unique_frame_records": true,
+          "original_metadata_preserved": true,
+          "sent_received_order": true,
+          "capture_order_increases": true,
+          "packed_byte_counters_reconciled": true,
+          "all_frames_processed_without_drops": true,
+          "one_cloud_session": true,
+          "one_controller_final": true,
+          "duplicate_acks_match_original_applied": true,
+          "recording_fully_replayed": true,
+          "source_intervals_preserved": true,
+          "graviton_native_cool_8threads": true,
+          "same_instance_and_native_runtime": true,
+          "shared_incident_profile": true,
+          "classic_requested": true,
+          "no_pose_or_roi": true,
+          "same_full_frame_geometry": true,
+          "no_network_frame_limiting": true,
+          "no_stale_or_session_error": true,
+          "drain_confirmed": true,
+          "worker_stopped": true,
+          "only_test_alerts_no_notification": true,
+          "episode_exercised": true,
+          "actual_rate_labels_preserved": true,
+          "fixed_target_is_5": true,
+          "no_sensing_executed_or_acknowledged": true,
+          "proposals_explicitly_suppressed": true,
+          "actual_applied_ids_unchanged": true
+        },
+        "transport_runtime_passed": true,
+        "expected_behavior": {
+          "expected_final_state": true,
+          "expected_test_alert_count": true,
+          "expected_recovery_closure": true,
+          "horizontal_episode_exercised": true
+        },
+        "known_input_behavior_passed": true,
+        "sent": 300,
+        "received": 300,
+        "processed": 300,
+        "dropped": 0,
+        "live_sent": 300,
+        "historical_sent": 0,
+        "cloud_sessions": 1,
+        "controller_final_records": 1,
+        "connection_errors": 0,
+        "command_retries": 0,
+        "duplicate_ack_records": 0,
+        "jpeg_bytes": 33527195,
+        "packed_application_bytes": 33747851,
+        "achieved_fps_over_source_duration": 5.001239723973578,
+        "target_fps": [
+          5
+        ],
+        "processing_ms": {
+          "median": 75.610512,
+          "min": 75.226682,
+          "max": 135.864456,
+          "p95": 80.824429
+        },
+        "queue_wait_ms": {
+          "median": 0.04384201020002365,
+          "min": 0.033491000067442656,
+          "max": 5.241612991085276,
+          "p95": 0.05706498632207513
+        },
+        "queue_wait_scope": "live observations with measured queue wait; historical rows are excluded",
+        "capture_lateness_ms": {
+          "median": 7.705,
+          "min": 0.103584,
+          "max": 10.272917,
+          "p95": 10.031791
+        },
+        "final_state": "ASSISTANCE_REQUIRED",
+        "episode_open": true,
+        "test_alerts": 1,
+        "event_source_seconds": {
+          "episode_opened": [
+            16.021701542
+          ],
+          "horizontal": [
+            18.425190917
+          ],
+          "recovery": [],
+          "test_alert": [
+            40.025132875
+          ]
+        },
+        "resources": {
+          "cpu_seconds": 152.20460500000002,
+          "cpu_counter_start_seconds": 0.293446,
+          "cpu_counter_end_seconds": 152.498051,
+          "window_seconds": 59.621483086,
+          "mean_cpu_percent_one_core": 255.28483546854252,
+          "sampled_rss_bytes": {
+            "median": 355016704.0,
+            "min": 134021120,
+            "max": 355033088,
+            "p95": 355033088
+          },
+          "process_peak_rss_bytes": 354492416,
+          "method": "direct cumulative process CPU counters, first received frame through drain; no billing estimate"
+        },
+        "causal_cycles": [],
+        "suppressed_sensing_proposals": 2,
+        "raw_sha256": {
+          "cloud.jsonl": "9713b9abf790783d4fadaa2fddc6951e632a4d402438cebe5e97cf5be26fb9a6",
+          "edge.jsonl": "7b402d336c2f1c81116181e7d4e3cf03ef5f2a520129c7c68f81ed1354beef22",
+          "replay-captures.jsonl": "ab219133ca37a5e6f7cb4c159479e6fa1d062bf05dfb0f3dd0cb8a01ed4e2d85",
+          "runtime.json": "ee1f38bf088e9c959fe2e49321ba5cd499099775dd5c1bc0b69045f446a98754"
+        }
+      },
+      {
+        "case": "sitting",
+        "repetition": 3,
+        "mode": "fixed5",
+        "label": "r3-sitting-fixed5",
+        "checks": {
+          "ledger_identity_reconciled": true,
+          "unique_frame_records": true,
+          "original_metadata_preserved": true,
+          "sent_received_order": true,
+          "capture_order_increases": true,
+          "packed_byte_counters_reconciled": true,
+          "all_frames_processed_without_drops": true,
+          "one_cloud_session": true,
+          "one_controller_final": true,
+          "duplicate_acks_match_original_applied": true,
+          "recording_fully_replayed": true,
+          "source_intervals_preserved": true,
+          "graviton_native_cool_8threads": true,
+          "same_instance_and_native_runtime": true,
+          "shared_incident_profile": true,
+          "classic_requested": true,
+          "no_pose_or_roi": true,
+          "same_full_frame_geometry": true,
+          "no_network_frame_limiting": true,
+          "no_stale_or_session_error": true,
+          "drain_confirmed": true,
+          "worker_stopped": true,
+          "only_test_alerts_no_notification": true,
+          "episode_exercised": true,
+          "actual_rate_labels_preserved": true,
+          "fixed_target_is_5": true,
+          "no_sensing_executed_or_acknowledged": true,
+          "proposals_explicitly_suppressed": true,
+          "actual_applied_ids_unchanged": true
+        },
+        "transport_runtime_passed": true,
+        "expected_behavior": {
+          "expected_final_state": true,
+          "expected_test_alert_count": true,
+          "expected_recovery_closure": true
+        },
+        "known_input_behavior_passed": true,
+        "sent": 300,
+        "received": 300,
+        "processed": 300,
+        "dropped": 0,
+        "live_sent": 300,
+        "historical_sent": 0,
+        "cloud_sessions": 1,
+        "controller_final_records": 1,
+        "connection_errors": 0,
+        "command_retries": 0,
+        "duplicate_ack_records": 0,
+        "jpeg_bytes": 31530622,
+        "packed_application_bytes": 31751277,
+        "achieved_fps_over_source_duration": 5.002187182001352,
+        "target_fps": [
+          5
+        ],
+        "processing_ms": {
+          "median": 75.57467,
+          "min": 75.236576,
+          "max": 135.880742,
+          "p95": 80.812575
+        },
+        "queue_wait_ms": {
+          "median": 0.04585548595059663,
+          "min": 0.03326701698824763,
+          "max": 5.537913006264716,
+          "p95": 0.058581994380801916
+        },
+        "queue_wait_scope": "live observations with measured queue wait; historical rows are excluded",
+        "capture_lateness_ms": {
+          "median": 7.599541,
+          "min": 0.038999,
+          "max": 10.077707,
+          "p95": 10.031416
+        },
+        "final_state": "UNRESOLVED",
+        "episode_open": true,
+        "test_alerts": 0,
+        "event_source_seconds": {
+          "episode_opened": [
+            15.026491834
+          ],
+          "horizontal": [],
+          "recovery": [],
+          "test_alert": []
+        },
+        "resources": {
+          "cpu_seconds": 152.25870100000003,
+          "cpu_counter_start_seconds": 0.29029499999999997,
+          "cpu_counter_end_seconds": 152.54899600000002,
+          "window_seconds": 59.603484145,
+          "mean_cpu_percent_one_core": 255.45268566782713,
+          "sampled_rss_bytes": {
+            "median": 355233792.0,
+            "min": 134217728,
+            "max": 355250176,
+            "p95": 355250176
+          },
+          "process_peak_rss_bytes": 354488320,
+          "method": "direct cumulative process CPU counters, first received frame through drain; no billing estimate"
+        },
+        "causal_cycles": [],
+        "suppressed_sensing_proposals": 4,
+        "raw_sha256": {
+          "cloud.jsonl": "f71371773f38c55cf46bdc461811472ccdd1cca52e10eb7c3cf7bd91b30e9009",
+          "edge.jsonl": "74bc7d403e0d96df5e938679dc38da74dc7dc3cf8f1aa76fc995c6a459eb201c",
+          "replay-captures.jsonl": "f64bea7e54ca9ca49e236d721594ccb681d3701f498841ce573cc6d16c7b1bac",
+          "runtime.json": "00fc9dc396cd6155d9f8e3366d5958cb721da8fecabe781f5009f897b3c780bc"
+        }
+      },
+      {
+        "case": "sitting",
+        "repetition": 3,
+        "mode": "adaptive",
+        "label": "r3-sitting-adaptive",
+        "checks": {
+          "ledger_identity_reconciled": true,
+          "unique_frame_records": true,
+          "original_metadata_preserved": true,
+          "sent_received_order": true,
+          "capture_order_increases": true,
+          "packed_byte_counters_reconciled": true,
+          "all_frames_processed_without_drops": true,
+          "one_cloud_session": true,
+          "one_controller_final": true,
+          "duplicate_acks_match_original_applied": true,
+          "recording_fully_replayed": true,
+          "source_intervals_preserved": true,
+          "graviton_native_cool_8threads": true,
+          "same_instance_and_native_runtime": true,
+          "shared_incident_profile": true,
+          "classic_requested": true,
+          "no_pose_or_roi": true,
+          "same_full_frame_geometry": true,
+          "no_network_frame_limiting": true,
+          "no_stale_or_session_error": true,
+          "drain_confirmed": true,
+          "worker_stopped": true,
+          "only_test_alerts_no_notification": true,
+          "episode_exercised": true,
+          "actual_rate_labels_preserved": true,
+          "adaptive_2_and_5_exercised": true,
+          "actual_causal_cycles": true,
+          "no_suppression": true
+        },
+        "transport_runtime_passed": true,
+        "expected_behavior": {
+          "expected_final_state": true,
+          "expected_test_alert_count": true,
+          "expected_recovery_closure": true
+        },
+        "known_input_behavior_passed": true,
+        "sent": 159,
+        "received": 159,
+        "processed": 159,
+        "dropped": 0,
+        "live_sent": 159,
+        "historical_sent": 0,
+        "cloud_sessions": 1,
+        "controller_final_records": 1,
+        "connection_errors": 0,
+        "command_retries": 0,
+        "duplicate_ack_records": 0,
+        "jpeg_bytes": 16656732,
+        "packed_application_bytes": 16778014,
+        "achieved_fps_over_source_duration": 2.651159206460717,
+        "target_fps": [
+          2,
+          5
+        ],
+        "processing_ms": {
+          "median": 75.3651,
+          "min": 75.095736,
+          "max": 136.978799,
+          "p95": 80.517447
+        },
+        "queue_wait_ms": {
+          "median": 0.04909600829705596,
+          "min": 0.036214012652635574,
+          "max": 52.86612402414903,
+          "p95": 0.06855398532934487
+        },
+        "queue_wait_scope": "live observations with measured queue wait; historical rows are excluded",
+        "capture_lateness_ms": {
+          "median": 7.546,
+          "min": 0.045375,
+          "max": 10.06575,
+          "p95": 10.031916
+        },
+        "final_state": "UNRESOLVED",
+        "episode_open": true,
+        "test_alerts": 0,
+        "event_source_seconds": {
+          "episode_opened": [
+            15.50651725
+          ],
+          "horizontal": [],
+          "recovery": [],
+          "test_alert": []
+        },
+        "resources": {
+          "cpu_seconds": 80.67848099999999,
+          "cpu_counter_start_seconds": 0.291433,
+          "cpu_counter_end_seconds": 80.96991399999999,
+          "window_seconds": 59.589830525,
+          "mean_cpu_percent_one_core": 135.38968023436914,
+          "sampled_rss_bytes": {
+            "median": 355201024,
+            "min": 134201344,
+            "max": 355221504,
+            "p95": 355221504
+          },
+          "process_peak_rss_bytes": 354521088,
+          "method": "direct cumulative process CPU counters, first received frame through drain; no billing estimate"
+        },
+        "causal_cycles": [
+          {
+            "type": "SET_TRANSMIT_FPS",
+            "requested_fps": 5,
+            "causal_capture_seq": 389,
+            "effective_from_capture_seq": 397,
+            "later_valid_capture_seq": 397,
+            "passed": true
+          },
+          {
+            "type": "SET_TRANSMIT_FPS",
+            "requested_fps": 2,
+            "causal_capture_seq": 542,
+            "effective_from_capture_seq": 550,
+            "later_valid_capture_seq": 550,
+            "passed": true
+          },
+          {
+            "type": "SET_TRANSMIT_FPS",
+            "requested_fps": 5,
+            "causal_capture_seq": 1145,
+            "effective_from_capture_seq": 1153,
+            "later_valid_capture_seq": 1158,
+            "passed": true
+          },
+          {
+            "type": "SET_TRANSMIT_FPS",
+            "requested_fps": 2,
+            "causal_capture_seq": 1283,
+            "effective_from_capture_seq": 1290,
+            "later_valid_capture_seq": 1291,
+            "passed": true
+          }
+        ],
+        "suppressed_sensing_proposals": 0,
+        "raw_sha256": {
+          "cloud.jsonl": "9093991a29cf36441714510bfa4a3696c29da2ef4ad15cf8955e9304850640ff",
+          "edge.jsonl": "2be53a30bd07c1ae1a4e09d6c40fc5d6f1ce9cc6855e2e883bbfc19486a2a136",
+          "replay-captures.jsonl": "053dc3903457d098b3cf9b240dfc2788c0f63530491e2432f1c793de4a3644a6",
+          "runtime.json": "ed84a2684bbf0c54f49ca8157896bdcb6c17e72e7b2f4e2a227e3d97aa7ede29"
+        }
+      }
+    ],
+    "pairs": [
+      {
+        "case": "recovery",
+        "repetition": 1,
+        "outcome_alert_agreement": true,
+        "adaptive_event_delay_seconds": {
+          "recovery": 0.2838585420000044
+        },
+        "within_preregistered_extra_delay": true,
+        "both_known_input_behaviors_pass": true,
+        "both_transport_runtime_pass": true,
+        "resource_reduction_percent": {
+          "sent": 53.333333333333336,
+          "processed": 53.333333333333336,
+          "jpeg_bytes": 53.539564250336326,
+          "packed_application_bytes": 53.52805199740283,
+          "cpu_seconds": 53.22999292418822
+        }
+      },
+      {
+        "case": "no-recovery",
+        "repetition": 1,
+        "outcome_alert_agreement": true,
+        "adaptive_event_delay_seconds": {
+          "test_alert": -0.16009962499999375
+        },
+        "within_preregistered_extra_delay": true,
+        "both_known_input_behaviors_pass": true,
+        "both_transport_runtime_pass": true,
+        "resource_reduction_percent": {
+          "sent": 53.333333333333336,
+          "processed": 53.333333333333336,
+          "jpeg_bytes": 53.475257921218876,
+          "packed_application_bytes": 53.46368276901543,
+          "cpu_seconds": 53.06585133126388
+        }
+      },
+      {
+        "case": "sitting",
+        "repetition": 1,
+        "outcome_alert_agreement": true,
+        "adaptive_event_delay_seconds": {},
+        "within_preregistered_extra_delay": true,
+        "both_known_input_behaviors_pass": true,
+        "both_transport_runtime_pass": true,
+        "resource_reduction_percent": {
+          "sent": 47.0,
+          "processed": 47.0,
+          "jpeg_bytes": 47.17262792976301,
+          "packed_application_bytes": 47.15777573292564,
+          "cpu_seconds": 46.60601328589961
+        }
+      },
+      {
+        "case": "recovery",
+        "repetition": 2,
+        "outcome_alert_agreement": true,
+        "adaptive_event_delay_seconds": {
+          "recovery": 0.2838585420000044
+        },
+        "within_preregistered_extra_delay": true,
+        "both_known_input_behaviors_pass": true,
+        "both_transport_runtime_pass": true,
+        "resource_reduction_percent": {
+          "sent": 53.333333333333336,
+          "processed": 53.333333333333336,
+          "jpeg_bytes": 53.53946442102391,
+          "packed_application_bytes": 53.527952810701684,
+          "cpu_seconds": 52.97046787532808
+        }
+      },
+      {
+        "case": "no-recovery",
+        "repetition": 2,
+        "outcome_alert_agreement": false,
+        "adaptive_event_delay_seconds": {},
+        "within_preregistered_extra_delay": true,
+        "both_known_input_behaviors_pass": false,
+        "both_transport_runtime_pass": false,
+        "resource_reduction_percent": {
+          "sent": 43.00000000000001,
+          "processed": 46.666666666666664,
+          "jpeg_bytes": 43.17334629395629,
+          "packed_application_bytes": 43.16522850595731,
+          "cpu_seconds": 46.00656762035569
+        }
+      },
+      {
+        "case": "sitting",
+        "repetition": 2,
+        "outcome_alert_agreement": true,
+        "adaptive_event_delay_seconds": {},
+        "within_preregistered_extra_delay": true,
+        "both_known_input_behaviors_pass": true,
+        "both_transport_runtime_pass": true,
+        "resource_reduction_percent": {
+          "sent": 44.666666666666664,
+          "processed": 44.666666666666664,
+          "jpeg_bytes": 44.82783435100012,
+          "packed_application_bytes": 44.81237400309915,
+          "cpu_seconds": 44.52705057710564
+        }
+      },
+      {
+        "case": "recovery",
+        "repetition": 3,
+        "outcome_alert_agreement": true,
+        "adaptive_event_delay_seconds": {
+          "recovery": 0.5238638330000001
+        },
+        "within_preregistered_extra_delay": true,
+        "both_known_input_behaviors_pass": true,
+        "both_transport_runtime_pass": true,
+        "resource_reduction_percent": {
+          "sent": 53.333333333333336,
+          "processed": 53.333333333333336,
+          "jpeg_bytes": 53.54520167033231,
+          "packed_application_bytes": 53.53365312876135,
+          "cpu_seconds": 53.122369614914845
+        }
+      },
+      {
+        "case": "no-recovery",
+        "repetition": 3,
+        "outcome_alert_agreement": true,
+        "adaptive_event_delay_seconds": {
+          "test_alert": 0.399884667000002
+        },
+        "within_preregistered_extra_delay": true,
+        "both_known_input_behaviors_pass": true,
+        "both_transport_runtime_pass": true,
+        "resource_reduction_percent": {
+          "sent": 53.333333333333336,
+          "processed": 53.333333333333336,
+          "jpeg_bytes": 53.47057813813533,
+          "packed_application_bytes": 53.45902765779071,
+          "cpu_seconds": 53.26409670719228
+        }
+      },
+      {
+        "case": "sitting",
+        "repetition": 3,
+        "outcome_alert_agreement": true,
+        "adaptive_event_delay_seconds": {},
+        "within_preregistered_extra_delay": true,
+        "both_known_input_behaviors_pass": true,
+        "both_transport_runtime_pass": true,
+        "resource_reduction_percent": {
+          "sent": 47.0,
+          "processed": 47.0,
+          "jpeg_bytes": 47.17284042160665,
+          "packed_application_bytes": 47.15798674806055,
+          "cpu_seconds": 47.01223610202745
+        }
+      }
+    ],
+    "summaries": {
+      "recovery": {
+        "pairs": 3,
+        "resource_reduction_percent": {
+          "sent": {
+            "median": 53.333333333333336,
+            "min": 53.333333333333336,
+            "max": 53.333333333333336,
+            "p95": 53.333333333333336
+          },
+          "processed": {
+            "median": 53.333333333333336,
+            "min": 53.333333333333336,
+            "max": 53.333333333333336,
+            "p95": 53.333333333333336
+          },
+          "jpeg_bytes": {
+            "median": 53.539564250336326,
+            "min": 53.53946442102391,
+            "max": 53.54520167033231,
+            "p95": 53.54520167033231
+          },
+          "packed_application_bytes": {
+            "median": 53.52805199740283,
+            "min": 53.527952810701684,
+            "max": 53.53365312876135,
+            "p95": 53.53365312876135
+          },
+          "cpu_seconds": {
+            "median": 53.122369614914845,
+            "min": 52.97046787532808,
+            "max": 53.22999292418822,
+            "p95": 53.22999292418822
+          }
+        },
+        "adaptive_event_delay_seconds": {
+          "recovery": {
+            "median": 0.2838585420000044,
+            "min": 0.2838585420000044,
+            "max": 0.5238638330000001,
+            "p95": 0.5238638330000001
+          },
+          "test_alert": null
+        }
+      },
+      "no-recovery": {
+        "pairs": 3,
+        "resource_reduction_percent": {
+          "sent": {
+            "median": 53.333333333333336,
+            "min": 43.00000000000001,
+            "max": 53.333333333333336,
+            "p95": 53.333333333333336
+          },
+          "processed": {
+            "median": 53.333333333333336,
+            "min": 46.666666666666664,
+            "max": 53.333333333333336,
+            "p95": 53.333333333333336
+          },
+          "jpeg_bytes": {
+            "median": 53.47057813813533,
+            "min": 43.17334629395629,
+            "max": 53.475257921218876,
+            "p95": 53.475257921218876
+          },
+          "packed_application_bytes": {
+            "median": 53.45902765779071,
+            "min": 43.16522850595731,
+            "max": 53.46368276901543,
+            "p95": 53.46368276901543
+          },
+          "cpu_seconds": {
+            "median": 53.06585133126388,
+            "min": 46.00656762035569,
+            "max": 53.26409670719228,
+            "p95": 53.26409670719228
+          }
+        },
+        "adaptive_event_delay_seconds": {
+          "recovery": null,
+          "test_alert": {
+            "median": 0.11989252100000414,
+            "min": -0.16009962499999375,
+            "max": 0.399884667000002,
+            "p95": 0.399884667000002
+          }
+        }
+      },
+      "sitting": {
+        "pairs": 3,
+        "resource_reduction_percent": {
+          "sent": {
+            "median": 47.0,
+            "min": 44.666666666666664,
+            "max": 47.0,
+            "p95": 47.0
+          },
+          "processed": {
+            "median": 47.0,
+            "min": 44.666666666666664,
+            "max": 47.0,
+            "p95": 47.0
+          },
+          "jpeg_bytes": {
+            "median": 47.17262792976301,
+            "min": 44.82783435100012,
+            "max": 47.17284042160665,
+            "p95": 47.17284042160665
+          },
+          "packed_application_bytes": {
+            "median": 47.15777573292564,
+            "min": 44.81237400309915,
+            "max": 47.15798674806055,
+            "p95": 47.15798674806055
+          },
+          "cpu_seconds": {
+            "median": 46.60601328589961,
+            "min": 44.52705057710564,
+            "max": 47.01223610202745,
+            "p95": 47.01223610202745
+          }
+        },
+        "adaptive_event_delay_seconds": {
+          "recovery": null,
+          "test_alert": null
+        }
+      }
+    },
+    "incomplete": [],
+    "transport_runtime_all_passed": false,
+    "known_input_behavior_all_passed": false,
+    "paired_criteria_all_passed": false,
+    "clinical_accuracy_validated": false,
+    "aws_billing_savings_measured": false,
+    "new_independent_incidents": 0,
+    "preregistered_plan_sha256": "d3b8934881ee68fc2cfa9e51bbbe2830d52fae8203adafcb578921192c99cf3c",
+    "protected_state_unchanged": true
+  },
+  "source_execution_unchanged": true,
+  "export_scope": "Derived scalar results and relative event times with original private-log hashes. No original imagery, body coordinates, tracks, absolute capture clocks, deployment IDs, credentials or SDK/model binaries.",
+  "public_format_note": "Public source hashes use path/sha256 records. The exact verifier and original map representation remain in the Devpost evidence packet."
+}

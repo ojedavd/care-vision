@@ -373,6 +373,8 @@ class Controller:
             "horizontal_evidence_seconds": 0.0,
             "previous_horizontal_ns": None,
             "test_alert_emitted": False,
+            "review_required": False,
+            "review_reason": None,
             "alert_after_seconds": self.policy.experimental_alert_after_seconds,
         }
         self._set_reference_eligibility(observation)
@@ -408,6 +410,7 @@ class Controller:
         self.episode.update(
             upright_since_ns=None, previous_horizontal_ns=None, last_seen_ns=None,
             evidence_unavailable=True, identity_link_status="unresolved_after_reconnect",
+            review_required=True, review_reason="identity_unresolved_after_reconnect",
             followup_last_ns=None, followup_budget_reported=False,
         )
         self._interrupt_seated_closure()

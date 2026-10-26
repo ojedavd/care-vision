@@ -22,6 +22,9 @@ EVENTS = {
     "frame_dropped",
     "process_resources",
     "server_stopped",
+    "episode_restored",
+    "episode_review_required",
+    "incident_episode",
 }
 ACTIONS = {
     "SET_TRANSMIT_FPS",
@@ -72,6 +75,7 @@ class Projection:
         self.cloud_port = None
         self.malformed = 0
         self.fps_times = deque(maxlen=120)
+        self.review_required = False
 
     def accept(self, row):
         event = row.get("event")
@@ -79,6 +83,19 @@ class Projection:
             return
         self.last_event = time.monotonic()
         mono = number(row.get("local_mono_ns"))
+        if event in {"episode_restored", "episode_review_required", "incident_episode"}:
+            if (
+                row.get("review_required") is True
+                and row.get("identity_link_status") == "unresolved_after_reconnect"
+                and row.get("review_reason") == "identity_unresolved_after_reconnect"
+            ):
+                if not self.review_required:
+                    self.timeline.append({
+                        "stage": "human_review_required",
+                        "action": "IDENTITY_UNRESOLVED_AFTER_RECONNECT",
+                    })
+                self.review_required = True
+            return
         if event == "server_ready":
             phase = row.get("phase")
             self.runtime = {
@@ -216,6 +233,10 @@ class Projection:
             "counts": dict(self.counts),
             "metrics": dict(self.metrics),
             "agent_state": self.agent_state,
+            "review": {
+                "required": self.review_required,
+                "reason": "identity_unresolved_after_reconnect" if self.review_required else None,
+            },
             "timeline": list(self.timeline),
             "edge_connected": self.edge_connected,
             "observation_age_seconds": age,

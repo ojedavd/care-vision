@@ -1,16 +1,9 @@
 # CARE-Vision
 Adaptive Agentic Vision for Safer Independent Living
 
-Technical report | 23 October 2026 | OpenCV AI Competition 2026
+Technical report | 26 October 2026 | OpenCV AI Competition 2026
 Victor Ojeda, Argentina | Individual project | AWS Compute Grant recipient
 
-> Source integration update, 24 October 2026: the source-reconciliation branch
-> includes the demonstrated experimental seated closure and its focused CI checks
-> on the later public-main baseline. See [profile](demo-profile-20261021.md) and
-> [integration record](obstacle-and-evidence-register.md#24-october--public-source-reconciliation-for-the-demonstrated-seated-closure).
-> Availability, publication and delivery statements below describe the frozen
-> 23 October package. Later endpoint checks are recorded separately in the evidence
-> register. This integration does not repeat or expand the measured CV trial.
 
 ## 1. Problem, users and implemented architecture
 
@@ -22,7 +15,7 @@ The Edge Gateway acquires video, samples frames, buffers recent context, resizes
 
 <!-- ARCHITECTURE -->
 
-The judge portal is an authenticated, image-free telemetry projection. CloudFront reaches the supervised portal through a restricted VPC origin. The private CV WebSocket is reached by the Edge through an authorized SSH tunnel. Browser login and Start session launch a bounded cloud worker; they do not connect the camera. A separate local Edge must supply evidence. No LLM is used for incident decisions.
+The public portal provides image-free saved episode review and a separately labeled illustrative workflow. Live operator controls remain authenticated. CloudFront reaches the supervised portal through a restricted VPC origin. The private CV WebSocket is reached by the Edge through an authorized SSH tunnel. Browser login and Start session launch a bounded cloud worker; they do not connect the camera. A separate local Edge must supply evidence. No LLM is used for incident decisions.
 
 <!-- PAGE -->
 
@@ -65,11 +58,33 @@ A separate frozen constrained-link regression on known development recordings pa
 
 Retained failures include a stalled pong/backlog; a lower-quality JPEG profile that missed an expected test alert; WebP50 losing the original identity and failing recovery; an earlier continuity case with 311 transmitted versus 310 processed frames; and a geometric portal probe that achieved 14 FPS against 20 requested. HTTPS alone does not correct those workload/transport failures.
 
-No independent precision, recall, F1, false-alert rate, fall-confirmation latency, billed-cost reduction or matched fixed/adaptive savings has been established. The second physical descent after seated closure remains unevaluated. Different participants, rooms, lighting, occlusion, chair positions and outages need broader evaluation. Scene regions and the five-second criterion are development choices, not calibrated thresholds.
+No independent precision, recall, F1, false-alert rate, fall-confirmation latency or billed-cost reduction has been established. The new fixed5/adaptive study below measures resource reductions with a retained failure; full incident-performance equivalence remains unestablished. The second physical descent after seated closure remains unevaluated. Different participants, rooms, lighting, occlusion, chair positions and outages need broader evaluation. Scene regions and the five-second criterion are development choices, not calibrated thresholds.
 
 <!-- PAGE -->
 
-## 4. COOL on Graviton: execution and comparison
+## 4. Paired fixed/adaptive transmission study - 25 October
+
+Eighteen recorded replays compare fixed 5 FPS against adaptive 2/5 FPS: three repeated pairs per known recovery, no-recovery and sitting recording. Both arms run person-only YOLOX-S640/CLASSIC, tracking and identical incident/recovery rules on the same Graviton + COOL. Pose, ROI and seated closure are disabled in both. No thresholds were tuned after execution.
+
+| Known recording | Less JPEG | Less cloud CPU | Pairs passing all gates |
+| --- | --- | --- | --- |
+| Recovery | 53.54% | 53.12% | 3/3 |
+| No recovery | 53.47% | 53.07% | 2/3 |
+| Sitting | 47.17% | 46.61% | 3/3 |
+
+Figures are medians of three paired percentage reductions, including every attempted pair. Direct process CPU counters bracket first frame receipt and confirmed drain; pre-first-frame model startup is excluded. JPEG counts payload, not WebSocket/SSH/TCP or control overhead. Full ranges, RSS, source hashes, inputs, method and scalar verifier are in the paired study attachment.
+
+Eight of nine pairs met all registered gates. The second adaptive no-recovery run reconnected: 171 locally completed sends, 160 received/processed, including 19 historical frames. Eleven sends have no confirmed cloud receipt. It ended VERIFYING with zero expected test alerts, versus one in fixed5. The failed pair remains in summaries and its resources are connection-confounded. Lower resource use does not establish equal incident performance.
+
+Sitting remained UNRESOLVED without alerts in both arms, a limitation rather than correct benign classification. Matched adaptive-minus-fixed event delays were +0.284 to +0.524 seconds for three recovery pairs and -0.160 to +0.400 seconds for two no-recovery pairs. The missing alert is not imputed. The two-second additional-delay margin is experimental, not a validated safety threshold.
+
+The fixed controller needs an explicit evaluation adapter because requested FPS also acts as its logical baseline/verification label. Actual raw 5 FPS metadata is retained; a copied controller input carries logical 2/5 mode. Sensing proposals are logged as suppressed, with no physical change or invented ACK. Adaptive uses actual commands, applied ACKs and later evidence. This is a declared experimental intervention, not an unchanged deployed fixed protocol.
+
+These known clips and repetitions are not independent incidents or dense ground truth. They do not establish general fall accuracy, a sustained 30 FPS/1080p comparison, isolated COOL gains or billed AWS savings. The separate 15 October pose/ROI resource study is not pooled with this person-only study.
+
+<!-- PAGE -->
+
+## 5. COOL on Graviton: execution and comparison
 
 Runtime provenance records the native COOL module, aarch64 architecture, eight threads and the executing person/pose workload. Visible OpenCV version is 5.1.0-dev; the supplied build stamp is 2026-07-13T03:56:14Z. The exact SDK source revision is unknown. A dependency version such as KleidiCV must not be presented as the COOL SDK version.
 
@@ -83,7 +98,7 @@ Native OpenCV module SHA-256:
 
 The original 17 October comparison used 240 input frames per process and 12 processes in total. Its output comparison disagreed on 102/240 frames; dependency/build differences also limit causal attribution. It cannot establish an equivalent-workload acceleration claim.
 
-The later control isolated forward inference by supplying the same blob to both runtimes, across eight paired repetitions of 240 frames. Raw tensors and detections were exactly equal on all 1,920 comparisons; measured forward medians were effectively similar with overlapping ranges. This resolves equivalence for that controlled stage, not for the original preprocessing/full pipeline.
+The later control isolated forward inference by supplying the same blob to both runtimes, across eight alternating runs of 240 frames. Raw tensors and detections were exactly equal on all 1,920 comparisons; measured forward medians were effectively similar with overlapping ranges. This resolves equivalence for that controlled stage, not for the original preprocessing/full pipeline.
 
 The report supports execution of the core workload on the required Arm path and a measured, reproducible comparison method. It does not claim COOL acceleration, superior Arm/x86 performance, energy reduction or cost savings. The deployed main workload is Arm; the local Edge and developer workstation perform acquisition/transport or tooling rather than a parallel x86 inference baseline.
 
@@ -91,9 +106,9 @@ Benchmark method, input hashes, original measurement workers and scalar results 
 
 <!-- PAGE -->
 
-## 5. Build, deployment, tests and current availability
+## 6. Build, deployment, tests and current availability
 
-The companion source archive is tied to a local Git commit and a per-file SHA-256 manifest. Its seven cloud/judge implementation files match the recorded deployment manifest from 21 October. This freezes the demonstrated code, without asserting that every test in the repository passes or that the private GitHub revision has been updated.
+The historical seated demonstration is frozen separately from the new paired study and reconnect-review candidate. The 18-condition study used public application commit f1f55d7a1cc7837001dd5ec9c07c4671e3079f7b; exact source and 93 source hashes accompany it. The candidate correction adds durable explicit human-review status when an open episode is restored. It does not relink physical identity or recover incident sensitivity. Candidate source and a separate Graviton controlled-close evaluation are retained. Original: 173 received, 172 processed, one explicit shutdown drop, no review event. Corrected: 170 received, 169 processed, one explicit shutdown drop, review emitted before new evidence and persisted. Both kept identity unresolved and emitted no test alert. This is application-close evaluation, not WAN-loss validation or a deployed production fix.
 
 Python dependencies are pinned in uv.lock. For source review and focused tests, use Python 3.11 and the locked development environment. The default standard-cv dependency is for local tools/tests; it is not evidence of COOL execution. The cloud environment must omit the default standard OpenCV group and load the entitled COOL libraries instead.
 
@@ -116,33 +131,29 @@ LD_LIBRARY_PATH=/opt/cool/cpp_sdk/lib:/opt/ffmpeg/lib \
 
 See docs/judge-https-deployment.md for the private-origin deployment, authenticated roles, security checks and rollback; docs/demo-profile-20261021.md for the selected options. The operator supplies a private cloud-options JSON with experimental-s-only-5fps=true, pose-shadow-config and experimental-seated-closure-seconds=5. Camera credentials, models, scene configuration, COOL entitlement and SSH identity are external. Start the bounded cloud worker, connect the separate Edge, verify fresh evidence and causal ACKs, then stop and verify drain/stale state. Never expose the CV WebSocket publicly to repair a missing stream.
 
-The focused set previously passed 116 tests; code-checks.json records verification for this package. The full suite retains failures and omitted private-fixture dependencies. A source archive alone does not reproduce the camera experiment or install the SDK on an empty host.
+The historical focused set passed 116 tests. The new reconnect-review candidate passed 48 focused continuity, projection, portal and shutdown tests; these test protocol behavior rather than fall-detection accuracy. The full suite retains failures and omitted private-fixture dependencies. A source archive alone does not reproduce the camera experiment or install the SDK on an empty host.
 
-On 23 October, anonymous requests to both the portal root and app.js returned HTTP 504 and SSH to the previous address timed out. A cached console page showed a user-initiated instance stop on 21 October, but the AWS session had expired; this is not a fresh instance-state check. Live judge availability is pending authenticated verification/restoration. The recorded demonstration remains dated evidence, not proof of current endpoint availability.
+The earlier 23 October outage remains historical. On 25 October the HTTPS portal and saved episode review were responding; the new benchmark summary is available on the public landing page. Public review starts no camera, cloud worker or external notification. During isolated experiments the portal remained IDLE and protected configuration/state hashes were unchanged. Availability is a dated check, not an uptime guarantee or proof of live incident detection.
 
 <!-- PAGE -->
 
-## 6. Responsible use, evidence and judge demonstration
+## 7. Responsible use, evidence and judge demonstration
 
 CARE-Vision is an experimental safety-support system, not a medical diagnostic product. A seated-pattern resolution means the controller met its current rule; it does not prove health, physical support or absence of risk. A stale connection must be visible and must not be interpreted as a safe scene. Alerts are disabled in the latest demo, and no real caregiver service is connected.
 
-The portal excludes images, faces, track identifiers and raw logs. Input frames are still processed in the cloud. Presentation head blur is applied after inference and reviewed by samples; it does not anonymize the original capture, clothing or room, and does not automatically protect a live screen-share. Personal footage remains restricted to authorized private judge review. Source archives exclude recordings, model weights, SDK binaries, credentials and scene calibration.
+The public episode review displays estimated body pose/detection boxes on an empty background. Live telemetry excludes imagery, body coordinates, track identifiers and raw logs. Input frames are still processed in the cloud. Presentation head blur is applied after inference and reviewed by samples; it does not anonymize the original capture, clothing or room, and does not automatically protect a live screen-share. Personal footage remains restricted to authorized private judge review. Source archives exclude recordings, model weights, SDK binaries, credentials and scene calibration.
 
 Operator/viewer separation, explicit opt-ins, bounded start/stop, freshness and cleanup make operation observable. A historical local synthetic test exercised 13 operator controls and 27 focused tests, including invalid opt-in rejection and clean interruption. That does not establish caregiver usability, remote emergency intervention or production safety.
 
 | Companion item | What a judge can inspect |
 | --- | --- |
-| CARE-Vision-architecture.svg / .png | Current deployment and evidence-feedback boundary |
-| causal-trace.json | Two causal commands with applied ACK and later valid evidence |
-| evidence-summary.json | Latest trial counts, rates, result, scope and original hashes |
-| evaluation-index.md | Input/method/result references and retained negative cases |
-| CARE-Vision-source-23oct.zip | Frozen source, locked dependencies, runbooks and manifest |
-| code-checks.json / SHA256SUMS | Focused checks and package integrity |
-| CARE-Vision-revision-4m52s.mp4 + .srt | Captioned 292.04 s private review video, no audio |
-| CARE-Vision-26oct-v2.pptx | Editable presentation with dated results |
+| Architecture figure and causal trace | Edge/cloud boundary; two commands with ACK and later valid evidence |
+| Paired study attachment | Full method, 18 runs, all outcomes, failures, source hashes and offline verifier |
+| Frozen source archives | Historical implementation and separately identified review-status candidate |
+| Updated presentation and private video | Seven editable slides; dated demonstration with new benchmark and failure ending |
 
 The video identifies the individual team, shows architecture, application behavior, principal results and limitations. The 60.04 s camera segment reconstructs telemetry from original frames/logs; it is not a screen recording of the portal. Earlier footage remains marked with its date/profile. Do not add the new 140 frames to historical totals displayed elsewhere in the video. Narration can accompany the captioned file during a live presentation.
 
-Judge access to the private code/archive and media, the final video-access modality and the submission confirmation still require completion. No public/unlisted publication is implied by this package. If using a screen-share instead of the endpoint, arrange access and rehearse a functioning session; a local video file alone is not an arranged live demonstration.
+The current public code and saved episode review are linked in Devpost. Original personal recordings and the private presentation video retain restricted access. The draft has completed Additional info with both special awards selected; final submission and terms acceptance remain the owner's pending action. No public/unlisted publication is implied by this package. If using a screen-share instead of the endpoint, arrange access and rehearse a functioning session; a local video file alone is not an arranged live demonstration.
 
-This package closes documentation and source-integrity work. It preserves the distinction between implemented behavior, a successful development trial, historical failures and remaining delivery conditions.
+The original 8/9 benchmark and its missed alert remain unchanged by the later review-status correction. It preserves the distinction between implemented behavior, a successful development trial, historical failures and remaining delivery conditions.
