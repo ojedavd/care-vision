@@ -114,6 +114,18 @@ class Session:
                 origin_identity=self.controller.episode["origin_identity"],
                 identity_link_status="unresolved_after_reconnect",
                 incident_status=self.controller.episode["incident_status"],
+                review_required=True,
+                review_reason="identity_unresolved_after_reconnect",
+            )
+            # Persist and expose the unresolved episode even if no new frame arrives.
+            # This operational status is separate from a confirmed incident/test alert.
+            self.checkpoint_episode()
+            self.log.emit(
+                "episode_review_required", **identity,
+                episode_id=self.controller.episode["episode_id"],
+                identity_link_status="unresolved_after_reconnect",
+                review_required=True, review_reason="identity_unresolved_after_reconnect",
+                incident_confirmed=False, notification_sent=False,
             )
         person_detector = person_detector_factory() if person_detector_factory else None
         self.vision = MotionVision(

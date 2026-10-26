@@ -16,6 +16,7 @@ function render(s) {
   const synthetic = s.mode === 'SYNTHETIC_LOCAL_NOT_COOL';
   text('mode', synthetic ? 'Synthetic local demonstration · NOT COOL' : 'AWS Graviton / COOL session');
   text('session', s.session_state); text('connection', s.vision_live ? 'Evidence arriving' : 'No fresh visual evidence');
+  el('review').hidden = s.review?.required !== true;
   text('scope', synthetic ? 'Generated motion fixture; no person/fall validation and no AWS/COOL claim.' : (s.person_detector_configured ? 'Guided private person-detection session; experimental decisions.' : 'COOL motion/transport probe only. Person detection and fall verification are not configured.'));
   text('agent', s.agent_state); text('processed', s.counts.processed); text('fps', fmt(s.processed_fps));
   text('target', fmt(s.metrics.target_transmit_fps)); text('latency', fmt(s.metrics.processing_ms, ' ms'));

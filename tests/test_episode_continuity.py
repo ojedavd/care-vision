@@ -84,6 +84,8 @@ def test_private_snapshot_survives_restart_without_commands_or_pixels(tmp_path, 
     assert new.episode["horizontal_evidence_seconds"] == 0.5
     assert new.episode["reference_bbox"] == old.episode["reference_bbox"]
     assert new.episode["identity_link_status"] == "unresolved_after_reconnect"
+    assert new.episode["review_required"] is True
+    assert new.episode["review_reason"] == "identity_unresolved_after_reconnect"
     assert new.pending is None and new.command_seq == 0
     assert not any(k in path.read_text() for k in ["jpeg", "keypoints", "password"])
     # New-session standing person cannot close the old logical episode.
@@ -94,6 +96,11 @@ def test_private_snapshot_survives_restart_without_commands_or_pixels(tmp_path, 
         new.observe(observation(t, track="new-track", command=request["command_id"], fps=5))
     assert new.episode is not None
     assert new.episode["horizontal_evidence_seconds"] == 0.5
+    assert new.episode["review_required"] is True
+    store.save(new)
+    again = Controller({**identity, "session_id": "third-session"}, POLICY)
+    assert EpisodeStore(path).restore(again)
+    assert again.episode["review_required"] is True
 
 
 def test_alert_and_evidence_survive_reconnect_without_duplicate_alert(identity):
@@ -111,6 +118,24 @@ def test_alert_and_evidence_survive_reconnect_without_duplicate_alert(identity):
     assert new.state == "ASSISTANCE_REQUIRED"
     assert new.episode["horizontal_evidence_seconds"] == 21
     assert not any(e["reason"] == "TRIGGER_ALERT_TEST" for e in new.pop_episode_events())
+
+
+def test_restored_review_is_durable_without_any_new_frame(tmp_path, identity):
+    store = EpisodeStore(tmp_path / "episode.json")
+    store.save(opened(identity))
+    log = EventLog("cloud", tmp_path / "cloud.jsonl")
+    try:
+        server_module.Session(
+            None, {**identity, "session_id": "new"}, log,
+            experimental_s_only_5fps=True, experimental_episode_continuity=True,
+            experimental_alert_after_seconds=20, episode_store=store,
+        )
+    finally:
+        log.close()
+    assert EpisodeStore(store.path).snapshot["episode"]["review_required"] is True
+    records = read_log(tmp_path / "cloud.jsonl")
+    assert any(r["event"] == "episode_review_required" for r in records)
+    assert not any(r["event"] in {"observation", "test_alert"} for r in records)
 
 
 def test_followup_budget_and_cooldown_leave_episode_open(identity):
@@ -311,6 +336,12 @@ def test_websocket_disconnect_restores_episode_and_requests_fresh_evidence(
             log.close()
         records = read_log(tmp_path / "cloud.jsonl")
         assert any(r["event"] == "episode_restored" for r in records)
+        review = [r for r in records if r["event"] == "episode_review_required"]
+        assert len(review) == 1
+        assert review[0]["review_required"] is True
+        assert review[0]["incident_confirmed"] is False
+        assert review[0]["notification_sent"] is False
+        assert cloud.episode_store.snapshot["episode"]["review_required"] is True
         assert not any(r.get("reason") == "episode_resolved" for r in records)
         assert len([r for r in records if r["event"] == "ack_received"]) == 2
 
